@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Ingredient extends Model {
     /**
@@ -10,17 +8,22 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // Ingredient.belongsToMany(models.Product, { through: "Recipes" });
     }
   }
-  Ingredient.init({
-    name: DataTypes.STRING,
-    stock: DataTypes.INTEGER,
-    cost: DataTypes.INTEGER,
-    unit: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Ingredient',
-  });
+  Ingredient.init(
+    {
+      name: DataTypes.STRING,
+      stock: DataTypes.INTEGER,
+      cost: DataTypes.INTEGER,
+      unit: DataTypes.STRING,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE
+    },
+    {
+      sequelize,
+      modelName: "Ingredient"
+    }
+  );
   return Ingredient;
 };

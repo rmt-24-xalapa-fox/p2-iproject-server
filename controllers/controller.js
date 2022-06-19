@@ -94,6 +94,37 @@ class Controller {
     }
   }
 
+  async addRecipe(req, res, next) {
+    try {
+    } catch (err) {
+      next(err);
+    }
+  }
+  async getAllRecipes(req, res, next) {
+    try {
+    } catch (err) {
+      next(err);
+    }
+  }
+  async getOneRecipe(req, res, next) {
+    try {
+    } catch (err) {
+      next(err);
+    }
+  }
+  async editRecipe(req, res, next) {
+    try {
+    } catch (err) {
+      next(err);
+    }
+  }
+  async deleteRecipe(req, res, next) {
+    try {
+    } catch (err) {
+      next(err);
+    }
+  }
+
   async addSale(req, res, next) {
     try {
     } catch (err) {

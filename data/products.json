@@ -4,8 +4,6 @@
         "description": "Blabla",
         "imgUrl": "url.com",
         "price": 22000,
-        "CategoryId": 1,
-        "StockId": 1,
-        "RecipeId": 1
+        "CategoryId": 1
     }
 ]

@@ -51,6 +51,22 @@ router.put("/ingredients/:id");
 
 //delete ingredient
 router.delete("/ingredients/:id");
+//=============================
+
+//add new recipe
+router.post("/recipes");
+
+//get all recipes
+router.get("/recipes");
+
+//get one recipe
+router.get("/recipes/:id");
+
+//edit recipe
+router.put("/recipes/:id");
+
+//delete recipe
+router.delete("/recipes/:id");
 
 //=============================
 
