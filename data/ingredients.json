@@ -1,0 +1,8 @@
+[
+    {
+        "name": "milk",
+        "stock": 1000,
+        "cost": 90,
+        "unit": "ml"
+    }
+]
