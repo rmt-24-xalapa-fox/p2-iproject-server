@@ -1,8 +1,106 @@
 [
     {
+        "name": "Bananaster",
+        "description": "Banana milkshake with various toppings",
+        "imgUrl": "https://i.ibb.co/qRt6P6K/Bananaster.jpg",
+        "price": 20000,
+        "CategoryId": 1
+    },
+    {
+        "name": "Bang! Bang!",
+        "description": "Chocolate milkshake with crunchy chocolate waffer",
+        "imgUrl": "https://i.ibb.co/R0v4FYb/Bang-Bang.jpg",
+        "price": 22000,
+        "CategoryId": 1
+    },
+    {
+        "name": "Berry Gum",
+        "description": "Sweet and sour smoothies with a touch of Bubble Gum!",
+        "imgUrl": "https://i.ibb.co/FhzhSsf/Berry-Gum.jpg",
+        "price": 20000,
+        "CategoryId": 2
+    },
+    {
+        "name": "Bloody Mary",
+        "description": "Refreshing Grape Soda",
+        "imgUrl": "https://i.ibb.co/n3xDnyZ/Bloody-Mary.jpg",
+        "price": 15000,
+        "CategoryId": 3
+    },
+    {
+        "name": "Blue Ocean",
+        "description": "Refreshing Orange Soda",
+        "imgUrl": "https://i.ibb.co/SdbP9by/Blue-Ocean.jpg",
+        "price": 15000,
+        "CategoryId": 3
+    },
+    {
+        "name": "Chocoholic",
+        "description": "Chocolate milkshake with various toppings",
+        "imgUrl": "https://i.ibb.co/XJqPdbk/Chocoholic.jpg",
+        "price": 22000,
+        "CategoryId": 1
+    },
+    {
+        "name": "Dragon Flame",
+        "description": "Refreshing Soursoup soda with Dragon Fruit toppings",
+        "imgUrl": "https://i.ibb.co/m5KSQ6c/Dragon-Flame.jpg",
+        "price": 15000,
+        "CategoryId": 3
+    },
+    {
+        "name": "Green O'Cha",
+        "description": "You favorite Matcha Milkshake",
+        "imgUrl": "https://i.ibb.co/py5Cnq3/Green-O-Cha.jpg",
+        "price": 22000,
+        "CategoryId": 1
+    },
+    {
+        "name": "Gummies",
+        "description": "Creamy Bubble Gum Milkshake with various toppings",
+        "imgUrl": "https://i.ibb.co/3YSDWPx/Gummies.jpg",
+        "price": 20000,
+        "CategoryId": 1
+    },
+    {
+        "name": "Ice Coffee",
+        "description": "Classic Ice Coffee Milk",
+        "imgUrl": "https://i.ibb.co/JC8sLT7/Ice-Coffee-Loco.jpg",
+        "price": 18000,
+        "CategoryId": 4
+    },
+    {
+        "name": "Mix Fruits",
+        "description": "Refreshing Mix Fruits soda with various fruit toppings",
+        "imgUrl": "https://i.ibb.co/WWVpdQZ/Mix-Fruits.jpg",
+        "price": 18000,
+        "CategoryId": 3
+    },
+    {
+        "name": "Strawberry Blast",
+        "description": "Refreshing Strawberry soda with Strawberry and Dragon Fruit toppings",
+        "imgUrl": "https://i.ibb.co/Sn82k9q/Strawberry-Blast.jpg",
+        "price": 18000,
+        "CategoryId": 3
+    },
+    {
+        "name": "Tuty Fruity",
+        "description": "Classic Mix Fruits Smoothies",
+        "imgUrl": "https://i.ibb.co/V9tNtrG/Tuty-Fruity.jpg",
+        "price": 20000,
+        "CategoryId": 2
+    },
+    {
         "name": "Vanillate",
-        "description": "Blabla",
-        "imgUrl": "url.com",
+        "description": "Milky Milkshakes with various toppings",
+        "imgUrl": "https://i.ibb.co/fn7MFms/Vanillate.jpg",
+        "price": 20000,
+        "CategoryId": 1
+    },
+    {
+        "name": "Velvet Kiss",
+        "description": "Red Velvet Milkshakes with various toppings",
+        "imgUrl": "https://i.ibb.co/RHRHHJS/Velvet-Kiss.jpg",
         "price": 22000,
         "CategoryId": 1
     }

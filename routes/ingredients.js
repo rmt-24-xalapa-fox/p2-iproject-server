@@ -18,4 +18,4 @@ router.put("/:id", Controller.editIngredient);
 //delete ingredient
 router.delete("/:id", Controller.deleteIngredient);
 
-router.module.exports = router;
+module.exports = router;

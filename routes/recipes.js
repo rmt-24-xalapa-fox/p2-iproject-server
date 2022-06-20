@@ -18,4 +18,4 @@ router.put("/:id", Controller.editRecipe);
 //delete recipe
 router.delete("/:id", Controller.deleteRecipe);
 
-router.module.exports = router;
+module.exports = router;

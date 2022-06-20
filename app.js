@@ -12,4 +12,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/", router);
 
+app.listen(port, () => {
+  console.log(`Ready to Go`);
+});
+
 module.exports = app;

@@ -18,4 +18,4 @@ router.put("/:id", Controller.editSale); //authorization
 //delete sales
 router.delete("/:id", Controller.deleteSale);
 
-router.module.exports = router;
+module.exports = router;

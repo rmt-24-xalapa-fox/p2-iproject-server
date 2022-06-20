@@ -15,4 +15,4 @@ router.get("/:id", Controller.getOneCategory);
 //edit category
 router.put("/:id", Controller.editCategory);
 
-router.module.exports = router;
+module.exports = router;
