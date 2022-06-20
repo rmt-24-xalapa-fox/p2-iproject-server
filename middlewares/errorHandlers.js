@@ -1,6 +1,8 @@
 "use strict";
 
 const errorHandler = (err, req, res, next) => {
+  console.log(err, `<<<Error Handler`);
+
   let code = 500;
   let message = err;
 
@@ -11,10 +13,7 @@ const errorHandler = (err, req, res, next) => {
   ) {
     code = 400;
     message = err.errors.map(el => el.message);
-  } else if (
-    err.message === `Id not found` ||
-    err.message === `Product not found`
-  ) {
+  } else if (err.message === `Id not found` || err.name === `Error`) {
     code = 404;
     message = `Error not found`;
   } else if (err === "Forbidden") {

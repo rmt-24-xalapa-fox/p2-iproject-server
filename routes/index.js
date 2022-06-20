@@ -10,6 +10,6 @@ router.use("/ingredients", require("./ingredients"));
 router.use("/recipes", require("./recipes"));
 router.use("/sales", require("./sales"));
 
-// router.use(errorHandler);
+router.use(errorHandler);
 
 module.exports = router;
