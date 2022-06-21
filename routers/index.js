@@ -8,6 +8,7 @@ router.post('/login', Controller.login)
 
 router.use(authentif)
 
+router.get('/tokenpayment', Controller.getTokenPayment)
 router.get('/getsong', Controller.getallSong)
 
 

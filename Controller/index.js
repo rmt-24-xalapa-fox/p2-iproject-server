@@ -48,31 +48,37 @@ class Controller {
       next(error);
     }
   }
-  
-  static async getallSong(req, res, next) {
+
+  static async getTokenPayment(req, res, next) {
     try {
-      const data = await axios({
-        method: "get",
-        url: `http://api.musixmatch.com/ws/1.1/chart.tracks.get?apikey=${APIKEY}`,
+      let snap = new midtransClient.Snap({
+        isProduction: false,
+        serverKey: SERVERKEY,
+        clientKey: CLIENTKEY,
       });
 
-      if (!data) {
-        throw { name: "Songs not found" };
+      let parameter = {
+        transaction_details: {
+          order_id: "test-transaction-123",
+          gross_amount: 200000,
+          name: "harsenn",
+        },
+        credit_card: {
+          secure: true,
+        },
+      };
+
+      const {email} = req.user
+
+      const transaction = await snap.createTransaction(parameter);
+
+      sendEmail(email, null, transaction.token)
+
+      if (!transaction) {
+        throw { name: "Transaction failed" };
       }
 
-      let trackInfo = data.data.message.body.track_list;
-
-      let result = trackInfo.map((el) => {
-        return {
-          title: el.track.track_name,
-          rating: el.track.track_rating,
-          album: el.track.album_name,
-          artistName: el.track.artist_name,
-          songUrl: el.track.track_share_url,
-        };
-      });
-
-      res.status(200).json(result);
+      res.status(200).json({ "Token Payment": transaction.token });
     } catch (error) {
       console.log(error);
       next(error);
