@@ -62,6 +62,17 @@ class Controller {
       }
     }
   }
+
+  static async fetchCoin(req, res) {
+    try {
+      const userId = req.user.id;
+
+      const foundUser = await User.findOne({ where: { id: userId } });
+      res.status(200).json({ gachaCoin: foundUser.gachaCoin });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
 
 module.exports = Controller;
