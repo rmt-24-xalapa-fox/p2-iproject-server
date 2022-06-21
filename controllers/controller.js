@@ -138,6 +138,21 @@ class Controller {
     }
   }
 
+  static async readCategories(req, res, next) {
+    try {
+      let allCategories = await Category.findAll({
+        order: [["id", "ASC"]],
+        include: Book,
+      });
+      res.status(200).json({
+        statusCode: 200,
+        data: allCategories,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async readBooks(req, res, next) {
     try {
       let options = {
@@ -153,7 +168,7 @@ class Controller {
       let { categoryId, name, minPrice, maxPrice, page } = req.query;
 
       if (name) {
-        options.where.name = {
+        options.where.title = {
           [Op.iLike]: `%${name}%`,
         };
       }
@@ -162,7 +177,7 @@ class Controller {
         if (!Array.isArray(categoryId)) {
           categoryId = categoryId.split("%");
         }
-        options.where.categoryId = {
+        options.where.CategoryId = {
           [Op.or]: categoryId,
         };
       }

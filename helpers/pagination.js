@@ -5,18 +5,18 @@ const getPagination = (page, size) => {
 };
 
 const getPagingData = (data, page, limit) => {
-  const { count: totalItems, rows: products } = data;
+  const { count: totalItems, rows: books } = data;
   const currentPage = page ? +page : 0;
   const totalPages = Math.ceil(totalItems / limit);
   const maxItemPerPage = limit;
-  const itemInThisPage = products.length;
+  const itemInThisPage = books.length;
   return {
     totalItems,
     totalPages,
     currentPage,
     maxItemPerPage,
     itemInThisPage,
-    products,
+    books,
   };
 };
 

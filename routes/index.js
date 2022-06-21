@@ -5,8 +5,10 @@ const errorHandler = require("../middlewares/errorHandler");
 
 router.get("/register", Controller.register);
 router.get("/login", Controller.login);
+router.post("/google-sign", Controller.googleSign);
 router.get("/books", Controller.readBooks);
 router.get("/books/:id", Controller.readOneBook);
+router.get("/categories", Controller.readCategories);
 
 router.use(authentication);
 
