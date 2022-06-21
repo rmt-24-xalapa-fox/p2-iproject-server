@@ -422,6 +422,32 @@ class Controller {
       next(err);
     }
   }
+
+  static async addShipping(req, res, next) {
+    try {
+      const { origin, destination, weight, courier } = req.body;
+      const resp = await axios.post(
+        "https://api.rajaongkir.com/starter/cost",
+        { origin, destination, weight, courier },
+        {
+          headers: {
+            key: process.env.API_RAJAONGKIR,
+          },
+        }
+      );
+
+      res.status(201).json({
+        statusCode: 201,
+        data: {
+          origin: resp.data.rajaongkir.origin_details,
+          destination: resp.data.rajaongkir.destination_details,
+          shipping: resp.data.rajaongkir.results[0].costs,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = Controller;
