@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Midnight Sky",
+    "colors": ["#103240", "#D9501E", "#D9805F", "#BF3C1F", "#8C3730"],
+    "UserId": 1
+  },
+  {
+    "name": "Rollercoaster",
+    "colors": ["#4BA4F2", "#85BFF2", "#C2DCF2", "#F25041", "#590202"],
+    "UserId": 1
+  },
+  {
+    "name": "Retro Pop Art",
+    "colors": ["#C81C22", "#FAE4CF", "#138385", "#E29E3B", "#F2F2F2"],
+    "UserId": 1
+  }
+]
