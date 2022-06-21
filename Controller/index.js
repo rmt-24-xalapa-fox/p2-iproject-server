@@ -1,5 +1,5 @@
 const { User } = require("../models/index");
-const { verifiedPass, createToken } = require("../helps/help");
+const { verifiedPass, createToken, verifiedToken } = require("../helps/help");
 const RadioBrowser = require("radio-browser");
 const axios = require("axios");
 const { APIKEY, SERVERKEY, CLIENTKEY } = process.env;
@@ -110,7 +110,6 @@ class Controller {
 
       const transaction = await snap.createTransaction(parameter);
 
-      sendEmail(email, null, transaction.token);
 
       if (!transaction) {
         throw { name: "Transaction failed" };
@@ -183,6 +182,34 @@ class Controller {
       next(error);
     }
   }
+
+  static async changeStatus(req, res, next){
+    try {
+
+    const { access_token } = req.headers;
+    const userId = verifiedToken(access_token).id;
+
+    if(!userId){
+      throw { name: "User id not found" };
+    }
+
+    const { status } = req.body;
+
+    const updateStatus = await User.update(
+      { status },
+      {
+        where: {
+          id: userId,
+        },
+      }
+    );
+
+    res.status(200).json({ message: "Status has been changed" });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 }
 
 module.exports = {

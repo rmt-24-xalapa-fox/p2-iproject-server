@@ -11,6 +11,10 @@ router.use(authentif)
 router.get('/tokenpayment', Controller.getTokenPayment)
 router.get('/getsong', Controller.getallSong)
 router.get('/top10radio', Controller.top10radio)
+router.patch('/userstatus', Controller.changeStatus)
+
+
+
 
 
 

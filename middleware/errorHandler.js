@@ -56,6 +56,11 @@ function handleError(err, req, res, next) {
       message = { message: "Songs not found" };
       break;
 
+    case "User id not found":
+      code = 404;
+      message = { message: "User id not found" };
+      break;
+
     case "Radio station not found":
       code = 404;
       message = { message: "Radio station not found" };

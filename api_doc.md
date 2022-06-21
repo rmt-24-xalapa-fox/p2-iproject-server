@@ -240,6 +240,49 @@ _Response (404 - Not Found)_
 }
 ```
 
+
+&nbsp;
+
+## 5. PATCH /userstatus
+
+Description:
+- change the status of user
+
+Request:
+
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+- body:
+
+```json
+{
+  "status": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Status has benn changed"
+}
+```
+
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "User id not found"
+}
+```
+
 &nbsp;
 
 ## Global Error
@@ -249,14 +292,6 @@ _Response (401 - Unauthorized)_
 ```json
 {
   "message": "Invalid token"
-}
-```
-
-_Response (403 - Forbidden)_
-
-```json
-{
-  "message": "You are not authorized"
 }
 ```
 
