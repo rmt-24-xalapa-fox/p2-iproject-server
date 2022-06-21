@@ -4,7 +4,14 @@ const PaletteController = require("../controllers/PaletteController");
 const authentication = require("../middlewares/authentication");
 const errorHandler = require("../middlewares/errorHandler");
 
-router.post("/register", UserController.register);
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
+
+router.post(
+  "/register",
+  upload.single("profilePicture"),
+  UserController.register
+);
 router.post("/login", UserController.login);
 router.use(authentication);
 router.get("/palettes", PaletteController.readAllPalettes);
