@@ -1,0 +1,259 @@
+{
+    "categories": [
+        {
+            "name": "Rookie Of The Year"
+        },
+        {
+            "name": "Most Improve Player"
+        },
+        {
+            "name": "Offensive Player"
+        },
+        {
+            "name": "Most Valuable Player"
+        },
+        {
+            "name": "Defensive Player"
+        },
+        {
+            "name": "Sixth Man Player"
+        }
+    ],
+    "positions": [
+        {
+            "name": "Point Guard"
+        },
+        {
+            "name": "Shooting Guard"
+        },
+        {
+            "name": "Small Forward"
+        },
+        {
+            "name": "Power Forward"
+        },
+        {
+            "name": "Center"
+        }
+    ],
+    "teams": [
+        {
+            "name": "Atlanta Hawks",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2021/01/atlanta_hawks_2021-pres.png"
+        },
+        {
+            "name": "Boston Celtics",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2016/SLH/nba_primary/boston_celtics.png"
+        },
+        {
+            "name": "Brooklyn Nets",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2017/12/brooklyn_nets_2013-pres.png"
+        },
+        {
+            "name": "Charlotte Hornets",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2017/12/charlotte_hornets_2015-pres.png"
+        },
+        {
+            "name": "Dallas Mavericks",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2017/12/dallas_mavericks_2017-pres.png"
+        },
+        {
+            "name": "Denver Nuggets",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2018/06/denver_nuggets_2019-pres.png"
+        },
+        {
+            "name": "Golden State Warriors",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2019/07/golden_state_warriors_2020-pres.png"
+        },
+        {
+            "name": "Memphis Grizzlies",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2018/08/memphis_grizzlies_2018-pres.png"
+        },
+        {
+            "name": "Los Angeles Lakers",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2017/12/los_angeles_lakers_2002-pres.png"
+        },
+        {
+            "name": "Minnesota Timberwolves",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2017/04/minnesota_timberwolves_2017-pres.png"
+        },
+        {
+            "name": "Milwaukee Bucks",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2017/12/milwaukee_bucks_2015-pres.png"
+        },
+        {
+            "name": "Utah Jazz",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2017/12/utah_jazz_2016-pres.png"
+        },
+        {
+            "name": "Miami Heat",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2017/12/miami_heat_2000-pres.png"
+        },
+        {
+            "name": "Chicago Bulls",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2017/12/chicago_bulls_1967-pres.png"
+        },
+        {
+            "name": "Cleveland Cavaliers",
+            "imgUrl": "https://sportslogohistory.com/wp-content/uploads/2022/06/cleveland_cavaliers_2023-pres.png"
+        }
+    ],
+    "players": [
+        {
+            "name": "Michael Jordan",
+            "year": "1998",
+            "overall": 98,
+            "description": "The Last Michael Jordan got an MVP awards",
+            "imgUrl1": "https://i.pinimg.com/236x/df/2c/25/df2c25c7abbe2311d6f4576edbe2bffc.jpg",
+            "imgUrl2": "https://i.pinimg.com/564x/39/96/92/399692c20388c6d9aaec6b97023b9149.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/5b/66/be/5b66bee6b80c346e801a7b7825f96ee7.jpg",
+            "price": 235000,
+            "TeamId": 14,
+            "PositionId": 2,
+            "CategoryId": 4
+        },
+        {
+            "name": "Kobe Bryant",
+            "year": "2008",
+            "overall": 97,
+            "description": "The one and only, the Black Mamba got the MVP",
+            "imgUrl1": "https://i.pinimg.com/564x/9f/57/29/9f572990753c236d2cc0e4ea35dec1dd.jpg",
+            "imgUrl2": "https://i.pinimg.com/564x/1a/16/8f/1a168fd9a42184f6daac46ad540f120b.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/fe/48/00/fe480034efd139c8353fa7efae89c952.jpg",
+            "price": 295000,
+            "TeamId": 14,
+            "PositionId": 2,
+            "CategoryId": 4
+        },
+        {
+            "name": "Stephen Curry",
+            "year": "2015",
+            "overall": 98,
+            "description": "Greatest 3 pointer of all time",
+            "imgUrl1": "https://cdn.shopify.com/s/files/1/0533/8077/6112/products/image_a5f187f4-6354-4ba9-9614-5f9961137fa3_grande.jpg?v=1639450505",
+            "imgUrl2": "https://i.pinimg.com/564x/3f/48/f5/3f48f524a9c1599fa21127411ebdd6f9.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/49/f9/73/49f973e81c3dcccc436c452615ec9f81.jpg",
+            "price": 435000,
+            "TeamId": 7,
+            "PositionId": 1,
+            "CategoryId": 4
+        },
+        {
+            "name": "Lamelo Ball",
+            "year": "2021",
+            "overall": 87,
+            "description": "Even he got an injury, but the best Rookie Of The Year got in his body",
+            "imgUrl1": "https://m.media-amazon.com/images/I/71Ir9V5-LWS._AC_SL1049_.jpg",
+            "imgUrl2": "https://i.pinimg.com/564x/83/9b/a1/839ba12800b25b492c772000e487f93e.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/03/41/cc/0341ccac4d2bec73454e6dee3f81fc4e.jpg",
+            "price": 190000,
+            "TeamId": 4,
+            "PositionId": 1,
+            "CategoryId": 1
+        },
+        {
+            "name": "Kyrie Irving",
+            "year": "2012",
+            "overall": 85,
+            "description": "Kyrie has a good handling. In this rookie year, he called to the USA National Team",
+            "imgUrl1": "https://i.ebayimg.com/images/g/Xq4AAOSw9gRaHgCA/s-l400.jpg",
+            "imgUrl2": "https://i.pinimg.com/564x/0a/82/dd/0a82dda73d84690963d5cdca8017dc7f.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/8b/8c/4d/8b8c4d3de7fa7e39e0eaf09a4f1ce2f7.jpg",
+            "price": 126000,
+            "TeamId": 15,
+            "PositionId": 1,
+            "CategoryId": 1
+        },
+        {
+            "name": "Malcolm Brogdon",
+            "year": "2017",
+            "overall": 83,
+            "description": "Brogdon frequently took advantage of openings created when opposing defenses collapsed on Antetokounmpo",
+            "imgUrl1": "https://cf.shopee.ph/file/99cf7353f0713556e6cbd8a40782c2e7",
+            "imgUrl2": "https://www.ligaolahraga.com/storage/images/news/2019/05/08/malcolm-brogdon-dipastikan-absen-pada-game-kelima-kontra-boston-celtics.jpeg",
+            "imgUrl3": "http://www.opencourt-basketball.com/wp-content/uploads/2017/01/brogdon_10.jpg",
+            "price": 86000,
+            "TeamId": 11,
+            "PositionId": 1,
+            "CategoryId": 1
+        },
+        {
+            "name": "Kevin Love",
+            "year": "2011",
+            "overall": 88,
+            "description": "Good at shooting, Can play inside, He deserved the nominee",
+            "imgUrl1": "https://cdn11.bigcommerce.com/s-0kvv9/products/207805/images/293424/apigrkcpr__54174.1541524283.500.750.jpg?c=2",
+            "imgUrl2": "https://i.pinimg.com/236x/16/29/48/162948c2225aa9aa6d8419a13fd6beff.jpg",
+            "imgUrl3": "https://i.pinimg.com/236x/40/8f/9c/408f9c4d3d6f07ca86a6536d15334a6c.jpg",
+            "price": 50600,
+            "TeamId": 10,
+            "PositionId": 4,
+            "CategoryId": 2
+        },
+        {
+            "name": "Ja Morant",
+            "year": "2022",
+            "overall": 90,
+            "description": "A true Point Guard, the future NBA best Point Guard",
+            "imgUrl1": "https://images.footballfanatics.com/FFImage/thumb.aspx?i=/productimages/_4900000/altimages/ff_4900495-279ffc6f9a242c63063falt1_full.jpg&w=900",
+            "imgUrl2": "https://i.pinimg.com/564x/40/c9/3d/40c93ddf648546ecf38e55b9b4e78d01.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/88/5f/bf/885fbf423965e8ddc5694df71aebfd7e.jpg",
+            "price": 166000,
+            "TeamId": 8,
+            "PositionId": 1,
+            "CategoryId": 2
+        },
+        {
+            "name": "Draymond Green",
+            "year": "2017",
+            "overall": 89,
+            "description": "Special on perimeter defense, has an active hand, and good at blocking",
+            "imgUrl1": "https://2kmtcentral.com/img/generated/20/players/15314i1.png/cache-1600266016/15314i1.png",
+            "imgUrl2": "https://i.pinimg.com/564x/01/38/b8/0138b8881a490f349d1e653429f0688f.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/cb/86/16/cb8616dcd6465bd85f37174096ba5cc0.jpg",
+            "price": 186000,
+            "TeamId": 7,
+            "PositionId": 4,
+            "CategoryId": 5
+        },
+        {
+            "name": "Rudy Gobert",
+            "year": "2021",
+            "overall": 91,
+            "description": "A true solid blocker",
+            "imgUrl1": "https://2kmtcentral.com/img/generated/20/players/8508i1.png/cache-1600265825/8508i1.png",
+            "imgUrl2": "https://i.pinimg.com/564x/58/7f/07/587f0736ed5fa0750fc388d22dce84c0.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/a5/66/3b/a5663bca7ac0cbae1672dac5a6596233.jpg",
+            "price": 107500,
+            "TeamId": 12,
+            "PositionId": 5,
+            "CategoryId": 5
+        },
+        {
+            "name": "Tyler Herro",
+            "year": "2022",
+            "overall": 86,
+            "description": "Always ready for back up the team mates. Good at Shooting and Dribbling",
+            "imgUrl1": "https://m.media-amazon.com/images/I/61WtDrKvQ+L._AC_SY445_.jpg",
+            "imgUrl2": "https://i.pinimg.com/564x/05/d7/35/05d735adb06516db547dda4d25460776.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/f1/d8/fa/f1d8faede2837cc3299e9dfc403cb19b.jpg",
+            "price": 109909,
+            "TeamId": 12,
+            "PositionId": 2,
+            "CategoryId": 6
+        },
+        {
+            "name": "Jordan Clarkson",
+            "year": "2022",
+            "overall": 95,
+            "description": "Half blood philipines, Having a quick first step, good at shooting",
+            "imgUrl1": "https://i.pinimg.com/originals/09/d0/10/09d0102dd756e4804e5fb798436b6104.png",
+            "imgUrl2": "https://i.pinimg.com/564x/63/74/c6/6374c659c2205a64f9c842e1e147a53e.jpg",
+            "imgUrl3": "https://i.pinimg.com/564x/19/c1/10/19c1108515c74a3ffc7204869dc6603c.jpg",
+            "price": 172000,
+            "TeamId": 12,
+            "PositionId": 2,
+            "CategoryId": 6
+        }
+    ]
+}
