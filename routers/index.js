@@ -4,7 +4,7 @@ const {Controller} = require("../Controller/index.js")
 const { authentif } = require("../middleware/autentif.js")
 
 
-router.post('/register', Controller.register)
+router.post('/login', Controller.login)
 
 
 

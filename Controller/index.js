@@ -7,11 +7,9 @@ const midtransClient = require("midtrans-client");
 const { sendEmail } = require("../helps/sendemail");
 
 class Controller {
-  static async register(req, res, next) {
+  static async login(req, res, next) {
     try {
-      const { email, password, name } = req.body;
-      const inputData = { email, password, name };
-
+      const { email, password } = req.body;
       if (!email) {
         throw { name: "Email is required" };
       }
@@ -20,23 +18,30 @@ class Controller {
         throw { name: "Password is required" };
       }
 
-      if (!name) {
-        throw { name: "Name is required" };
+      const findUser = await User.findOne({
+        where: {
+          email,
+        },
+      });
+
+      if (!findUser) {
+        throw { name: "Invalid email/password" };
       }
 
-      const newUser = await User.create(inputData);
+      const checkPass = verifiedPass(password, findUser.password);
 
-      sendEmail(email, name, null);
+      if (!checkPass) {
+        throw { name: "Invalid email/password" };
+      }
 
-      const result = {
-        id: newUser.id,
-        name: newUser.name,
-        email: newUser.email,
+      const payload = {
+        id: findUser.id,
+        email: findUser.email,
       };
 
-      res.status(201).json(result);
+      const token = createToken(payload);
 
-      
+      res.status(200).json({ access_token: token });
     } catch (error) {
       console.log(error);
       next(error);
