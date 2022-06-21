@@ -1,22 +1,22 @@
-let wishlistsData = [
+let cartsData = [
   {
     UserId: 1,
-    BookId: 1,
+    BookId: 4,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
   {
     UserId: 1,
-    BookId: 2,
+    BookId: 5,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
   {
     UserId: 1,
-    BookId: 3,
+    BookId: 6,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
 ];
 
-module.exports = wishlistsData;
+module.exports = cartsData;

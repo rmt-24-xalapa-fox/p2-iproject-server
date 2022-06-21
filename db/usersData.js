@@ -1,26 +1,20 @@
 const { hash } = require("../helpers/bcrypt");
 
-let usersData = [
+let customersData = [
   {
-    username: "fauzan",
-    email: "fauzan@email.com",
-    password: hash("fauzan123", 9),
-    role: "admin",
-    phoneNumber: "085221466466",
-    address: "Majalengka",
+    username: "fauzan1",
+    email: "fauzan1@email.com",
+    password: hash("12345", 9),
     createdAt: new Date(),
     updatedAt: new Date(),
   },
   {
-    username: "pojan",
-    email: "pojan@email.com",
-    password: hash("pojan123", 9),
-    role: "admin",
-    phoneNumber: "085221466467",
-    address: "Bandung",
+    username: "fauzan2",
+    email: "fauzan2@email.com",
+    password: hash("12345", 9),
     createdAt: new Date(),
     updatedAt: new Date(),
   },
 ];
 
-module.exports = usersData;
+module.exports = customersData;
