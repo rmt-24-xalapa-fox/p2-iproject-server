@@ -74,6 +74,36 @@ class Controller {
       res.status(500).json(err);
     }
   }
+
+  static async fetchDataDigimon(req, res) {
+    try {
+      // console.log("masok");
+      const dataDigimonFresh = await axios({
+        method: "get",
+        url: "https://digimon-api.vercel.app/api/digimon/level/Fresh",
+      });
+
+      const dataDigimonInTraining = await axios({
+        method: "get",
+        url: "https://digimon-api.vercel.app/api/digimon/level/In%20Training",
+      });
+
+      const dataDigimonRookie = await axios({
+        method: "get",
+        url: "https://digimon-api.vercel.app/api/digimon/level/Rookie",
+      });
+
+      // console.log(dataDigimonFresh);
+
+      res.status(200).json({
+        dataDigimonFresh: dataDigimonFresh.data,
+        dataDigimonInTraining: dataDigimonInTraining.data,
+        dataDigimonRookie: dataDigimonRookie.data,
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
 
 module.exports = Controller;

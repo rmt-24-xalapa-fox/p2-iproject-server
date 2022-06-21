@@ -12,6 +12,8 @@ app.use(express.json());
 app.post("/register", Controller.register);
 app.post("/login", Controller.login);
 
+app.get("/digimonList", Controller.fetchDataDigimon);
+
 app.use(authentication);
 
 app.get("/user/gachaCoin", Controller.fetchCoin);
