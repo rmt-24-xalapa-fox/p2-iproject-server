@@ -1,0 +1,16 @@
+[
+    {
+        "email": "ade@gmail.com",
+        "name": "Ade Farhan",
+        "password": "12345",
+        "phoneNumber": "081818181818",
+        "numberOfClimbers": 2
+    },
+    {
+        "email": "nandia@gmail.com",
+        "name": "Nandia Z. C.",
+        "password": "12345",
+        "phoneNumber": "089898989",
+        "numberOfClimbers": 5
+    }
+]
