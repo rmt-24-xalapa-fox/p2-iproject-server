@@ -68,7 +68,17 @@ class Controller {
       next(err);
     }
   }
+  static async getDetail(req, res, next) {
+    try {
+      const id = +req.params.id;
+      const detail = await Poem.findByPk(id);
+
+      res.status(200).json({
+        detail,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 module.exports = Controller;
-
-// test
