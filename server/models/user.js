@@ -1,5 +1,5 @@
 "use strict";
-import { bcryptPass } from "../helpers/bcrypt";
+const { bcryptPass } = require("../helpers/bcrypt");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        unique: { msg: "Email must be unique" },
         validate: {
           notNull: { msg: "Email cannot be null" },
           notEmpty: { msg: "Email cannot be empty" },
