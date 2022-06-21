@@ -8,7 +8,8 @@ router.get('/', (req, res) => {
 })
 
 router.post('/unit/:RentalanId', OpController.addUnit)
-
-router.get('/unit', OpController.readUnit)
+router.get('/unit/:RentalanId', OpController.readUnit)
+router.patch('/unit/:RentalanId/:UnitId', OpController.editUnit)
+router.delete('/unit/:RentalanId/:UnitId', OpController.deleteUnit)
 
 module.exports = router
