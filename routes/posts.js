@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Post } = require("../models");
+const { Post, User, Like } = require("../models");
 const multer = require("multer");
 const path = require("path");
 const diskStorage = multer.diskStorage({
@@ -26,7 +26,9 @@ router.get("/", async (req, res, next) => {
   try {
     const UserId = req.user.id;
 
-    let posts = await Post.findAll();
+    let posts = await Post.findAll({
+      include: [User, Like],
+    });
 
     res.status(200).json(posts);
   } catch (err) {
@@ -42,6 +44,7 @@ router.get("/myposts", async (req, res, next) => {
       where: {
         UserId,
       },
+      include: [User, Like],
     });
 
     res.status(200).json(posts);
@@ -76,5 +79,7 @@ router.post(
     }
   }
 );
+
+router.use("/likes", require("./likes"));
 
 module.exports = router;
