@@ -128,6 +128,28 @@ class Controller {
       next(err);
     }
   }
+
+  static async licensesController(req, res, next) {
+    try {
+      const { id: UserId } = req.user;
+      const response = await License.findOne({
+        where: {
+          UserId: UserId,
+        },
+        include: [
+          {
+            model: Mountain,
+          },
+          {
+            model: Quota,
+          },
+        ],
+      });
+      res.status(200).json(response);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = Controller;

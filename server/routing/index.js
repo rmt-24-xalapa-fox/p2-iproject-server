@@ -14,6 +14,8 @@ router.get("/mountains/:MountainId", Controller.mountainsByIdController);
 
 router.use(authentication);
 
+router.get("/licenses", Controller.licensesController);
+
 router.post("/licenses/:MountainId", Controller.postLicenseController);
 
 router.patch("/quota/:QuotaId/:QuotaUse", Controller.patchQuotaController);
