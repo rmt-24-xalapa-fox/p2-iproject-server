@@ -60,6 +60,7 @@ router.post(
       const UserId = +req.user.id;
 
       imageUrl = base64_encode(imageUrl);
+      fs.unlinkSync(req.file.path);
 
       let post = await Post.create({
         UserId,
