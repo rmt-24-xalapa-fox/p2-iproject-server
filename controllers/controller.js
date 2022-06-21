@@ -1,6 +1,7 @@
 const { comparePassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const { User, MyDigimon } = require("../models");
+const axios = require("axios");
 
 class Controller {
   static async register(req, res) {
