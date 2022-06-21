@@ -1,0 +1,28 @@
+{
+  "name": "p2-iproject-server",
+  "version": "1.0.0",
+  "description": "Individual Project - Server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blessed-Code/p2-iproject-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Blessed-Code/p2-iproject-server/issues"
+  },
+  "homepage": "https://github.com/Blessed-Code/p2-iproject-server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "firebase": "^9.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
