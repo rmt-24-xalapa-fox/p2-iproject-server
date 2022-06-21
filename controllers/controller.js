@@ -46,7 +46,7 @@ class Controller {
   static async getOneProduct(req, res, next) {
     try {
       const id = +req.params.id;
-
+      console.log(id, `<<<< controller`);
       const result = await Product.findAll({
         attributes: {
           exclude: ["createdAt", "updatedAt"]
@@ -390,8 +390,9 @@ class Controller {
           }
         },
         attributes: {
-          exclude: ["id", "createdAt", "updatedAt", "ProductId"]
-        }
+          exclude: ["id", "updatedAt", "ProductId"]
+        },
+        order: [["createdAt", "DESC"]]
       });
 
       res.status(200).json(result);
