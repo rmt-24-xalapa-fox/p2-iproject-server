@@ -11,6 +11,7 @@ app.use(express.json());
 
 app.post("/register", Controller.register);
 app.post("/login", Controller.login);
+app.get("/", Controller.getPoem);
 
 app.listen(port, () => {
   console.log(`Listening App ${port}`);
