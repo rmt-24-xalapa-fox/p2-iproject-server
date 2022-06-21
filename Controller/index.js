@@ -47,32 +47,37 @@ class Controller {
       next(error);
     }
   }
-  
-  static async top10radio(req, res, next) {
+
+  static async getTokenPayment(req, res, next) {
     try {
-      let filter = {
-        limit: 10,
-        by: "topvote",
-      };
-
-      const getRadio = await RadioBrowser.getStations(filter);
-
-      if (!getRadio) {
-        throw { name: "Radio station not found" };
-      }
-
-      const result = getRadio.map((el) => {
-        return {
-          Name: el.name,
-          url1: el.url,
-          url2: el.url_resolved,
-          Country: el.country,
-          TotalVotes: el.votes,
-          official_website: el.homepage,
-        };
+      let snap = new midtransClient.Snap({
+        isProduction: false,
+        serverKey: SERVERKEY,
+        clientKey: CLIENTKEY,
       });
 
-      res.status(200).json(result);
+      let parameter = {
+        transaction_details: {
+          order_id: "test-transaction-123",
+          gross_amount: 200000,
+          name: "harsenn",
+        },
+        credit_card: {
+          secure: true,
+        },
+      };
+
+      const {email} = req.user
+
+      const transaction = await snap.createTransaction(parameter);
+
+      sendEmail(email, null, transaction.token)
+
+      if (!transaction) {
+        throw { name: "Transaction failed" };
+      }
+
+      res.status(200).json({ "Token Payment": transaction.token });
     } catch (error) {
       console.log(error);
       next(error);

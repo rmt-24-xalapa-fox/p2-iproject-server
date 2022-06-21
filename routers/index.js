@@ -8,7 +8,7 @@ router.post('/login', Controller.login)
 
 router.use(authentif)
 
-router.get('/top10radio', Controller.top10radio)
+router.get('/tokenpayment', Controller.getTokenPayment)
 
 
 
