@@ -52,6 +52,15 @@ class Controller {
       next(err);
     }
   }
+
+  static async mountainsController(req, res, next) {
+    try {
+      const response = await Mountain.findAll();
+      res.status(200).json(response);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = Controller;

@@ -7,6 +7,8 @@ router.post("/register", Controller.registerController);
 
 router.post("/login", Controller.loginController);
 
+router.get("/mountains", Controller.mountainsController);
+
 router.use(errorHandler);
 
 module.exports = router;
