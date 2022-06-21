@@ -3,18 +3,17 @@ const axios = require('axios');
 const apiKeyTMBD = process.env.secretApiTMDB;
 
 class Controller {
-  static async actorPopular(req, res, next) {
+  static async searchMovies(req, res, next) {
     try {
-      const {page} = req.body
+      const {search} = req.body
       const response = await axios.get(
-        `https://api.themoviedb.org/3/person/popular?api_key=${apiKeyTMBD}&page=${page}`
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKeyTMBD}&query=${search}`
       );
       res.status(200).json(response.data);
     } catch (error) {
-        next(error)
+      next(error)
     }
   }
-
 }
 
 module.exports = Controller;
