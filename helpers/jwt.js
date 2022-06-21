@@ -1,14 +1,12 @@
 const jwt = require("jsonwebtoken");
-const secretKey = process.env.SECRET_KEY;
+const secret = "rahasia";
 
 function convertPayloadToToken(payload) {
-  return jwt.sign(payload, secretKey, {
-    expiresIn: "365d",
-  });
+  return jwt.sign(payload, secret);
 }
 
 function convertTokenToPayload(token) {
-  return jwt.verify(token, secretKey);
+  return jwt.verify(token, secret);
 }
 
 module.exports = {
