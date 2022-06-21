@@ -1,6 +1,31 @@
-const { Unit } = require('../models/index')
+const { Unit, Operator } = require('../models/index')
+const { comparePassword } = require('../helpers/bcrypt')
+const { convertToToken } = require('../helpers/jwt')
 
 class OpController {
+    static async operatorLogin(req, res, next) {
+        try {
+            const { email, password } = req.body
+            const operator = await Operator.findOne({ where: { email } })
+            if (!operator) {
+                throw { name: "email/password invalid" }
+            }
+            const valid = comparePassword(password, operator.password)
+            if (!valid) {
+                throw { name: "email/password invalid" }
+            }
+            const payload = { id: operator.id }
+            const token = convertToToken(payload)
+            res.status(200).json({
+                email,
+                access_token: token
+            })
+        } catch (err) {
+            console.log(err)
+            next(err)
+        }
+    }
+
     static async addUnit(req, res, next) {
         try {
             const { RentalanId } = req.params

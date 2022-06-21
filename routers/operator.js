@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
     res.send('Hello Routers!')
 })
 
+router.post('/oplogin', OpController.operatorLogin)
 router.post('/unit/:RentalanId', OpController.addUnit)
 router.get('/unit/:RentalanId', OpController.readUnit)
 router.patch('/unit/:RentalanId/:UnitId', OpController.editUnit)
