@@ -42,7 +42,9 @@ Request:
 {
   "email": "string",
   "name": "string",
-  "password": "string"
+  "password": "string",
+  "status": "string",
+
 }
 ```
 

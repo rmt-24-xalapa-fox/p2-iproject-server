@@ -9,8 +9,8 @@ const { sendEmail } = require("../helps/sendemail");
 class Controller {
   static async register(req, res, next) {
     try {
-      const { email, password, name } = req.body;
-      const inputData = { email, password, name };
+      const { email, password, name, status } = req.body;
+      const inputData = { email, password, name, status };
 
       if (!email) {
         throw { name: "Email is required" };
@@ -22,6 +22,10 @@ class Controller {
 
       if (!name) {
         throw { name: "Name is required" };
+      }
+
+      if (!status) {
+        throw { name: "Status is required" };
       }
 
       const newUser = await User.create(inputData);
@@ -71,6 +75,7 @@ class Controller {
       const payload = {
         id: findUser.id,
         email: findUser.email,
+        status: findUser.status
       };
 
       const token = createToken(payload);

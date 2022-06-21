@@ -41,6 +41,11 @@ function handleError(err, req, res, next) {
       message = { message: "Password is required" };
       break;
 
+    case "Status is required":
+      code = 400;
+      message = { message: "Status is required" };
+      break;
+
     case "Invalid token":
       code = 401;
       message = { message: "Invalid token" };
@@ -53,7 +58,7 @@ function handleError(err, req, res, next) {
 
     case "Radio station not found":
       code = 404;
-      message = { message: "Radio station not found"};
+      message = { message: "Radio station not found" };
       break;
 
     case "Invalid email/password":
