@@ -104,7 +104,7 @@ class Controller {
         url: `https://api.jikan.moe/v4/seasons/2022/summer`,
         method: "get"
       })
-      console.log(response.data)
+
       const seasonAnimeJson = response.data.data
       const seasonAnime = seasonAnimeJson.map((anime)=>{
         const {title, images, synopsis, url, trailer} = anime
