@@ -14,5 +14,6 @@ router.get("/items", Controller.getItems);
 router.use(authentication);
 
 router.post("/builds", Controller.createBuild);
+router.get("/builds", Controller.getBuilds);
 
 module.exports = router;

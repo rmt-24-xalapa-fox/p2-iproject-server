@@ -45,6 +45,34 @@ class Controller {
       next(err);
     }
   }
+
+  static async getBuilds(req, res, next) {
+    try {
+      const buildList = await Build.findAll({
+        include: [
+          {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+          {
+            model: Hero,
+          },
+          {
+            model: Item,
+          },
+        ],
+      });
+      res.status(200).json({
+        statusCode: 200,
+        buildList,
+      });
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
+  }
 }
 
 module.exports = Controller;
