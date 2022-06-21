@@ -1,5 +1,5 @@
 function errorHandler(err, req, res, next) {
-  console.log(err);
+  //   console.log(err);
   let code = 500;
   let error = "Internal server error";
   let detail = [];
@@ -16,6 +16,11 @@ function errorHandler(err, req, res, next) {
 
   if (err.name === "login fail") {
     code = 401;
+    error = err.message;
+  }
+
+  if (err.name === "not found") {
+    code = 404;
     error = err.message;
   }
 

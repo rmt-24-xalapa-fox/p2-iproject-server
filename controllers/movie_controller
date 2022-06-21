@@ -41,7 +41,7 @@ class movieController {
     try {
       let { id } = req.params;
       const movie = await getDetails(id);
-      if (movie.response.status === 404) {
+      if (movie.response) {
         throw { name: "not found", message: "Movie not found" };
       }
       const trailer = await getTrailer(movie);
