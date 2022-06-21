@@ -20,32 +20,32 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notNull: { msg: "fields must not be null" },
-          notEmpty: { msg: "fields must not be empty" },
+          notNull: { msg: "title must not be null" },
+          notEmpty: { msg: "title must not be empty" },
         },
       },
       author: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notNull: { msg: "fields must not be null" },
-          notEmpty: { msg: "fields must not be empty" },
+          notNull: { msg: "author must not be null" },
+          notEmpty: { msg: "author must not be empty" },
         },
       },
       content: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notNull: { msg: "fields must not be null" },
-          notEmpty: { msg: "fields must not be empty" },
+          notNull: { msg: "content must not be null" },
+          notEmpty: { msg: "content must not be empty" },
         },
       },
       UserId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          notNull: { msg: "fields must not be null" },
-          notEmpty: { msg: "fields must not be empty" },
+          notNull: { msg: "UserId must not be null" },
+          notEmpty: { msg: "UserId must not be empty" },
         },
       },
     },
