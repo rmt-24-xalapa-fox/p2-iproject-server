@@ -7,6 +7,7 @@ const midtransClient = require("midtrans-client");
 const { sendEmail } = require("../helps/sendemail");
 
 class Controller {
+
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
@@ -48,27 +49,26 @@ class Controller {
     }
   }
   
-  static async top10radio(req, res, next) {
+  static async getallSong(req, res, next) {
     try {
-      let filter = {
-        limit: 10,
-        by: "topvote",
-      };
+      const data = await axios({
+        method: "get",
+        url: `http://api.musixmatch.com/ws/1.1/chart.tracks.get?apikey=${APIKEY}`,
+      });
 
-      const getRadio = await RadioBrowser.getStations(filter);
-
-      if (!getRadio) {
-        throw { name: "Radio station not found" };
+      if (!data) {
+        throw { name: "Songs not found" };
       }
 
-      const result = getRadio.map((el) => {
+      let trackInfo = data.data.message.body.track_list;
+
+      let result = trackInfo.map((el) => {
         return {
-          Name: el.name,
-          url1: el.url,
-          url2: el.url_resolved,
-          Country: el.country,
-          TotalVotes: el.votes,
-          official_website: el.homepage,
+          title: el.track.track_name,
+          rating: el.track.track_rating,
+          album: el.track.album_name,
+          artistName: el.track.artist_name,
+          songUrl: el.track.track_share_url,
         };
       });
 
