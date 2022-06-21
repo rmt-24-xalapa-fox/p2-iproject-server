@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.Post, { foreignKey: "UserId" });
     }
   }
   User.init(
@@ -56,6 +57,9 @@ module.exports = (sequelize, DataTypes) => {
           notNull: true,
         },
       },
+      avatar: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
@@ -64,6 +68,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.beforeCreate((user) => {
     user.password = hashPassword(user.password);
+    user.avatar = `https://avatars.dicebear.com/api/avataaars/${user.email}.svg`;
   });
   return User;
 };

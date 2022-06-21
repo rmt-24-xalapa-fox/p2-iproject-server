@@ -41,7 +41,7 @@ router.post("/login", async (req, res, next) => {
 
     const isValid = checkPassword(password, user.password);
     if (!isValid) {
-      throw { name: "Error invalid username or email or password", code: 401 };
+      throw { msg: "Error invalid username or email or password", code: 401 };
     }
 
     const payload = {
@@ -59,5 +59,7 @@ router.post("/login", async (req, res, next) => {
 
 //! AUTHENTICATION
 router.use(authentication);
+
+router.use("/posts", require("../routes/posts"));
 
 module.exports = router;
