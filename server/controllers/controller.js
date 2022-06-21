@@ -26,6 +26,9 @@ class Controller {
   static async loginController(req, res, next) {
     try {
       const { email, password } = req.body;
+      if (!email || !password) {
+        throw { name: "Email/PasswordEmpty" };
+      }
       const findUser = await User.findOne({
         where: {
           email,
@@ -44,7 +47,7 @@ class Controller {
         name: findUser.name,
       };
       const token = convertToToken(payload);
-      res.status(200).json(token);
+      res.status(200).json({ access_token: token });
     } catch (err) {
       next(err);
     }

@@ -1,6 +1,6 @@
 const errorHandler = (err, req, res, next) => {
+  console.log(err);
   const { name, errors } = err;
-  console.log(name, errors);
   let statusCode = 500;
   let message = "Internal Server Error";
 
@@ -10,6 +10,12 @@ const errorHandler = (err, req, res, next) => {
   ) {
     statusCode = 400;
     message = errors.map(({ message }) => message);
+  } else if (name === "Email/PasswordEmpty") {
+    statusCode = 400;
+    message = "Email / Password is required";
+  } else if (name === "UserNotFound") {
+    statusCode = 401;
+    message = "Invalid email/password";
   }
 
   res.status(statusCode).json({ message });
