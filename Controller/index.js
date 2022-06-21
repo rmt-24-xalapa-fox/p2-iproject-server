@@ -7,6 +7,7 @@ const midtransClient = require("midtrans-client");
 const { sendEmail } = require("../helps/sendemail");
 
 class Controller {
+
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
