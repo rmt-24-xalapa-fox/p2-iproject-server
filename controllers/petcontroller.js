@@ -89,6 +89,62 @@ class PetController {
             next(err);
         }
     }
+
+    static async UpdatePetDetails(req, res, next) {
+        try {
+            console.log("test");
+            const {
+                name,
+                gender,
+                age,
+                size,
+                primaryBreed,
+                secondaryBreed,
+                mixedBreed,
+                unknownBreed,
+                spayed,
+                houseTrained,
+                declawed,
+                specialNeeds,
+                shots,
+                goodWithChildren,
+                goodWithDogs,
+                goodWithCats,
+                imageUrl,
+                description,
+            } = req.body;
+
+            const petDetail = await Pet.update(
+                {
+                    name,
+                    gender,
+                    age,
+                    size,
+                    primaryBreed,
+                    secondaryBreed,
+                    mixedBreed,
+                    unknownBreed,
+                    spayed,
+                    houseTrained,
+                    declawed,
+                    specialNeeds,
+                    shots,
+                    goodWithChildren,
+                    goodWithDogs,
+                    goodWithCats,
+                    imageUrl,
+                    description,
+                },
+                { where: { id: +req.params.id } }
+            );
+            res.status(200).json({
+                statusCode: 200,
+                message: `Pet detail updated`,
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 module.exports = PetController;
