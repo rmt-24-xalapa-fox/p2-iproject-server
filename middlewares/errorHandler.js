@@ -2,12 +2,14 @@ const errorHandler = (err, req, res, next) => {
   let code = 500;
   let msg = "Internal Server Error";
 
+  console.log(err);
+
   if (
     err.name === "SequelizeUniqueConstraintError" ||
     err.name === "SequelizeValidationError"
   ) {
     code = 400;
-    msg = err.errors.map((el) => el.message);
+    msg = err.errors[0].message;
   } else if (
     err.name === "SequelizeForeignKeyConstraintError" ||
     err.name === "ForeignKeyNotValid"
