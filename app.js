@@ -8,7 +8,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/", Controller.indexTes);
+app.post("/register", Controller.register);
+app.post("/login", Controller.login);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
