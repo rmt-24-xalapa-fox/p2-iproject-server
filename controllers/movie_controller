@@ -1,0 +1,7 @@
+class movieController {
+  static test(req, res, next) {
+    res.status(200).json({ message: "Server berfungsi" });
+  }
+}
+
+module.exports = movieController;
