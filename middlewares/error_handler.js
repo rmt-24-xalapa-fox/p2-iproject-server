@@ -1,9 +1,5 @@
-function errorHandler(res, req, next) {
-  res.send("Error nih");
-}
-module.exports = { errorHandler };
 function errorHandler(err, req, res, next) {
-  //   console.log(err);
+  console.log(err);
   let code = 500;
   let error = "Internal server error";
   let detail = [];
