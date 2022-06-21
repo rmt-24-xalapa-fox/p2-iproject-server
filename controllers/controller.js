@@ -11,7 +11,7 @@ class Controller {
         username,
         email,
         password,
-        gachaCoin: 5000,
+        gachaCoin: 2000,
         role: "Customer",
       });
       res.status(201).json({
@@ -109,9 +109,11 @@ class Controller {
     try {
       const userId = req.user.id;
 
-      const foundUser = User.findOne({ where: { id: userId } });
-
+      const foundUser = await User.findOne({ where: { id: userId } });
+      console.log(foundUser);
+      console.log(foundUser.gachaCoin);
       if (foundUser.gachaCoin < 100) {
+        // console.log("masok");
         throw { name: "NotEnoughCoin" };
       }
 
@@ -175,7 +177,11 @@ class Controller {
         });
       }
     } catch (err) {
-      res.status(500).json(err);
+      if (err.name == "NotEnoughCoin") {
+        res.status(404).json({ message: "You dont have enough coins !" });
+      } else {
+        res.status(500).json(err);
+      }
     }
   }
 
