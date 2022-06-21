@@ -9,6 +9,8 @@ router.post("/login", Controller.loginController);
 
 router.get("/mountains", Controller.mountainsController);
 
+router.get("/mountains/:MountainId", Controller.mountainsByIdController);
+
 router.use(errorHandler);
 
 module.exports = router;

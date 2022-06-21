@@ -16,6 +16,9 @@ const errorHandler = (err, req, res, next) => {
   } else if (name === "UserNotFound") {
     statusCode = 401;
     message = "Invalid email/password";
+  } else if (name === "MountainNotFound") {
+    statusCode = 404;
+    message = "Mountain Not Found";
   }
 
   res.status(statusCode).json({ message });

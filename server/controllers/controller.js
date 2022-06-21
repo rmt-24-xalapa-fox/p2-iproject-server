@@ -61,6 +61,25 @@ class Controller {
       next(err);
     }
   }
+
+  static async mountainsByIdController(req, res, next) {
+    try {
+      const { MountainId } = req.params;
+      const findMountain = await Mountain.findByPk(MountainId, {
+        include: [
+          {
+            model: Quota,
+          },
+        ],
+      });
+      if (!findMountain) {
+        throw { name: "MountainNotFound" };
+      }
+      res.status(200).json(findMountain);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = Controller;
