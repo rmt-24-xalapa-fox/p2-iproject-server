@@ -5,6 +5,8 @@ const errorHandler = require("../middlewares/errorHandle");
 
 router.post("/register", Controller.registerController);
 
+router.post("/login", Controller.loginController);
+
 router.use(errorHandler);
 
 module.exports = router;
