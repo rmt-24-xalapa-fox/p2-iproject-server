@@ -131,10 +131,10 @@ class Controller {
       ];
 
       let randomNumber1 = Math.floor(Math.random() * gachaDigimonRate.length);
-      console.log(randomNumber1);
+      // console.log(randomNumber1);
 
       let gachaLevel = gachaDigimonRate[randomNumber1];
-      console.log(gachaLevel);
+      // console.log(gachaLevel);
 
       const dataDigimonGacha = await axios({
         method: "get",
@@ -145,23 +145,35 @@ class Controller {
         Math.random() * dataDigimonGacha.data.length
       );
       let gachaedDigimon = dataDigimonGacha.data[randomNumber2];
-      console.log(gachaedDigimon);
+      // console.log(gachaedDigimon);
 
       // IF DUPE DISINI
-
-      const createdMyDigimon = await MyDigimon.create({
-        UserId: userId,
-        name: gachaedDigimon.name,
-        img: gachaedDigimon.img,
-        level: gachaedDigimon.level,
+      const foundMyDigimon = await MyDigimon.findOne({
+        where: { UserId: userId, name: gachaedDigimon.name },
       });
 
-      res.status(200).json({
-        message: "You got a new Digimon !",
-        name: createdMyDigimon.name,
-        img: createdMyDigimon.img,
-        level: createdMyDigimon.level,
-      });
+      if (foundMyDigimon) {
+        res.status(200).json({
+          message: "You got a dupe ! Better luck next time !",
+          name: foundMyDigimon.name,
+          img: foundMyDigimon.img,
+          level: foundMyDigimon.level,
+        });
+      } else {
+        const createdMyDigimon = await MyDigimon.create({
+          UserId: userId,
+          name: gachaedDigimon.name,
+          img: gachaedDigimon.img,
+          level: gachaedDigimon.level,
+        });
+
+        res.status(200).json({
+          message: "You got a new Digimon !",
+          name: createdMyDigimon.name,
+          img: createdMyDigimon.img,
+          level: createdMyDigimon.level,
+        });
+      }
     } catch (err) {
       res.status(500).json(err);
     }
