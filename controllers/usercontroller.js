@@ -1,6 +1,6 @@
 "use script";
 
-const { User } = require("../models/index.js");
+const { User, Pet } = require("../models/index.js");
 const { compare } = require("../helpers/bcrypt");
 const { convertPayloadToToken } = require("../helpers/jwt");
 
@@ -53,6 +53,36 @@ class UserController {
             });
         } catch (error) {
             next(error);
+        }
+    }
+
+    static async getUserDetail(req, res, next) {
+        try {
+            let id = +req.params.id;
+            const user = await User.findOne({
+                attributes: {
+                    where: {
+                        id,
+                    },
+                    exclude: ["password", "createdAt", "updatedAt"],
+                },
+                include: {
+                    model: Pet,
+                    attributes: {
+                        exclude: ["createdAt", "updatedAt"],
+                    },
+                },
+            });
+
+            if (!user) {
+                throw { code: 404 };
+            }
+            res.status(200).json({
+                statusCode: 200,
+                user: user,
+            });
+        } catch (err) {
+            next(err);
         }
     }
 }
