@@ -11,7 +11,7 @@ class Controller {
         username,
         email,
         password,
-        gachaCoin: 0,
+        gachaCoin: 5000,
         role: "Customer",
       });
       res.status(201).json({
@@ -184,13 +184,20 @@ class Controller {
       // console.log("masok");
       const userId = req.user.id;
 
-      const foundUser = await User.findOne({
-        where: { id: userId },
-        include: MyDigimon,
+      // const foundUser = await User.findOne({
+      //   where: { id: userId },
+      //   include: { model: MyDigimon, order: [["level"]] },
+      // });
+
+      const foundMyDigimon = await MyDigimon.findAll({
+        where: {
+          UserId: userId,
+        },
+        order: ["level", "name"],
       });
 
       // console.log(foundUser);
-      res.status(200).json(foundUser.MyDigimons);
+      res.status(200).json(foundMyDigimon);
     } catch (err) {
       res.status(500).json(err);
     }
