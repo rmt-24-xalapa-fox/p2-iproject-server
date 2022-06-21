@@ -45,5 +45,13 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
+
+  User.beforeCreate((user, options) => {
+    if (!user.plan) {
+      user.plan = "Free";
+    }
+    user.password = encryptPassword(user.password);
+  });
+
   return User;
 };
