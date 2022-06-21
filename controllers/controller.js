@@ -104,6 +104,68 @@ class Controller {
       res.status(500).json(err);
     }
   }
+
+  static async gachaDigimon(req, res) {
+    try {
+      const userId = req.user.id;
+
+      const foundUser = User.findOne({ where: { id: userId } });
+
+      if (foundUser.gachaCoin < 100) {
+        throw { name: "NotEnoughCoin" };
+      }
+
+      await User.increment({ gachaCoin: -100 }, { where: { id: userId } });
+
+      let gachaDigimonRate = [
+        "Fresh",
+        "Fresh",
+        "Fresh",
+        "Fresh",
+        "In%20Training",
+        "In%20Training",
+        "In%20Training",
+        "Rookie",
+        "Rookie",
+        "Rookie",
+      ];
+
+      let randomNumber1 = Math.floor(Math.random() * gachaDigimonRate.length);
+      console.log(randomNumber1);
+
+      let gachaLevel = gachaDigimonRate[randomNumber1];
+      console.log(gachaLevel);
+
+      const dataDigimonGacha = await axios({
+        method: "get",
+        url: `https://digimon-api.vercel.app/api/digimon/level/${gachaLevel}`,
+      });
+
+      let randomNumber2 = Math.floor(
+        Math.random() * dataDigimonGacha.data.length
+      );
+      let gachaedDigimon = dataDigimonGacha.data[randomNumber2];
+      console.log(gachaedDigimon);
+
+      // IF DUPE DISINI
+
+      const createdMyDigimon = await MyDigimon.create({
+        UserId: userId,
+        name: gachaedDigimon.name,
+        img: gachaedDigimon.img,
+        level: gachaedDigimon.level,
+      });
+
+      res.status(200).json({
+        message: "You got a new Digimon !",
+        name: createdMyDigimon.name,
+        img: createdMyDigimon.img,
+        level: createdMyDigimon.level,
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
 
 module.exports = Controller;
