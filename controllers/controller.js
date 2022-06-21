@@ -2,6 +2,7 @@ const { comparedPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const { User, FavoriteAnime } = require("../models");
 const axios = require("axios");
+const truncateString = require('../helpers/trim')
 
 class Controller {
   static async register(req, res) {
@@ -109,11 +110,11 @@ class Controller {
       const seasonAnime = seasonAnimeJson.map((anime)=>{
         const {title, images, synopsis, url, trailer} = anime
         return {
-          title,
+          title: truncateString(title, 20),
           imageUrl: images.jpg.image_url,
-          synopsis,
+          synopsis: truncateString(synopsis, 40),
           url,
-          trailer: trailer.url
+          trailer: trailer.embed_url
         }
       })
       res.status(200).json(seasonAnime)
