@@ -22,6 +22,9 @@ const errorHandler = (err, req, res, next) => {
   } else if (name === "invalidToken" || name === "JsonWebTokenError") {
     statusCode = 401;
     message = "Access Token is Invalid";
+  } else if (name === "QuotaNotFound") {
+    statusCode = 400;
+    message = "Quota Not Found";
   }
 
   res.status(statusCode).json({ message });

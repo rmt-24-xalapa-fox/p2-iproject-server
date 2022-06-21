@@ -84,6 +84,10 @@ class Controller {
   static async postLicenseController(req, res, next) {
     try {
       const { MountainId } = req.params;
+      const findMountain = await Mountain.findByPk(MountainId);
+      if (!findMountain) {
+        throw { name: "MountainNotFound" };
+      }
       const { numberOfClimbers, totalPrice, QuotaId } = req.body;
       const { id: UserId } = req.user;
       const data = {
@@ -95,6 +99,31 @@ class Controller {
       };
       await License.create(data);
       res.status(201).json({ message: "Success Created License" });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async patchQuotaController(req, res, next) {
+    try {
+      const { QuotaId, QuotaUse } = req.params;
+      let quotaData = 0;
+      const findQuota = await Quota.findByPk(QuotaId);
+      if (!findQuota) {
+        throw { name: "QuotaNotFound" };
+      }
+      quotaData = findQuota.quotaUse;
+      await Quota.update(
+        {
+          quotaUse: quotaData + +QuotaUse,
+        },
+        {
+          where: {
+            id: QuotaId,
+          },
+        }
+      );
+      res.status(200).json({ message: "QuotaUse has been updated" });
     } catch (err) {
       next(err);
     }

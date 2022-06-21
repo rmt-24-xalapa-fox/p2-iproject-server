@@ -16,6 +16,8 @@ router.use(authentication);
 
 router.post("/licenses/:MountainId", Controller.postLicenseController);
 
+router.patch("/quota/:QuotaId/:QuotaUse", Controller.patchQuotaController);
+
 router.use(errorHandler);
 
 module.exports = router;
