@@ -18,6 +18,7 @@ app.use(authentication);
 
 app.put("/user/gachaDigimon", Controller.gachaDigimon);
 app.get("/user/gachaCoin", Controller.fetchCoin);
+app.get("/user/myDigimon", Controller.fetchMyDigimon);
 
 // app.use(async (req, res, next) => {
 //   try {

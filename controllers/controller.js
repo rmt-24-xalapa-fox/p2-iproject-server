@@ -166,6 +166,23 @@ class Controller {
       res.status(500).json(err);
     }
   }
+
+  static async fetchMyDigimon(req, res) {
+    try {
+      // console.log("masok");
+      const userId = req.user.id;
+
+      const foundUser = await User.findOne({
+        where: { id: userId },
+        include: MyDigimon,
+      });
+
+      // console.log(foundUser);
+      res.status(200).json(foundUser.MyDigimons);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
 
 module.exports = Controller;
