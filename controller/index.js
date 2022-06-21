@@ -55,6 +55,19 @@ class Controller {
       next(err);
     }
   }
+  static async getPoem(req, res, next) {
+    try {
+      const data = await Poem.findAll({
+        order: [["createdAt", "Desc"]],
+      });
+
+      res.status(200).json({
+        data,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 module.exports = Controller;
 
