@@ -87,7 +87,7 @@ class Controller {
         title,
         author,
         content,
-        UserId: 1
+        UserId: req.userId
       });
 
       res.status(201).json(createdPoem);
