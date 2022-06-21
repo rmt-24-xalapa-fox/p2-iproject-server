@@ -7,6 +7,7 @@ router.post("/register", Controller.register);
 router.post("/login", Controller.login);
 router.use(authentication);
 router.get("/palettes", Controller.readAllPalettes);
+router.get("/palettes/generate", Controller.generatePalette);
 router.post("/palettes/add", Controller.addPalette);
 router.get("/palettes/:colorPaletteId", Controller.readPaletteById);
 router.use(errorHandler);
