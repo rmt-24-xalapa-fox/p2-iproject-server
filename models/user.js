@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       profilePicture: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
       },
     },
     {
@@ -51,7 +51,9 @@ module.exports = (sequelize, DataTypes) => {
     if (!user.plan) {
       user.plan = "Free";
     }
-    user.profilePicture = `https://avatars.dicebear.com/api/identicon/${user.name}.png`;
+    if (!user.profilePicture) {
+      user.profilePicture = `https://avatars.dicebear.com/api/identicon/${user.name}.png`;
+    }
     user.password = encryptPassword(user.password);
   });
   return User;

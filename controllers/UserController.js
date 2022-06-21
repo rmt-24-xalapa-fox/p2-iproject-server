@@ -7,10 +7,15 @@ class UserController {
   static async register(req, res, next) {
     try {
       const { name, email, password } = req.body;
+      let profilePicture = "";
+      if (req.file) {
+        profilePicture = req.file.buffer.toString("base64");
+      }
       const input = {
         name,
         email,
         password,
+        profilePicture,
       };
       const user = await User.create(input);
       res.status(201).json({
