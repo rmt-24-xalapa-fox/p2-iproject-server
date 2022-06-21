@@ -1,15 +1,18 @@
 const router = require("express").Router();
-const Controller = require("../controllers");
+const UserController = require("../controllers/UserController");
+const PaletteController = require("../controllers/PaletteController");
 const authentication = require("../middlewares/authentication");
 const errorHandler = require("../middlewares/errorHandler");
 
-router.post("/register", Controller.register);
-router.post("/login", Controller.login);
+router.post("/register", UserController.register);
+router.post("/login", UserController.login);
 router.use(authentication);
-router.get("/palettes", Controller.readAllPalettes);
-router.get("/palettes/generate", Controller.generatePalette);
-router.post("/palettes/add", Controller.addPalette);
-router.get("/palettes/:colorPaletteId", Controller.readPaletteById);
+router.get("/palettes", PaletteController.readAllPalettes);
+router.get("/palettes/generate", PaletteController.generatePalette);
+router.post("/palettes/add", PaletteController.addPalette);
+router.get("/palettes/:colorPaletteId", PaletteController.readPaletteById);
+router.post("/profile/tokenUpgrade", UserController.createSnapToken);
+router.patch("/profile/upgradePlan", UserController.upgradePlan);
 router.use(errorHandler);
 
 module.exports = router;
