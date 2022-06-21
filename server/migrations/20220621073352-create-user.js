@@ -21,9 +21,6 @@ module.exports = {
       phoneNumber: {
         type: Sequelize.STRING,
       },
-      numberOfClimbers: {
-        type: Sequelize.INTEGER,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

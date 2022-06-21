@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Quota.hasMany(models.License, { foreignKey: "QuotaId" });
       Quota.belongsTo(models.Mountain, { foreignKey: "MountainId" });
     }
   }

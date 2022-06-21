@@ -19,6 +19,9 @@ const errorHandler = (err, req, res, next) => {
   } else if (name === "MountainNotFound") {
     statusCode = 404;
     message = "Mountain Not Found";
+  } else if (name === "invalidToken" || name === "JsonWebTokenError") {
+    statusCode = 401;
+    message = "Access Token is Invalid";
   }
 
   res.status(statusCode).json({ message });

@@ -80,6 +80,25 @@ class Controller {
       next(err);
     }
   }
+
+  static async postLicenseController(req, res, next) {
+    try {
+      const { MountainId } = req.params;
+      const { numberOfClimbers, totalPrice, QuotaId } = req.body;
+      const { id: UserId } = req.user;
+      const data = {
+        UserId,
+        MountainId,
+        QuotaId,
+        numberOfClimbers,
+        totalPrice,
+      };
+      await License.create(data);
+      res.status(201).json({ message: "Success Created License" });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = Controller;

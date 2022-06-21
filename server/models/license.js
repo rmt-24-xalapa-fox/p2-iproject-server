@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       License.belongsTo(models.User, { foreignKey: "UserId" });
       License.belongsTo(models.Mountain, { foreignKey: "MountainId" });
+      License.belongsTo(models.Quota, { foreignKey: "QuotaId" });
     }
   }
   License.init(
@@ -30,14 +31,31 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "MountainId cannot be empty" },
         },
       },
-      status: {
-        type: DataTypes.STRING,
+      QuotaId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          notNull: { msg: "Status cannot be null" },
-          notEmpty: { msg: "Status cannot be empty" },
+          notNull: { msg: "QuotaId cannot be null" },
+          notEmpty: { msg: "QuotaId cannot be empty" },
         },
       },
+      numberOfClimbers: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "NumberOfClimbers cannot be null" },
+          notEmpty: { msg: "NumberOfClimbers cannot be empty" },
+        },
+      },
+      totalPrice: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "totalPrice cannot be null" },
+          notEmpty: { msg: "totalPrice cannot be empty" },
+        },
+      },
+      status: DataTypes.STRING,
     },
     {
       sequelize,

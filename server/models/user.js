@@ -54,14 +54,6 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "Phone Number cannot be empty" },
         },
       },
-      numberOfClimbers: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notNull: { msg: "Number Of Climbers cannot be null" },
-          notEmpty: { msg: "Number Of Climbers cannot be empty" },
-        },
-      },
     },
     {
       sequelize,

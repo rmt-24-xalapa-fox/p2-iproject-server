@@ -22,6 +22,19 @@ module.exports = {
           key: "id",
         },
       },
+      QuotaId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Quota",
+          key: "id",
+        },
+      },
+      numberOfClimbers: {
+        type: Sequelize.INTEGER,
+      },
+      totalPrice: {
+        type: Sequelize.INTEGER,
+      },
       status: {
         type: Sequelize.STRING,
       },
