@@ -28,6 +28,23 @@ class Controller {
       next(err);
     }
   }
+
+  static async createBuild(req, res, next) {
+    try {
+      let { HeroId, Item1Id, Item2Id, Item3Id, Item4Id, Item5Id, Item6Id, Item7Id } = req.body;
+      let { id: UserId } = req.user;
+      let newBuild = { UserId, HeroId, Item1Id, Item2Id, Item3Id, Item4Id, Item5Id, Item6Id, Item7Id };
+
+      const builds = await Build.create(newBuild);
+
+      res.status(201).json({
+        statusCode: 201,
+        builds,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = Controller;
