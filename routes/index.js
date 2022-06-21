@@ -21,7 +21,7 @@ router.post("/carts/:BookId", Controller.addCarts);
 router.delete("/carts/:BookId", Controller.removeCarts);
 
 router.get("/shipping/cities", Controller.readCities);
-router.post("/shipping/cost", Controller.addShipping);
+router.post("/shipping/costs", Controller.addShipping);
 
 router.use(errorHandler);
 
