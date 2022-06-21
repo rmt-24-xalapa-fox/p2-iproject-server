@@ -80,5 +80,20 @@ class Controller {
       next(err);
     }
   }
+  static async createPoem(req, res, next) {
+    try {
+      const { title, author, content } = req.body;
+      const createdPoem = await Poem.create({
+        title,
+        author,
+        content,
+        UserId: 1
+      });
+
+      res.status(201).json(createdPoem);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 module.exports = Controller;
