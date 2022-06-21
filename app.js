@@ -18,6 +18,7 @@ app.use(authentication)
 
 app.get("/", Controller.getPoem);
 app.get("/read-more/:id", Controller.getDetail);
+app.get("/my-poem/:id", Controller.getMyPoem);
 app.post("/create-poem", Controller.createPoem);
 
 app.use(errorHandler)

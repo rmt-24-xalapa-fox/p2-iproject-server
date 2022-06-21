@@ -61,9 +61,7 @@ class Controller {
         order: [["createdAt", "Desc"]],
       });
 
-      res.status(200).json({
-        data,
-      });
+      res.status(200).json(data);
     } catch (err) {
       next(err);
     }
@@ -73,9 +71,7 @@ class Controller {
       const id = +req.params.id;
       const detail = await Poem.findByPk(id);
 
-      res.status(200).json({
-        detail,
-      });
+      res.status(200).json(detail);
     } catch (err) {
       next(err);
     }
@@ -87,10 +83,24 @@ class Controller {
         title,
         author,
         content,
-        UserId: req.userId
+        UserId: req.userId,
       });
 
       res.status(201).json(createdPoem);
+    } catch (err) {
+      next(err);
+    }
+  }
+  static async getMyPoem(req, res, next) {
+    try {
+      const id = +req.params.id;
+      const myPoem = await Poem.findAll({
+        where: {
+          UserId: req.userId,
+        },
+      });
+
+      res.status(200).json(myPoem);
     } catch (err) {
       next(err);
     }
