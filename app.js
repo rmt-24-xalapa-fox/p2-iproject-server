@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = 3000
@@ -12,6 +13,7 @@ app.use(express.urlencoded({extended: false}))
 
 app.post('/register', Controller.register)
 app.post('/login', Controller.login)
+app.get('/seasonAnime', Controller.getSeasonAnime)
 app.post('/addFavorite', authentication, Controller.addFavoriteAnime)
 app.patch('/favorites/:id', authentication, Controller.updateFavoriteanime)
 app.get('/favorites', authentication, Controller.getallFavoriteAnime)
