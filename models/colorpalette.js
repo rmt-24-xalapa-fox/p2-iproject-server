@@ -25,7 +25,14 @@ module.exports = (sequelize, DataTypes) => {
               throw new Error("Colors must be an Array");
             }
           },
-          is: /^#[0-9a-f]{6}/i,
+          isHexCode(colors) {
+            colors.forEach((color) => {
+              const isColor = /^#[0-9a-f]{6}/i.test(color);
+              if (!isColor) {
+                throw new Error("Colors must be in hexcode format");
+              }
+            });
+          },
           isFiveColors(colors) {
             if (colors.length !== 5) {
               throw new Error("Colors must consist of 5 colors");
