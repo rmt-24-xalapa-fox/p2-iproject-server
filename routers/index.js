@@ -18,6 +18,12 @@ router.get("/palettes", PaletteController.readAllPalettes);
 router.get("/palettes/generate", PaletteController.generatePalette);
 router.post("/palettes/add", PaletteController.addPalette);
 router.get("/palettes/:colorPaletteId", PaletteController.readPaletteById);
+router.get("/profile", UserController.readUserById);
+router.patch(
+  "/profile/edit",
+  upload.single("profilePicture"),
+  UserController.editUserById
+);
 router.post("/profile/tokenUpgrade", UserController.createSnapToken);
 router.patch("/profile/upgradePlan", UserController.upgradePlan);
 router.use(errorHandler);

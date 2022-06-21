@@ -7,7 +7,7 @@ class UserController {
   static async register(req, res, next) {
     try {
       const { name, email, password } = req.body;
-      let profilePicture = "";
+      let profilePicture = undefined;
       if (req.file) {
         profilePicture = req.file.buffer.toString("base64");
       }
@@ -56,6 +56,48 @@ class UserController {
       const access_token = convertPayloadToToken(payload);
       res.status(200).json({
         access_token,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async readUserById(req, res, next) {
+    try {
+      const user = await User.findByPk(req.user.id, {
+        attributes: {
+          exclude: ["password"],
+        },
+      });
+      res.status(200).json({
+        user,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async editUserById(req, res, next) {
+    try {
+      const { name, email, password } = req.body;
+      let profilePicture = undefined;
+      if (req.file) {
+        profilePicture = req.file.buffer.toString("base64");
+      }
+      const input = {
+        name,
+        email,
+        password,
+        profilePicture,
+      };
+      await User.update(input, {
+        where: {
+          id: req.user.id,
+        },
+        individualHooks: true,
+      });
+      res.status(200).json({
+        message: `Your profile has been updated`,
       });
     } catch (err) {
       next(err);
