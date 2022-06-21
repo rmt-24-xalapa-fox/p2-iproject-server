@@ -20,6 +20,8 @@ router.get("/carts", Controller.readCarts);
 router.post("/carts/:BookId", Controller.addCarts);
 router.delete("/carts/:BookId", Controller.removeCarts);
 
+router.get("/shipping/cities", Controller.readCities);
+
 router.use(errorHandler);
 
 module.exports = router;

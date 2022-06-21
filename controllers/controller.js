@@ -2,9 +2,10 @@ const { User, Category, Book, Wishlist, Cart } = require("../models");
 const { comparePassword } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
-const { CLIENT_ID } = process.env;
+const { CLIENT_ID, API_RAJAONGKIR } = process.env;
 const { Op } = require("sequelize");
 const { getPagination, getPagingData } = require("../helpers/pagination");
+const axios = require("axios");
 
 class Controller {
   static async register(req, res, next) {
@@ -396,6 +397,26 @@ class Controller {
       res.status(200).json({
         statusCode: 200,
         message: `successfully remove ${book.title} from your carts`,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async readCities(req, res, next) {
+    try {
+      const allCities = await axios.get(
+        "https://api.rajaongkir.com/starter/city",
+        {
+          headers: {
+            key: process.env.API_RAJAONGKIR,
+          },
+        }
+      );
+
+      res.status(200).json({
+        statusCode: 200,
+        data: allCities.data.rajaongkir.results,
       });
     } catch (err) {
       next(err);
