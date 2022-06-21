@@ -1,4 +1,4 @@
-const { Unit, Operator } = require('../models/index')
+const { Unit, Operator, Rentalan } = require('../models/index')
 const { comparePassword } = require('../helpers/bcrypt')
 const { convertToToken } = require('../helpers/jwt')
 
@@ -8,11 +8,11 @@ class OpController {
             const { email, password } = req.body
             const operator = await Operator.findOne({ where: { email } })
             if (!operator) {
-                throw { name: "email/password invalid" }
+                throw { name: "email/password required" }
             }
             const valid = comparePassword(password, operator.password)
             if (!valid) {
-                throw { name: "email/password invalid" }
+                throw { name: "email/password required" }
             }
             const payload = { id: operator.id }
             const token = convertToToken(payload)
@@ -21,7 +21,6 @@ class OpController {
                 access_token: token
             })
         } catch (err) {
-            console.log(err)
             next(err)
         }
     }
@@ -31,12 +30,15 @@ class OpController {
             const { RentalanId } = req.params
             const { psType } = req.body
             let status = 'available'
+            const found = await Rentalan.findByPk(RentalanId)
+            if (!found) {
+                throw { name: "Rentalan not found" }
+            }
             const add = await Unit.create({ status, RentalanId, psType })
             res.status(201).json({
                 add
             })
         } catch (err) {
-            console.log(err);
             next(err)
         }
     }

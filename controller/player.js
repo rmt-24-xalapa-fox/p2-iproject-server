@@ -18,7 +18,7 @@ class PlayerController {
                 msg: "success register"
             })
         } catch (err) {
-            console.log(err);
+            next(err)
         }
     }
 
@@ -40,7 +40,6 @@ class PlayerController {
                 access_token: token
             })
         } catch (err) {
-            console.log(err)
             next(err)
         }
     }
@@ -52,7 +51,6 @@ class PlayerController {
                 rentalan
             })
         } catch (err) {
-            console.log(err);
             next(err)
         }
     }
@@ -70,7 +68,7 @@ class PlayerController {
                 msg: `Unit where id ${UnitId} booked`
             })
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 }
