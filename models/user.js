@@ -56,5 +56,8 @@ module.exports = (sequelize, DataTypes) => {
     }
     user.password = encryptPassword(user.password);
   });
+  User.beforeUpdate((user, options) => {
+    user.password = encryptPassword(user.password);
+  });
   return User;
 };
