@@ -70,6 +70,27 @@ class Controller {
     }
   }
 
+  static async generatePalette(req, res, next) {
+    try {
+      let { colorScheme } = req.body;
+      if (!colorScheme) {
+        colorScheme = "Monochromatic";
+      }
+      const headers = {
+        "X-RapidAPI-Host": "random-palette-generator.p.rapidapi.com",
+        "X-RapidAPI-Key": process.env.X_RAPID_API_KEY,
+      };
+      let { data } = await axios.get(
+        `https://random-palette-generator.p.rapidapi.com/palette/${colorScheme}/1/5`,
+        { headers }
+      );
+      const palette = data.data[0].palette;
+      res.status(200).json(palette);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async readPaletteById(req, res, next) {
     try {
       const { colorPaletteId } = req.params;
