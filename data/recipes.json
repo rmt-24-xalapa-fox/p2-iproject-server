@@ -600,8 +600,8 @@
         "ProductId": 15
     },
     {
-        "measurement": 2,
-        "IngredientId": 200,
+        "measurement": 200,
+        "IngredientId": 2,
         "ProductId": 15
     },
     {
