@@ -18,11 +18,12 @@ class Controller {
       res.status(201).json({
         id: response.id,
         email: response.email,
-      })
-    } catch (err){
-    next(err)
+      });
+    } catch (err) {
+      next(err);
     }
-  
+  }
+
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
