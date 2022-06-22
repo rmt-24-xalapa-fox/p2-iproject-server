@@ -10,7 +10,5 @@ userRoutes.get("/", Controller.listUser)
 userRoutes.post("/register", Controller.register)
 // POST /user/login
 userRoutes.post("/login", Controller.login)
-// // POST /user/login-google
-// userRoutes.post("/login-google", Controller.loginGoogle)
 
 module.exports = userRoutes

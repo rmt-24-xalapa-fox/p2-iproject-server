@@ -116,42 +116,7 @@ class Controller {
       next(err);
     }
   }
-
-  // static async loginGoogle(req, res, next) {
-  //     try {
-  //         const client = new OAuth2Client(process.env.client_id);
-  //         const ticket = await client.verifyIdToken({
-  //             idToken: req.body.credential,
-  //             audience: process.env.client_id,
-  //         });
-  //         const payload = ticket.getPayload();
-  //         const user = await User.findOrCreate({
-  //             where: { email: payload.email },
-  //             defaults: {
-  //                 nickname: 'userGoogle',
-  //                 password: "123456",
-  //             }
-  //         })
-
-  //         console.log(user, "ini user");
-  //         const dataUser = {
-  //             id: +user.id,
-  //             email: user.email,
-  //         }
-
-  //         const access_token = createToken(dataUser)
-
-  //         res.status(200).json({
-  //             statusCode: 200,
-  //             message: "Login Google Succes",
-  //             access_token,
-  //             dataUser
-  //         })
-
-  //     } catch (err) {
-  //         next(err)
-  //     }
-  // }
+  
 }
 
 module.exports = Controller;
