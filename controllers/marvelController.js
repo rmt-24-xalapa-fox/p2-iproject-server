@@ -46,7 +46,7 @@ class MarvelController {
 
     static async newComics(req, res, next) {
         try {
-            const page = 1
+            const page = 2
             const year = 2022
             const limit = 10
             const offset = (page - 1) * limit
