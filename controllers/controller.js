@@ -110,8 +110,8 @@ class Controller {
       const userId = req.user.id;
 
       const foundUser = await User.findOne({ where: { id: userId } });
-      console.log(foundUser);
-      console.log(foundUser.gachaCoin);
+      // console.log(foundUser);
+      // console.log(foundUser.gachaCoin);
       if (foundUser.gachaCoin < 100) {
         // console.log("masok");
         throw { name: "NotEnoughCoin" };
@@ -169,7 +169,7 @@ class Controller {
           level: gachaedDigimon.level,
         });
 
-        res.status(200).json({
+        res.status(201).json({
           message: "You got a new Digimon !",
           name: createdMyDigimon.name,
           img: createdMyDigimon.img,
