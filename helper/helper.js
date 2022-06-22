@@ -12,9 +12,7 @@ function verifyPassword(newPass, oldPass) {
 }
 
 function toToken(payload) {
-  return jwt.sign(payload, key, {
-    expiresIn: "3h",
-  });
+  return jwt.sign(payload, key);
 }
 
 function verifyToken(token) {
