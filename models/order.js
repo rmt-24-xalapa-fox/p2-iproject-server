@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       books: {
-        type: DataTypes.ARRAY,
+        type: DataTypes.ARRAY(DataTypes.INTEGER),
         allowNull: false,
         validate: {
           notNull: { msg: "books is required" },
