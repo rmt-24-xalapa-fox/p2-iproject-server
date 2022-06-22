@@ -61,6 +61,31 @@ class Controller {
           },
           {
             model: Item,
+            as: "item1",
+          },
+          {
+            model: Item,
+            as: "item2",
+          },
+          {
+            model: Item,
+            as: "item3",
+          },
+          {
+            model: Item,
+            as: "item4",
+          },
+          {
+            model: Item,
+            as: "item5",
+          },
+          {
+            model: Item,
+            as: "item6",
+          },
+          {
+            model: Item,
+            as: "item7",
           },
         ],
       });

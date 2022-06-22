@@ -16,24 +16,38 @@ module.exports = (sequelize, DataTypes) => {
       });
       Build.belongsTo(models.Item, {
         foreignKey: "Item1Id",
+        as: "item1",
+        constraints: false,
       });
       Build.belongsTo(models.Item, {
         foreignKey: "Item2Id",
+        as: "item2",
+        constraints: false,
       });
       Build.belongsTo(models.Item, {
         foreignKey: "Item3Id",
+        as: "item3",
+        constraints: false,
       });
       Build.belongsTo(models.Item, {
         foreignKey: "Item4Id",
+        as: "item4",
+        constraints: false,
       });
       Build.belongsTo(models.Item, {
         foreignKey: "Item5Id",
+        as: "item5",
+        constraints: false,
       });
       Build.belongsTo(models.Item, {
         foreignKey: "Item6Id",
+        as: "item6",
+        constraints: false,
       });
       Build.belongsTo(models.Item, {
         foreignKey: "Item7Id",
+        as: "item7",
+        constraints: false,
       });
     }
   }
