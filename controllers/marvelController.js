@@ -30,12 +30,11 @@ class MarvelController {
             }
             const limit = 20
             const offset = (page - 1) * limit
-
-            if (!year || year === '') {
+            if (!year || year === '' || year === '0') {
                 year = 2022
             }
 
-            const { data } = await axios.get(`${url}/comics?ts=${ts}&apikey=${apikey}&hash=${hash}&limit=${limit}&offset=${offset}&startYear=${year}`)
+            const { data } = await axios.get(`${url}/comics?ts=${ts}&apikey=${apikey}&hash=${hash}&limit=${limit}&offset=${offset}&startYear=${Number(year)}`)
 
             res.status(200).json(
                 data
@@ -61,8 +60,6 @@ class MarvelController {
             console.log(error);
         }
     }
-
-
 }
 
 module.exports = MarvelController
