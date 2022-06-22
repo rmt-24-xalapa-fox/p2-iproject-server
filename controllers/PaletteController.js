@@ -58,6 +58,13 @@ class PaletteController {
         colors,
         UserId: req.user.id,
       };
+      const user = await User.findByPk(req.user.id);
+      const palettes = await ColorPalette.findAll({
+        where: { UserId: req.user.id },
+      });
+      if (user.plan === "Free" && palettes.length >= 20) {
+        throw { name: "Color palettes has reached the limit" };
+      }
       const colorPalette = await ColorPalette.create(input);
       res.status(201).json({
         id: colorPalette.id,
