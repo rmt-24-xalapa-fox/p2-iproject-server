@@ -7,10 +7,11 @@ const router = express.Router();
 router.post("/register", Controller.register);
 router.post("/login", Controller.login);
 router.post("/google-sign", Controller.googleSign);
+router.get("/tour", Controller.dataTour);
+router.get("/tour/:id", Controller.oneData);
 
 router.use((err, req, res, next) => {
   handleError(err, req, res, next);
 });
-
 
 module.exports = router;

@@ -38,14 +38,15 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "password is required" },
           notNull: { msg: "password is required" },
         },
-      phone_number: DataTypes.STRING,
+      },
+      phoneNumber: DataTypes.STRING,
       address: DataTypes.TEXT,
     },
     {
       sequelize,
       modelName: "User",
       hooks: {
-        beforeCreate(ins) {
+        beforeCreate: (ins) => {
           ins.password = hasPasswrd(ins.password);
         },
       },

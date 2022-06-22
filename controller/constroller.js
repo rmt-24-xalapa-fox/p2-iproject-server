@@ -1,5 +1,5 @@
 "use strict";
-const { User } = require("../models");
+const { User, Tour } = require("../models");
 const { verifyPassword, toToken } = require("../helper/helper");
 const { OAuth2Client } = require("google-auth-library");
 const { CLIENT_ID } = process.env;
@@ -7,14 +7,16 @@ const { CLIENT_ID } = process.env;
 class Controller {
   static async register(req, res, next) {
     try {
-      const { username, email, password, phone_number, address } = req.body;
+      const { username, email, password, phoneNumber, address } = req.body;
+      console.log(username, email, password, phoneNumber, address);
       let response = await User.create({
         username,
         email,
         password,
-        phone_number,
+        phoneNumber,
         address,
       });
+      console.log(response);
       res.status(201).json({
         id: response.id,
         email: response.email,
@@ -104,6 +106,35 @@ class Controller {
           user: user,
         });
       }
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async dataTour(req, res, next) {
+    try {
+      const response = await Tour.findAll();
+      if (!res) {
+        throw { msg: "Not found" };
+      }
+      res.status(200).json({
+        response,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async oneData(req, res, next) {
+    try {
+      const { id } = req.params;
+      const response = await Tour.findByPk(id);
+      if (!response) {
+        throw { msg: "Not found" };
+      }
+      res.status(200).json({
+        response,
+      });
     } catch (err) {
       next(err);
     }

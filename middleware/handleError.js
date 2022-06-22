@@ -10,6 +10,27 @@ function handleError(err, req, res, next) {
     error = err.errors.map((el) => el.message);
   }
 
+  if (err.name === "SequelizeDatabaseError") {
+    code = 400;
+    msg = "database error";
+  }
+
+  if (err.name === "Invalid Token") {
+    code = 401;
+    msg = "unauthorized";
+  }
+
+  if (err.name === "SequelizeUniqueConstraintError") {
+    code = 403;
+    msg = "Forbidden";
+    error = err.errors.map((el) => el.message);
+  }
+
+  if (err.name === "Not found") {
+    code = 404;
+    msg = "can not find requested";
+  }
+
   res.status(code).json({
     msg,
     error,
