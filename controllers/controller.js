@@ -208,6 +208,27 @@ class Controller {
       res.status(500).json(err);
     }
   }
+
+  static async sellDigimon(req, res) {
+    try {
+      const { myDigimonId } = req.params;
+      const deletedMyDigimon = await MyDigimon.destroy({
+        where: { id: myDigimonId },
+      });
+      if (deletedMyDigimon < 1) {
+        throw { name: "NotFound" };
+      }
+
+      const userId = req.user.id;
+      await User.increment({ gachaCoin: 50 }, { where: { id: userId } });
+
+      res
+        .status(200)
+        .json({ message: "Digimon has been sold ! You got 50 Coin !" });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
 
 module.exports = Controller;
