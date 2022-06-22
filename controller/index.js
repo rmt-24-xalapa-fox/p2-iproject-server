@@ -98,6 +98,7 @@ class Controller {
         where: {
           UserId: req.userId,
         },
+        order: [["createdAt", "Desc"]],
       });
 
       res.status(200).json(myPoem);
