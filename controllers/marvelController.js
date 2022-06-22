@@ -8,8 +8,11 @@ const url = process.env.URL
 class MarvelController {
     static async getCharacters(req, res, next) {
         try {
-            const { data } = await axios.get(`${url}/characters?ts=${ts}&apikey=${apikey}&hash=${hash}`)
-            // console.log(data);
+            const { page = 1, name = 'A' } = req.query
+            const limit = 20
+            const offset = (page - 1) * limit
+
+            const { data } = await axios.get(`${url}/characters?ts=${ts}&apikey=${apikey}&hash=${hash}&limit=${limit}&offset=${offset}&nameStartsWith=${name}`)
 
             res.status(200).json(
                 data
@@ -21,7 +24,11 @@ class MarvelController {
 
     static async getComics(req, res, next) {
         try {
-            const { data } = await axios.get(`${url}/comics?ts=${ts}&apikey=${apikey}&hash=${hash}`)
+            const { page = 1, year = 2022 } = req.query
+            const limit = 20
+            const offset = (page - 1) * limit
+
+            const { data } = await axios.get(`${url}/comics?ts=${ts}&apikey=${apikey}&hash=${hash}&limit=${limit}&offset=${offset}&startYear=${year}`)
 
             res.status(200).json(
                 data
