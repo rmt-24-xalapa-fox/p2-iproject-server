@@ -22,12 +22,15 @@ List of available endpoints:
 
 - `POST /register`
 - `POST /login`
+- `POST /loginGoogle`
+
 
 Routes below need authentication:
 
 - `GET /getsong`
 - `POST /tokenpayment`
 - `GET /top10radio`
+- `PATCH /userstatus`
 
 
 &nbsp;
@@ -42,7 +45,9 @@ Request:
 {
   "email": "string",
   "name": "string",
-  "password": "string"
+  "password": "string",
+  "status": "string",
+
 }
 ```
 
@@ -164,9 +169,17 @@ _Response (404 - not found)_
 }
 ```
 
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "message": "You are not authorized, Premium member only"
+}
+```
+
 &nbsp;
 
-## 4. get /tokenpayment
+## 4. post /tokenpayment
 
 Description:
 - give the token payment
@@ -181,11 +194,20 @@ Request:
 }
 ```
 
+- body:
+
+```json
+{
+  "username": "string",
+  "phoneNumber": "string"
+}
+```
+
 _Response (201 - Created)_
 
 ```json
 {
-  "Token Payment": "string"
+  "TokenPayment": "string"
 }
 ```
 
@@ -194,6 +216,14 @@ _Response (401 - Forbidden)_
 ```json
 {
   "message": "Transaction failed"
+}
+```
+
+_Response (403 - Access denied)_
+
+```json
+{
+  "message": "Access Denied, Your account already Premium"
 }
 ```
 
@@ -238,6 +268,49 @@ _Response (404 - Not Found)_
 }
 ```
 
+
+&nbsp;
+
+## 5. PATCH /userstatus
+
+Description:
+- change the status of user
+
+Request:
+
+- headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+- body:
+
+```json
+{
+  "status": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Status has benn changed"
+}
+```
+
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "User id not found"
+}
+```
+
 &nbsp;
 
 ## Global Error
@@ -247,14 +320,6 @@ _Response (401 - Unauthorized)_
 ```json
 {
   "message": "Invalid token"
-}
-```
-
-_Response (403 - Forbidden)_
-
-```json
-{
-  "message": "You are not authorized"
 }
 ```
 
