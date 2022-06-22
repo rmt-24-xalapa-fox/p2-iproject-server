@@ -23,7 +23,7 @@ class Controller {
     } catch (err) {
       next(err);
     }
-  }
+  } //√
   static async getAllProducts(req, res, next) {
     try {
       const result = await Product.findAll({
@@ -35,14 +35,15 @@ class Controller {
           attributes: {
             exclude: ["createdAt", "updatedAt", "id"]
           }
-        }
+        },
+        order: [["createdAt", "DESC"]]
       });
 
       res.status(201).json(result);
     } catch (err) {
       next(err);
     }
-  }
+  } //√
   static async getOneProduct(req, res, next) {
     try {
       const id = +req.params.id;
@@ -70,7 +71,7 @@ class Controller {
     } catch (err) {
       next(err);
     }
-  }
+  } //√
   static async editProduct(req, res, next) {
     try {
       const id = +req.params.id;
@@ -107,7 +108,7 @@ class Controller {
     } catch (err) {
       next(err);
     }
-  }
+  } //√
   static async deleteProduct(req, res, next) {
     try {
       const id = +req.params.id;
@@ -129,7 +130,7 @@ class Controller {
     } catch (err) {
       next(err);
     }
-  }
+  } //√
 
   static async addCategory(req, res, next) {
     try {
@@ -270,6 +271,7 @@ class Controller {
       next(err);
     }
   }
+
   static async addRecipe(req, res, next) {
     try {
       let { measurement, IngredientId, ProductId } = req.body;
@@ -371,7 +373,7 @@ class Controller {
     } catch (err) {
       next(err);
     }
-  }
+  } //√
   static async getAllSales(req, res, next) {
     try {
       const result = await Sale.findAll({
@@ -399,7 +401,8 @@ class Controller {
     } catch (err) {
       next(err);
     }
-  }
+  } // √
+
   static async getOneSale(req, res, next) {
     try {
     } catch (err) {
