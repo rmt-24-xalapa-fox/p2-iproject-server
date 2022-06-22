@@ -147,7 +147,7 @@ class Controller {
       if (err.name === "Service is required") {
         res.status(400).json({ message: "Service is required" });
       } else if (err.name === "Service not found") {
-        res.status(400).json({ message: "Service not found" });
+        res.status(404).json({ message: "Service not found" });
       } else if (err.name === "Kg is required") {
         res.status(400).json({ message: "Kg is required" });
       } else if (err.name === "Minimum kg is 1") {
@@ -155,7 +155,7 @@ class Controller {
       } else if (err.name === "Maximum kg is 15") {
         res.status(400).json({ message: "Maximum kg is 15" });
       } else if (err.name === "Laundry not found") {
-        res.status(400).json({ message: "Laundry not found" });
+        res.status(404).json({ message: "Laundry not found" });
       } else {
         res.status(500).json({ message: "Internal server error" });
       }
@@ -172,10 +172,9 @@ class Controller {
             include: Laundry
         })
 
-        res.send(myOrders)
-
+        res.status(200).json(myOrders)
     } catch (err) {
-        
+        res.status(500).json({ message: "Internal server error" });
     }
   }
 }
