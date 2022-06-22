@@ -25,7 +25,10 @@ class ControllerStats {
 
   static async saveUserRun(req, res, next){
     try {
+      const UserId = req.user.id
+
       
+
     } catch (error) {
       next(error)
     }
