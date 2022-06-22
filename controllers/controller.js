@@ -1,8 +1,11 @@
 const { comparedPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
-const { User, FavoriteAnime } = require("../models");
+const { User, FavoriteAnime, Anime } = require("../models");
 const axios = require("axios");
 const truncateString = require('../helpers/trim')
+const {Op} =require('sequelize')
+const token = process.env.token
+const sendEmail = require('../helpers/nodemailer')
 
 class Controller {
   static async register(req, res) {
@@ -11,7 +14,7 @@ class Controller {
 
       const isValid = await axios({
         method: "get",
-        url: `https://verifier.meetchopra.com/verify/${email}?token=2b1e810090b21cab8a8753ec6bd1f0919bc1c698e5439627351a7f8dbbd17041f0569652a98ec7a58777cfce4df37ae6`,
+        url: `https://verifier.meetchopra.com/verify/${email}?token=${token}`,
       });
 
       if (!isValid.data.status) {
@@ -24,6 +27,7 @@ class Controller {
         phoneNumber,
         address,
       });
+      sendEmail(newUser.email)
       res.status(201).json({
         id: newUser.id,
         email: newUser.email,
@@ -125,6 +129,60 @@ class Controller {
       res.status(500).json({
         message: "Internal Server Error"
       })
+    }
+  }
+  static async getAnime(req, res){
+    try{
+      let size = +req.query.size
+      let page = +req.query.page
+      const filterName = req.query.name
+      const condition = {
+        limit: size,
+        offset: 0,
+        order: [["score", "DESC"]],
+        attributes : {
+          exclude: ["createdAt", "updatedAt"]
+        }
+      };
+
+      if(!page || page <= 0){
+        page = 1
+      }
+
+      condition.offset = (page-1) * condition.limit
+
+      if(filterName){
+        condition.where = {
+          ...condition.where,
+          title: {[Op.iLike]: `%${filterName}%`},
+
+        }
+      }
+      
+
+
+
+      const animes = await Anime.findAndCountAll( condition, {
+      });
+      const totalPage = Math.ceil(animes.count / size)
+      let currentPage = +req.query.page
+      if(!currentPage) {
+        currentPage = 1
+      }
+      if(currentPage > totalPage){
+        currentPage = totalPage
+      }
+      res.status(200).json({
+        statusCode: 200,
+        Anime: animes,
+        totalPage,
+        currentPage
+      });
+      
+
+    }
+    catch(err){
+      console.log(err)
     }
   }
 

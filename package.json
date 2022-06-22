@@ -27,7 +27,8 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3",
     "sequelize": "^6.21.0",
-    "verifier-node": "^1.0.2"
+    "verifier-node": "^1.0.2",
+    "nodemailer": "^6.7.5"
   },
   "devDependencies": {
     "sequelize-cli": "^6.4.1"
