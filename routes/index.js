@@ -23,6 +23,8 @@ router.delete("/carts/:BookId", Controller.removeCarts);
 router.get("/shipping/cities", Controller.readCities);
 router.post("/shipping/costs", Controller.addShipping);
 
+router.post("/pay", Controller.createPayment);
+
 router.use(errorHandler);
 
 module.exports = router;

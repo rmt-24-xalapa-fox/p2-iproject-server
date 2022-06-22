@@ -2,10 +2,11 @@ const { User, Category, Book, Wishlist, Cart } = require("../models");
 const { comparePassword } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
-const { CLIENT_ID, API_RAJAONGKIR } = process.env;
+const { CLIENT_ID, API_RAJAONGKIR, MIDTRANS_SERVER_KEY } = process.env;
 const { Op } = require("sequelize");
 const { getPagination, getPagingData } = require("../helpers/pagination");
 const axios = require("axios");
+const midtransClient = require("midtrans-client");
 
 class Controller {
   static async register(req, res, next) {
@@ -409,7 +410,7 @@ class Controller {
         "https://api.rajaongkir.com/starter/city",
         {
           headers: {
-            key: process.env.API_RAJAONGKIR,
+            key: API_RAJAONGKIR,
           },
         }
       );
@@ -431,7 +432,7 @@ class Controller {
         { origin, destination, weight, courier },
         {
           headers: {
-            key: process.env.API_RAJAONGKIR,
+            key: API_RAJAONGKIR,
           },
         }
       );
@@ -443,6 +444,43 @@ class Controller {
           destination: resp.data.rajaongkir.destination_details,
           shipping: resp.data.rajaongkir.results[0].costs,
         },
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async createPayment(req, res, next) {
+    try {
+      // Create Snap API instance
+      let snap = new midtransClient.Snap({
+        // Set to true if you want Production Environment (accept real transaction).
+        isProduction: false,
+        serverKey: MIDTRANS_SERVER_KEY,
+      });
+
+      let parameter = {
+        transaction_details: {
+          order_id: "YOUR-ORDERID-123456",
+          gross_amount: 10000,
+        },
+        credit_card: {
+          secure: true,
+        },
+        customer_details: {
+          first_name: "budi",
+          last_name: "pratama",
+          email: "budi.pra@example.com",
+          phone: "08111222333",
+        },
+      };
+
+      const transaction = await snap.createTransaction(parameter);
+      let transactionToken = transaction.token;
+
+      res.status(201).json({
+        statusCode: 201,
+        token: transactionToken,
       });
     } catch (err) {
       next(err);
