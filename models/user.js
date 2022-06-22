@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
         through: models.Cart,
         foreignKey: "UserId",
       });
+      User.hasMany(models.Order, {
+        foreignKey: "UserId",
+      });
     }
   }
   User.init(

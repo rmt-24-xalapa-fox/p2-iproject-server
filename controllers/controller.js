@@ -487,6 +487,16 @@ class Controller {
       next(err);
     }
   }
+
+  static async readOrders(req, res, next) {
+    try {
+    } catch (err) {}
+  }
+
+  static async addOrder(req, res, next) {
+    try {
+    } catch (err) {}
+  }
 }
 
 module.exports = Controller;
