@@ -7,7 +7,6 @@ const { Op } = require("sequelize");
 const { getPagination, getPagingData } = require("../helpers/pagination");
 const axios = require("axios");
 const midtransClient = require("midtrans-client");
-let order_id = 10020;
 
 class Controller {
   static async register(req, res, next) {
@@ -455,6 +454,7 @@ class Controller {
     try {
       const { price } = req.body;
       // Create Snap API instance
+
       let snap = new midtransClient.Snap({
         // Set to true if you want Production Environment (accept real transaction).
         isProduction: false,
@@ -463,7 +463,7 @@ class Controller {
 
       let parameter = {
         transaction_details: {
-          order_id: order_id,
+          order_id: new Date().getTime(),
           gross_amount: price,
         },
         credit_card: {
@@ -473,8 +473,6 @@ class Controller {
           email: req.user.email,
         },
       };
-
-      order_id += 1;
 
       const transaction = await snap.createTransaction(parameter);
       let transactionToken = transaction.token;
@@ -499,17 +497,18 @@ class Controller {
         order: [["id", "DESC"]],
       });
 
-      let bookMultiArray = [];
       let promises2 = [];
       response.forEach((el) => {
         const books = el.books;
         let promises1 = [];
         books.forEach((id) => {
-          let promise1 = Book.findByPk(id);
+          let promise1 = Book.findByPk(id, {
+            include: Category,
+          });
           promises1.push(promise1);
           if (promises1.length === books.length) {
             let promise2 = Promise.all(promises1).then((value) => {
-              bookMultiArray.push(value);
+              el.setDataValue("booksDetail", value);
             });
             promises2.push(promise2);
           }
@@ -520,7 +519,6 @@ class Controller {
         res.status(200).json({
           statusCode: 200,
           data: response,
-          books: bookMultiArray,
         });
       });
     } catch (err) {
