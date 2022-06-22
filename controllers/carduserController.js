@@ -115,7 +115,7 @@ class carduserController {
                     }
                 ],
                 attributes: {
-                    exclude: ["createdAt", "updatedAt"]
+                    exclude: ["createdAt"]
                 }
             },
 
@@ -148,9 +148,6 @@ class carduserController {
             if (checkDouble) {
                 throw new Error(`already`)
             }
-            if (!checkDouble) {
-
-            }
 
             const addCardUser = await CardUser.create({
                 UserId: +req.additionalData.id,
@@ -162,6 +159,31 @@ class carduserController {
             res.status(201).json({
                 statusCode: 201,
                 data: addCardUser
+            })
+        }
+        catch (err) {
+            next(err)
+        }
+    }
+
+    static async updatePaidCart(req, res, next) {
+        try {
+            let idUser = +req.additionalData.id
+            let idCard = +req.params.cardId
+            const updateCart = await CardUser.update({
+                status: `paid`
+            }, {
+                where: {
+                    UserId: idUser,
+                    status: 'unpaid'
+                }
+            })
+            if (!updateCart) {
+                throw new Error(`NOT_FOUND`)
+            }
+            console.log(`berhasil`);
+            res.status(200).json({
+                message: `berhasil update`
             })
         }
         catch (err) {
