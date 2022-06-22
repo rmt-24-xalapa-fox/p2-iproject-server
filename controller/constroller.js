@@ -20,10 +20,6 @@ class Controller {
       next(err);
     }
   }
-  static async login(req, res) {
-    try {
-    } catch (err) {}
-  }
 }
 
 module.exports = Controller;
