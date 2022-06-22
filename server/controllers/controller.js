@@ -1,6 +1,6 @@
 const { checkPassword } = require("../helpers/bcrypt");
 const { createToken } = require("../helpers/jwt");
-const { User } = require("../models");
+const { User, Laundry } = require("../models");
 
 class Controller {
   static async newUser(req, res) {
@@ -37,6 +37,8 @@ class Controller {
         res.status(400).json({ message: "Invalid email format" });
       } else if (err.name === "SequelizeUniqueConstraintError") {
         res.status(400).json({ message: "Email must be unique" });
+      } else {
+        res.status(500).json({ message: "Internal server error" });
       }
     }
   }
@@ -79,7 +81,19 @@ class Controller {
         res.status(400).json({ message: "Password is required" });
       } else if (err.name === "Invalid email/password") {
         res.status(401).json({ message: "Invalid email/password" });
+      } else {
+        res.status(500).json({ message: "Internal server error" });
       }
+    }
+  }
+
+  static async getLaundries(req, res) {
+    try {
+      const laundryList = await Laundry.findAll();
+
+      res.status(200).json(laundryList)
+    } catch (err) {
+        res.status(500).json({ message: "Internal server error" });
     }
   }
 }

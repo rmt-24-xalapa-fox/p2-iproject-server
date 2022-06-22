@@ -6,6 +6,8 @@ const router = express.Router();
 router.post("/register", Controller.newUser);
 router.post("/login", Controller.loginUser);
 router.use(authentication)
+router.get("/laundries", Controller.getLaundries);
+
 
 
 
