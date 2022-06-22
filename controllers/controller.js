@@ -250,7 +250,16 @@ class Controller {
   static async fetchReferralData(req, res) {
     try {
       // http://localhost:3000/register?referral=1
-      //
+      const userId = req.user.id;
+      let referralLink = `http://localhost:5050/register?referral=${userId}`;
+
+      const response = await axios({
+        method: "get",
+        url: `https://api.happi.dev/v1/qrcode?data=${referralLink}&width=500&dots=000000&bg=FFFFFF&apikey=399bfftQ3YIg8FE4vCOloPz9dHkiCEAQNbOtVcKqQ3ZeRP0wQrhMumpA`,
+      });
+
+      const qrCode = response.data.qrcode;
+      res.status(200).json({ referralLink, qrCode });
     } catch (err) {
       res.status(500).json(err);
     }

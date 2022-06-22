@@ -21,6 +21,7 @@ app.use(authentication);
 app.put("/user/gachaDigimon", Controller.gachaDigimon);
 app.get("/user/gachaCoin", Controller.fetchCoin);
 app.get("/user/myDigimon", Controller.fetchMyDigimon);
+app.get("/user/referralCode", Controller.fetchReferralData);
 app.put("/user/sellDigimon/:myDigimonId", Controller.sellDigimon);
 
 // app.use(async (req, res, next) => {
