@@ -7,6 +7,7 @@ const { Op } = require("sequelize");
 const { getPagination, getPagingData } = require("../helpers/pagination");
 const axios = require("axios");
 const midtransClient = require("midtrans-client");
+let order_id = 10020;
 
 class Controller {
   static async register(req, res, next) {
@@ -452,6 +453,7 @@ class Controller {
 
   static async createPayment(req, res, next) {
     try {
+      const { price } = req.body;
       // Create Snap API instance
       let snap = new midtransClient.Snap({
         // Set to true if you want Production Environment (accept real transaction).
@@ -461,19 +463,18 @@ class Controller {
 
       let parameter = {
         transaction_details: {
-          order_id: "YOUR-ORDERID-123456",
-          gross_amount: 10000,
+          order_id: order_id,
+          gross_amount: price,
         },
         credit_card: {
           secure: true,
         },
         customer_details: {
-          first_name: "budi",
-          last_name: "pratama",
-          email: "budi.pra@example.com",
-          phone: "08111222333",
+          email: req.user.email,
         },
       };
+
+      order_id += 1;
 
       const transaction = await snap.createTransaction(parameter);
       let transactionToken = transaction.token;
