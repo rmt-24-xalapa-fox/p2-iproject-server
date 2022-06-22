@@ -38,6 +38,23 @@ class MarvelController {
         }
     }
 
+    static async newComics(req, res, next) {
+        try {
+            const page = 1
+            const year = 2022
+            const limit = 10
+            const offset = (page - 1) * limit
+
+            const { data } = await axios.get(`${url}/comics?ts=${ts}&apikey=${apikey}&hash=${hash}&limit=${limit}&offset=${offset}&startYear=${year}`)
+
+            res.status(200).json(
+                data
+            )
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
 }
 

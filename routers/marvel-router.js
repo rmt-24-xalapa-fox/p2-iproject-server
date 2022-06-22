@@ -7,6 +7,7 @@ const ts = process.env.TS
 
 marvel.use(`/characters`, marvel_controller.getCharacters)
 marvel.use(`/comics`, marvel_controller.getComics)
+marvel.use('/new-comics', marvel_controller.newComics)
 
 
 
