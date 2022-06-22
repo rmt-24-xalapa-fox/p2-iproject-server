@@ -250,6 +250,7 @@ class Controller {
   static async fetchReferralData(req, res) {
     try {
       // http://localhost:3000/register?referral=1
+      //
     } catch (err) {
       res.status(500).json(err);
     }
