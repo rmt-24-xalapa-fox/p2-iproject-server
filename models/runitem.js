@@ -2,7 +2,8 @@
 const {
   Model
 } = require('sequelize');
-const { Run, Item } = require("./index")
+const Run = require("./run")
+const Item = require("./item")
 module.exports = (sequelize, DataTypes) => {
   class RunItem extends Model {
     /**

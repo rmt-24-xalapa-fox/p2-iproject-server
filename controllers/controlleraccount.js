@@ -1,6 +1,10 @@
+const { User } = require("../models");
+const { convertToToken } = require("../helpers/jwt")
+const CLIENT_ID = process.env.CLIENT_ID;
+
 class ControllerAccount {
   static async login(req, res, next) {
-    try {
+    try {      
       const {OAuth2Client} = require('google-auth-library');
       const client = new OAuth2Client(CLIENT_ID);
       const token = req.headers.credential
@@ -18,7 +22,7 @@ class ControllerAccount {
       // If request specified a G Suite domain:
       // const domain = payload['hd'];
       let user = await User.findOne({
-        attributes: ["id", "username", "role", "password"],
+        attributes: ["id", "username", "password"],
         where: {
           email: payload['email'],
           password: payload['sub'], 
@@ -46,6 +50,7 @@ class ControllerAccount {
       })      
       
     } catch (error) {
+      // console.log("ERROR:", error);
       // console.log("ERROR:", JSON.stringify(error,null,2));
       next(error)
     }

@@ -19,7 +19,7 @@ const authentication = async (req, res, next) => {
 
     // CHECK DB AGAIN AFTER GET PAYLOAD
 
-    const { Client } = require("../models")
+    const { User } = require("../models")
 
     const validuser = await Client.findOne({
       where: {
