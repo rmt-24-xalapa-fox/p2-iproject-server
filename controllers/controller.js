@@ -146,22 +146,6 @@ class Controller {
     }
   } //√
 
-  static async addRecipe(req, res, next) {
-    try {
-      let { measurement, IngredientId, ProductId } = req.body;
-
-      const recipe = await Recipe.create({
-        measurement: +measurement,
-        IngredientId: +IngredientId,
-        ProductId: +ProductId
-      });
-
-      res.status(201).json(recipe);
-    } catch (err) {
-      next(err);
-    }
-  }
-
   static async addSale(req, res, next) {
     try {
       let { qty, ProductId } = req.body;
