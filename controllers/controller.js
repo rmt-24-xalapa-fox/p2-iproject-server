@@ -251,7 +251,7 @@ class Controller {
     try {
       // http://localhost:3000/register?referral=1
       const userId = req.user.id;
-      let referralLink = `http://localhost:5050/register?referral=${userId}`;
+      let referralLink = `https://gachamon-app.web.app/register?referral=${userId}`;
 
       const response = await axios({
         method: "get",
