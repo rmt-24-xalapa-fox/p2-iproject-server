@@ -1,6 +1,8 @@
 const { compareHash } = require('../helpers/bcrypt')
+const nodemailer = require("nodemailer");
 const { createToken } = require('../helpers/token')
 const { User } = require('../models')
+
 
 class customerController {
 

@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   CardUser.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     PlayerId: DataTypes.INTEGER,
     UserId: DataTypes.INTEGER,
     status: DataTypes.STRING

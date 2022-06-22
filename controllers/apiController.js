@@ -1,7 +1,42 @@
 const axios = require('axios')
+
+const midtransClient = require('midtrans-client');
 require('dotenv').config()
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 class apiRajaOngkir {
+
+    static async getTokenmid(req, res, next) {
+        try {
+            //bayaran dari body di grossamount
+            const { totalPrice } = req.body
+            console.log(totalPrice);
+            let snap = new midtransClient.Snap({
+                // Set to true if you want Production Environment (accept real transaction).
+                isProduction: false,
+                serverKey: process.env.Server_Key,
+                clientKey: process.env.Client_Key
+            });
+            let codeUniq = Math.random().toString(36).substring(1, 7)
+            let parameter = {
+                "transaction_details": {
+                    "order_id": codeUniq,
+                    "gross_amount": totalPrice
+                },
+                "credit_card": {
+                    "secure": true
+                },
+            };
+            const transactionToken = await snap.createTransaction(parameter) //get token
+            // console.log('transactionToken:', transactionToken.token);
+            res.status(200).json({
+                token: transactionToken.token
+            })
+        }
+        catch (err) {
+            next(err)
+        }
+    }
+
     static async getAPIprov(req, res, next) {
         try {
             const getProvince = await axios.get(`https://api.rajaongkir.com/starter/province`, {
@@ -38,10 +73,11 @@ class apiRajaOngkir {
 
     static async getPrice(req, res, next) {
         try {
-            const { city } = req.body
+            const { idCity } = req.params
+            // console.log(idCity);
             const getPrice = await axios.post(`https://api.rajaongkir.com/starter/cost`, {
                 origin: '501',
-                destination: city,
+                destination: idCity,
                 weight: 1000,
                 courier: 'jne',
             }, {
