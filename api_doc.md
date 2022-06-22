@@ -22,12 +22,15 @@ List of available endpoints:
 
 - `POST /register`
 - `POST /login`
+- `POST /loginGoogle`
+
 
 Routes below need authentication:
 
 - `GET /getsong`
 - `POST /tokenpayment`
 - `GET /top10radio`
+- `PATCH /userstatus`
 
 
 &nbsp;
@@ -166,9 +169,17 @@ _Response (404 - not found)_
 }
 ```
 
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "message": "You are not authorized, Premium member only"
+}
+```
+
 &nbsp;
 
-## 4. get /tokenpayment
+## 4. post /tokenpayment
 
 Description:
 - give the token payment
@@ -183,11 +194,20 @@ Request:
 }
 ```
 
+- body:
+
+```json
+{
+  "username": "string",
+  "phoneNumber": "string"
+}
+```
+
 _Response (201 - Created)_
 
 ```json
 {
-  "Token Payment": "string"
+  "TokenPayment": "string"
 }
 ```
 
@@ -196,6 +216,14 @@ _Response (401 - Forbidden)_
 ```json
 {
   "message": "Transaction failed"
+}
+```
+
+_Response (403 - Access denied)_
+
+```json
+{
+  "message": "Access Denied, Your account already Premium"
 }
 ```
 

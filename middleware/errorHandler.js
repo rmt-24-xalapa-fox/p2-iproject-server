@@ -71,6 +71,16 @@ function handleError(err, req, res, next) {
       message = { message: "Invalid email/password" };
       break;
 
+    case "You are not authorized, Premium member only":
+      code = 401;
+      message = { message: "You are not authorized, Premium member only" };
+      break;
+
+    case "Access Denied, Your account already Premium":
+      code = 403;
+      message = { message: "Access Denied, Your account already Premium" };
+      break;
+
     default:
       code = 500;
       message = "Internet Server Error";
