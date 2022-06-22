@@ -6,6 +6,8 @@ const axios = require("axios");
 class Controller {
   static async register(req, res) {
     try {
+      let referralId = +req.query.referral;
+
       const { username, email, password } = req.body;
       const createdUser = await User.create({
         username,
@@ -14,6 +16,21 @@ class Controller {
         gachaCoin: 2000,
         role: "Customer",
       });
+
+      if (referralId) {
+        const foundUser = await User.findOne({
+          where: {
+            id: referralId,
+          },
+        });
+        if (foundUser) {
+          await User.increment(
+            { gachaCoin: 1000 },
+            { where: { id: referralId } }
+          );
+        }
+      }
+
       res.status(201).json({
         email: createdUser.email,
         username: createdUser.username,
@@ -225,6 +242,14 @@ class Controller {
       res
         .status(200)
         .json({ message: "Digimon has been sold ! You got 50 Coin !" });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  static async fetchReferralData(req, res) {
+    try {
+      // http://localhost:3000/register?referral=1
     } catch (err) {
       res.status(500).json(err);
     }
