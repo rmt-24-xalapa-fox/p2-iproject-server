@@ -115,7 +115,7 @@ class UserController {
 
       let parameter = {
         transaction_details: {
-          order_id: `ColorSrc-UpgradePlan-${user.id}`,
+          order_id: `ColorSrc-upgrade-${user.id}`,
           gross_amount: 10000,
         },
         credit_card: {

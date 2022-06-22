@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { ColorPalette } = require("../models");
+const { ColorPalette, User } = require("../models");
 
 class PaletteController {
   static async readAllPalettes(req, res, next) {
@@ -7,6 +7,10 @@ class PaletteController {
       const colorPalettes = await ColorPalette.findAll({
         where: {
           UserId: req.user.id,
+        },
+        include: {
+          model: User,
+          attributes: ["name", "profilePicture"],
         },
       });
       res.status(200).json(colorPalettes);
@@ -17,10 +21,7 @@ class PaletteController {
 
   static async generatePalette(req, res, next) {
     try {
-      let { colorScheme } = req.body;
-      if (!colorScheme) {
-        colorScheme = "Monochromatic";
-      }
+      let { colorScheme } = req.query;
       const headers = {
         "X-RapidAPI-Host": "random-palette-generator.p.rapidapi.com",
         "X-RapidAPI-Key": process.env.X_RAPID_API_KEY,
