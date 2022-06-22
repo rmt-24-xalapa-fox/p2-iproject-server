@@ -11,12 +11,57 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.belongsToMany(models.Price, {
+        through: "Transaction",
+        foreignKey: "UserId",
+      });
+      User.hasMany(models.Transaction, { foreignKey: "UserId" });
     }
   }
   User.init({
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Username is required",
+        },
+        notNull: {
+          args: true,
+          msg: "Username is required",
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Email is required",
+        },
+        notNull: {
+          args: true,
+          msg: "Email is required",
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Password is required",
+        },
+        notNull: {
+          args: true,
+          msg: "Password is required",
+        }
+      }
+    },
     role: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
     address: DataTypes.STRING
