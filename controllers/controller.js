@@ -404,6 +404,29 @@ class Controller {
     }
   }
 
+  static async clearCarts(req, res, next) {
+    try {
+      const { id: UserId } = req.user;
+
+      const response = await Cart.destroy({
+        where: {
+          UserId,
+        },
+      });
+
+      if (!response) {
+        throw { name: "wishlistNotFound" };
+      }
+
+      res.status(200).json({
+        statusCode: 200,
+        message: `successfully clear your carts`,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async readCities(req, res, next) {
     try {
       const allCities = await axios.get(
@@ -528,7 +551,25 @@ class Controller {
 
   static async addOrder(req, res, next) {
     try {
-    } catch (err) {}
+      const { id: UserId } = req.user;
+      console.log(req.body);
+      const { books, price, receivedDateMin, receivedDateMax } = req.body;
+
+      await Order.create({
+        UserId,
+        books,
+        price,
+        receivedDateMin,
+        receivedDateMax,
+        status: "on process",
+      });
+
+      res.status(200).json({
+        message: "Order Success!",
+      });
+    } catch (err) {
+      next(err);
+    }
   }
 }
 

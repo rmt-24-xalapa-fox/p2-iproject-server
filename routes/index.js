@@ -20,6 +20,7 @@ router.post("/wishlists/:BookId", Controller.addWishlists);
 router.delete("/wishlists/:BookId", Controller.removeWishlists);
 
 router.get("/carts", Controller.readCarts);
+router.delete("/clearCarts", Controller.clearCarts);
 router.post("/carts/:BookId", Controller.addCarts);
 router.delete("/carts/:BookId", Controller.removeCarts);
 
