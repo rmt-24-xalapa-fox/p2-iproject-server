@@ -116,6 +116,11 @@ class playerController {
                     attributes: {
                         exclude: ["id", "createdAt", "updatedAt"]
                     }
+                }, {
+                    model: User,
+                    attributes: {
+                        exclude: ["id", "password", "createdAt", "updatedAt"]
+                    }
                 }
                 ],
             })

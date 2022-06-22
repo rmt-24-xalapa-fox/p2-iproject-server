@@ -48,7 +48,8 @@ class apiRajaOngkir {
             res.status(200).json(getProvince.data.rajaongkir.results)
         }
         catch (err) {
-            next(err);
+            console.log(err);
+            // next(err);
         }
 
     }
@@ -67,7 +68,7 @@ class apiRajaOngkir {
             res.status(200).json(getProvince.data.rajaongkir.results)
         }
         catch (err) {
-            console.log(err);
+            console.log(err.response.data);
         }
     }
 
