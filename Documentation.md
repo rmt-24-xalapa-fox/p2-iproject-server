@@ -13,7 +13,7 @@ List of Available Endpoints:
 - `GET /user/referralCode`
 - `PUT /user/sellDigimon/:myDigimonId`
 
-### POST /signup
+### POST /register
 
 #### Description
 
