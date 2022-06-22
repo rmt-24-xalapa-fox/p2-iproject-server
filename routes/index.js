@@ -1,19 +1,17 @@
 "use strict"
-const express = require("express")
-const router = express.Router()
-const userController = require("../controllers/customer")
-const authenticationCustomer = require("../middlewares/authentication")
+const router = require("express").Router();
+const userRouter = require("./user");
+const movieRouter = require("./movie");
+const transactionRouter = require("./transaction");
+const priceRouter = require("./price");
+const paymentRouter = require("./payment");
 
-router.get("/products", userController.getAllProduct)
-router.post("/register", userController.registerCust)
-router.post("/login", userController.loginCust)
-router.post("/google-signIn", userController.googleSignInCustomer)
-router.get("/products/:id", userController.getAllProductById)
-router.use(authenticationCustomer)
-router.get("/favorites", userController.getAllFavorite)
-router.post("/favorites/:id", userController.addNewFavorite)
-router.delete("/favorites/:id", userController.deleteFavorite)
+router.use("/", userRouter);
+router.use("/movies", movieRouter);
+router.use("/transactions", transactionRouter);
+router.use("/payment", paymentRouter);
+router.use("/prices", priceRouter);
 
-router.use(errorHandler);
+// router.use("/movies", movieRouter);
 
-module.exports = router
+module.exports = router;
