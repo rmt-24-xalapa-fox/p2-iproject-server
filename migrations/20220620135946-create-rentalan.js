@@ -17,6 +17,9 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
+      iconImage: {
+        type: Sequelize.STRING
+      },
       OperatorId: {
         type: Sequelize.INTEGER,
         references: {

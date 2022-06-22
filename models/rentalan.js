@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasMany(models.Unit)
     }
   }
   Rentalan.init({
@@ -31,6 +31,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     phone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        notNull: true,
+      }
+    },
+    iconImage: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {

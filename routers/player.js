@@ -14,6 +14,7 @@ router.get('/player', (req, res) => {
 router.post('/player/register', PlayerController.playerRegistration)
 router.post('/player/login', PlayerController.playerLogin)
 router.get('/rentalan', PlayerController.readRentalan)
+router.get('/rentalan/:id', PlayerController.readRentalanById)
 router.patch('/rentalan/:RentalanId/:UnitId', PlayerController.bookUnit)
 router.use(errorHandler)
 

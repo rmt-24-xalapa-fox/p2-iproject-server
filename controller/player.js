@@ -46,9 +46,27 @@ class PlayerController {
 
     static async readRentalan(req, res, next) {
         try {
-            const rentalan = await Rentalan.findAll()
+            const rentalan = await Rentalan.findAll({
+                attributes: {
+                    exclude: ["createdAt", "updatedAt"]
+                },
+            })
             res.status(200).json({
                 rentalan
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async readRentalanById(req, res, next) {
+        try {
+            const { id } = req.params
+            const perRentalan = await Rentalan.findByPk(id, {
+                include: Unit
+            })
+            res.status(200).json({
+                perRentalan
             })
         } catch (err) {
             next(err)
