@@ -24,6 +24,8 @@ class Controller {
         offerSeries: fetchedOfferSeries,
         fetchedImg: fetchedOfferImg,
       });
+      console.log(response);
+      //   res.status(201).json(response);
     } catch (err) {
       next(err);
     }
