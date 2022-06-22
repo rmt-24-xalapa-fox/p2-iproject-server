@@ -9,7 +9,7 @@ class MarvelController {
     static async getCharacters(req, res, next) {
         try {
             const { page = 1, name = 'A' } = req.query
-            const limit = 20
+            const limit = 50
             const offset = (page - 1) * limit
 
             const { data } = await axios.get(`${url}/characters?ts=${ts}&apikey=${apikey}&hash=${hash}&limit=${limit}&offset=${offset}&nameStartsWith=${name}`)
@@ -24,9 +24,16 @@ class MarvelController {
 
     static async getComics(req, res, next) {
         try {
-            const { page = 1, year = 2022 } = req.query
+            let { page, year } = req.query
+            if (!page) {
+                page = 1
+            }
             const limit = 20
             const offset = (page - 1) * limit
+
+            if (!year || year === '') {
+                year = 2022
+            }
 
             const { data } = await axios.get(`${url}/comics?ts=${ts}&apikey=${apikey}&hash=${hash}&limit=${limit}&offset=${offset}&startYear=${year}`)
 
