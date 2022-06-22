@@ -6,12 +6,10 @@ router.get('/', controllerStats.getStats)
 router.get('/leaderboard', controllerStats.getLeaderboard)
 
 // must login first
-const authentication = require("../middlewares/clientauthentication")
+router.use(require("../middlewares/authentication"))
 
-router.get('/run/:userId', authentication, controllerStats.getUserRun)
-router.post('/run/:userId', authentication, controllerStats.saveUserRun)
-router.put('/run/:userId', authentication, controllerStats.finaliseUserRun)
-
-router.use(require("../middlewares/errorHandler"))
+router.get('/run/:userId', controllerStats.getUserRun)
+router.post('/run/:userId', controllerStats.saveUserRun)
+router.put('/run/:userId', controllerStats.finaliseUserRun)
 
 module.exports = router
