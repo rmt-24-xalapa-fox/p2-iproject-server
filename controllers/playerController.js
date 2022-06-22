@@ -1,6 +1,6 @@
 
 const { Player, Category, Position, Team, User } = require('../models')
-
+const { Op } = require('sequelize');
 class playerController {
     static async getTeam(req, res, next) {
         try {
@@ -53,7 +53,8 @@ class playerController {
     }
     static async getPlayers(req, res, next) {
         try {
-            const dataPlayer = await Player.findAndCountAll({
+            let { searchName } = req.query
+            let options = {
                 include: [{
                     model: Position,
                     attributes: {
@@ -78,11 +79,19 @@ class playerController {
                 }
                 ],
 
-
                 attributes: {
                     exclude: ["createdAt", "updatedAt"]
                 }
-            })
+            }
+            if (searchName) {
+                options.where = {
+                    ...options.where,
+                    name: {
+                        [Op.iLike]: `%${searchName}%`
+                    }
+                }
+            }
+            const dataPlayer = await Player.findAndCountAll(options)
             res.status(200).json({
                 statusCode: 200,
                 data: dataPlayer
