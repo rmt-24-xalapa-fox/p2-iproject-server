@@ -257,7 +257,7 @@ class Controller {
         method: "get",
         url: `https://api.happi.dev/v1/qrcode?data=${referralLink}&width=500&dots=000000&bg=FFFFFF&apikey=399bfftQ3YIg8FE4vCOloPz9dHkiCEAQNbOtVcKqQ3ZeRP0wQrhMumpA`,
       });
-
+      //
       const qrCode = response.data.qrcode;
       res.status(200).json({ referralLink, qrCode });
     } catch (err) {
