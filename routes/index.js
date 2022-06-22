@@ -1,10 +1,10 @@
 "use strict"
 const router = require("express").Router();
-const userRouter = require("./userRouter");
-const movieRouter = require("./movieRouter");
-const transactionRouter = require("./transactionRouter");
-const priceRouter = require("./priceRouter");
-const paymentRouter = require("./paymentRouter");
+const userRouter = require("./user");
+const movieRouter = require("./movie");
+const transactionRouter = require("./transaction");
+const priceRouter = require("./price");
+const paymentRouter = require("./payment");
 
 router.use("/", userRouter);
 router.use("/movies", movieRouter);
