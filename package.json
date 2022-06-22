@@ -4,7 +4,7 @@
   "description": "Individual Project - Server",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development npx nodemon app.js",
+    "dev": "npx nodemon app.js",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

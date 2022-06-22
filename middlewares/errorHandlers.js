@@ -1,8 +1,6 @@
 "use strict";
 
 const errorHandler = (err, req, res, next) => {
-  console.log(err, `<<<Error Handler`);
-
   let code = 500;
   let message = err;
 
