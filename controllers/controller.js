@@ -132,12 +132,6 @@ class Controller {
     }
   } //√
 
-  static async addCategory(req, res, next) {
-    try {
-    } catch (err) {
-      next(err);
-    }
-  }
   static async getAllCategories(req, res, next) {
     try {
       const result = await Category.findAll({
@@ -150,127 +144,7 @@ class Controller {
     } catch (err) {
       next(err);
     }
-  }
-  static async getOneCategory(req, res, next) {
-    try {
-      const id = +req.params.id;
-
-      const result = await Category.findByPk(id, {
-        attributes: {
-          exclude: ["createdAt", "updatedAt"]
-        }
-      });
-
-      res.status(200).json(result);
-    } catch (err) {
-      next(err);
-    }
-  }
-  static async editCategory(req, res, next) {
-    try {
-      const id = +req.params.id;
-      const name = req.body;
-
-      const result = await Category.update(
-        {
-          name
-        },
-        {
-          where: {
-            id
-          }
-        }
-      );
-
-      res.status(200).json(result);
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  static async addIngredient(req, res, next) {
-    try {
-      const { name, stock, cost, unit } = req.body;
-
-      const ingredient = await Ingredient.create({
-        name,
-        stock: +stock,
-        cost: +cost,
-        unit
-      });
-
-      res.status(201).json(ingredient);
-    } catch (err) {
-      next(err);
-    }
-  }
-  static async getAllIngredients(req, res, next) {
-    try {
-      const ingredients = await Ingredient.findAll({
-        attributes: {
-          exclude: ["createdAt", "updatedAt"]
-        }
-      });
-
-      res.status(200).json(ingredients);
-    } catch (err) {
-      next(err);
-    }
-  }
-  static async getOneIngredient(req, res, next) {
-    try {
-      const id = +req.params.id;
-      const result = await Ingredient.findByPk(id, {
-        attributes: {
-          exclude: ["createdAt", "updatedAt"]
-        }
-      });
-
-      res.status(200).json(result);
-    } catch (err) {
-      next(err);
-    }
-  }
-  static async editIngredient(req, res, next) {
-    try {
-      const id = +req.params.id;
-      const { name, stock, cost, unit } = req.body;
-
-      const result = await Ingredient.update(
-        {
-          name,
-          stock: +stock,
-          cost: +cost,
-          unit
-        },
-        {
-          where: {
-            id
-          }
-        }
-      );
-
-      res.status(201).json(result);
-    } catch (err) {
-      next(err);
-    }
-  }
-  static async deleteIngredient(req, res, next) {
-    try {
-      const id = +req.params.id;
-
-      const result = await Ingredient.destroy({
-        where: {
-          id
-        },
-        returning: true
-      });
-
-      res.status(200).json(result);
-    } catch (err) {
-      next(err);
-    }
-  }
+  } //√
 
   static async addRecipe(req, res, next) {
     try {
@@ -283,48 +157,6 @@ class Controller {
       });
 
       res.status(201).json(recipe);
-    } catch (err) {
-      next(err);
-    }
-  }
-  static async getAllRecipes(req, res, next) {
-    try {
-    } catch (err) {
-      next(err);
-    }
-  }
-  static async getOneRecipe(req, res, next) {
-    try {
-      const productId = +req.params.id;
-
-      const productRecipe = await Recipe.findAll({
-        include: {
-          model: Ingredient,
-          attributes: {
-            exclude: ["id", "createdAt", "updatedAt", "stock"]
-          }
-        },
-        attributes: {
-          exclude: ["id", "createdAt", "updatedAt", "IngredientId", "ProductId"]
-        },
-        where: {
-          ProductId: productId
-        }
-      });
-
-      res.status(200).json(productRecipe);
-    } catch (err) {
-      next(err);
-    }
-  }
-  static async editRecipe(req, res, next) {
-    try {
-    } catch (err) {
-      next(err);
-    }
-  }
-  static async deleteRecipe(req, res, next) {
-    try {
     } catch (err) {
       next(err);
     }
@@ -344,7 +176,7 @@ class Controller {
         include: {
           model: Ingredient,
           attributes: {
-            exclude: ["id", "createdAt", "updatedAt", "stock"]
+            exclude: ["id", "createdAt", "updatedAt"]
           }
         },
         attributes: {
