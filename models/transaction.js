@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Transaction',
+    hooks: {
+      beforeCreate: (transaction) => {
+        transaction.status = "pending";
+      },
+    },
   });
   return Transaction;
 };

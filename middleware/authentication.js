@@ -1,34 +1,29 @@
-"use strict"
+const { User } = require("../models");
+const { verifyTokenData } = require("../helpers/index");
 
-const { verifyTokenData } = require("../helpers/index")
-const { User } = require("../models/index")
-
-
-const authenticationUser = async (req, res, next) => {
+const authentication = async (req, res, next) => {
     try {
-        const access_token = req.headers.access_token;
-        if (!access_token) {
-            throw { name: "Invalid Customer Token" }
+        const { access_token: token } = req.headers;
+        let payload = verifyTokenData(token);
+
+        const user = await User.findByPk(payload.id);
+        if (!user) {
+            throw {
+                code: 401,
+                name: "Invalid_token",
+                message: "Invalid token",
+            };
         }
 
-        const customerPayload = verifyTokenData(access_token)
-        const id = customerPayload.id
-        const foundCustomer = await User.findByPk(id)
+        req.userOnLogin = {
+            id: user.id,
+            email: user.email,
+        };
 
-        if (!foundCustomer) {
-            throw new Error("Invalid Customer Token");
-        }
-
-        req.user = {
-            id: foundCustomer.id,
-            email: foundCustomer.email,
-            username: foundCustomer.username
-        }
         next();
     } catch (err) {
-        next(err)
+        next(err);
     }
-}
+};
 
-
-module.exports = authenticationUser
+module.exports = authentication;

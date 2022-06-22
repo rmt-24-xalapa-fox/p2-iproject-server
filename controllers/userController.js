@@ -1,137 +1,72 @@
-"use strict";
+const { User } = require("../models");
+const { addToken, verifyPassword } = require("../helpers/index");
 
-const { User } = require("../models/index");
-const { verifyPassword, addToken } = require("../helpers");
-const { OAuth2Client } = require("google-auth-library");
-const { CLIENT_ID } = process.env;
+const register = async (req, res, next) => {
+    try {
+        const { name, email, password } = req.body;
+        const dataUser = { name, email, password };
+        const user = await User.create(dataUser);
 
-class userController {
-    static async googleSignIn(req, res, next) {
-        try {
-            const client = new OAuth2Client(CLIENT_ID);
-            const ticket = await client.verifyIdToken({
-                idToken: req.body.credential,
-                audience: CLIENT_ID,
-            });
-            const payload = ticket.getPayload();
-
-            let email = payload.email;
-            let user = await User.findOne({
-                where: {
-                    email,
-                },
-            });
-            if (user) {
-                let accessToken = addToken({
-                    id: user.id,
-                    email: user.email,
-                    username: user.username,
-                    role: user.role,
-                });
-                res.status(200).json({
-                    accessToken,
-                    email: user.email,
-                    username: user.username,
-                    role: user.role,
-                });
-            } else {
-                let username = payload.name.split(" ").join("_");
-                let user = {
-                    username,
-                    email,
-                    password: "Goggle Sign In",
-                    role: "staff",
-                };
-                user = await User.create(user, { hooks: false })
-
-                accessToken = addToken({
-                    id: user.id,
-                    email: user.email,
-                    username: user.username,
-                    role: user.role,
-                })
-                res.status(201).json({
-                    message: "User Created Succesfully",
-                    accessToken,
-                    email,
-                    role,
-                    username
-                })
-            }
-        } catch (error) {
-            next(error);
-        }
+        res.status(200).json({ id: user.id, email: user.email });
+    } catch (err) {
+        next(err);
     }
+};
 
-    static async userCreate(req, res, next) {
-        try {
-            const { username, email, password, phoneNumber, address } = req.body;
-            const createUser = await User.create({
-                username,
-                email,
-                password,
-                role: "admin",
-                phoneNumber,
-                address,
-            });
-            res.status(200).json({
-                statusCode: 200,
-                data: createUser,
-            });
-        } catch (err) {
-            next(err);
-        }
-    }
-
-    static async userLogin(req, res, next) {
-        try {
-            const { email, password } = req.body;
-            if (!email) {
-                throw new Error("Email cannot be null");
-            }
-            if (!password) {
-                throw new Error("Password cannot be null");
-            }
-
-            const foundUser = await User.findOne({
-                where: {
-                    email,
-                },
-            });
-
-            if (!foundUser) {
-                throw new Error("User not found");
-            }
-            const comparePassword = verifyPassword(password, foundUser.password);
-
-            if (!comparePassword) {
-                throw new Error("User not found");
-            }
-
-            const payloadUser = {
-                id: foundUser.id,
-                username: foundUser.username,
-                email: foundUser.email,
-                role: foundUser.role,
+const login = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+        if (!email) {
+            throw {
+                code: 400,
+                name: "Email_is_Required",
+                message: "Email is required",
             };
-
-            const tokenUser = addToken(payloadUser);
-            res.status(200).json({
-                statusCode: 200,
-                data: {
-                    accessToken: tokenUser,
-                    userId: foundUser.id,
-                    email: foundUser.email,
-                    username: foundUser.username,
-                    role: foundUser.role,
-
-                },
-            });
-        } catch (err) {
-            console.log(err);
-            next(err);
         }
-    }
-}
+        if (!password) {
+            throw {
+                code: 400,
+                name: "Password_is_Required",
+                message: "Password is required",
+            };
+        }
 
-module.exports = { userController };
+        const user = await User.findOne({
+            where: {
+                email,
+            },
+        });
+
+        if (!user) {
+            throw {
+                code: 401,
+                name: "User_Not_Found",
+                message: "Invalid email/password",
+            };
+        }
+
+        let isValid = verifyPassword(password, user.password);
+        if (!isValid) {
+            throw {
+                code: 401,
+                name: "User_Not_Found",
+                message: "Invalid email/password",
+            };
+        }
+
+        const payload = {
+            id: user.id,
+            email: user.email,
+        };
+
+        const token = addToken(payload);
+        res.status(200).json({ access_token: token });
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = {
+    login,
+    register,
+};
