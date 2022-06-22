@@ -9,7 +9,6 @@ const transporter = nodemailer.createTransport({
     pass: "Eventlokal1",
   },
 });
-
 class EventController {
   static async getAllEvent(req, res, next) {
     try {
