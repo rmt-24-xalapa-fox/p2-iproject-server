@@ -76,12 +76,11 @@ class PlayerController {
     static async bookUnit(req, res, next) {
         try {
             const { UnitId } = req.params
-            const { status } = req.body
             const found = await Unit.findByPk(UnitId)
             if (!found) {
                 throw { name: "Not found Unit" }
             }
-            await Unit.update({ status: status }, { where: { id: UnitId } })
+            await Unit.update({ status: 'Booked' }, { where: { id: UnitId } })
             res.status(200).json({
                 msg: `Unit where id ${UnitId} booked`
             })

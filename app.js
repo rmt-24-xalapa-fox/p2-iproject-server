@@ -14,11 +14,11 @@ app.post('/create-checkout-session', async (req, res) => {
         line_items: [
             {
                 price_data: {
-                    currency: 'usd',
+                    currency: 'idr',
                     product_data: {
                         name: 'Booking for Rental',
                     },
-                    unit_amount: 2000,
+                    unit_amount: 5000000,
                 },
                 quantity: 1,
             },
