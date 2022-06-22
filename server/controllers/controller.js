@@ -119,8 +119,8 @@ class Controller {
       if (kg >= 15) {
         throw { name: "Maximum kg is 15" };
       }
-
-      if (service !== "Regular" || service !== "Express") {
+      
+      if (service !== "Regular" && service !== "Express") {
         throw { name: "Service not found" };
       }
 
