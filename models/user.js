@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { hasPasswrd } = require("../helper/helper");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -34,16 +35,20 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notNull: { msg: "password is required" },
           notEmpty: { msg: "password is required" },
+          notNull: { msg: "password is required" },
         },
-      },
       phone_number: DataTypes.STRING,
       address: DataTypes.TEXT,
     },
     {
       sequelize,
       modelName: "User",
+      hooks: {
+        beforeCreate(ins) {
+          ins.password = hasPasswrd(ins.password);
+        },
+      },
     }
   );
   return User;
