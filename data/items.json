@@ -1,0 +1,31 @@
+{
+  "Medicine":[
+    { "name":"Potion", "heal":20 , "price":300 , "img":"https://img.pokemondb.net/sprites/items/potion.png" },
+    { "name":"Super Potion", "heal":60 , "price":700 , "img":"https://img.pokemondb.net/sprites/items/super-potion.png" },
+    { "name":"Hyper Potion", "heal":120 , "price":1200 , "img":"https://img.pokemondb.net/sprites/items/hyper-potion.png" },
+    { "name":"Max Potion", "heal":"100%" , "price":2500 , "img":"https://img.pokemondb.net/sprites/items/max-potion.png" },
+    { "name":"Fresh Water", "limit": 5, "heal":30 , "price":200 , "img":"https://img.pokemondb.net/sprites/items/fresh-water.png" },
+    { "name":"Lemonade", "limit": 3, "heal":70 , "price":350 , "img":"https://img.pokemondb.net/sprites/items/lemonade.png" },
+    { "name":"Moomoo Milk", "limit": 1, "heal":100 , "price":500 , "img":"https://img.pokemondb.net/sprites/items/moomoo-milk.png" },
+    { "name":"Soda Pop", "limit": 3, "heal":50 , "price":300 , "img":"https://img.pokemondb.net/sprites/items/soda-pop.png" }
+  ],
+  "Utils":[
+    { "name":"Escape Rope", "price":550 , "img":"https://img.pokemondb.net/sprites/items/escape-rope.png" },
+    { "name":"Rare Candy", "limit": 5, "price":550 , "img":"https://img.pokemondb.net/sprites/items/rare-candy.png" }
+  ],
+  "Valuable":[
+    { "name":"Nugget", "price":5000 , "img":"https://img.pokemondb.net/sprites/items/nugget.png" },
+    { "name":"Big Nugget", "price":20000 , "img":"https://img.pokemondb.net/sprites/items/big-nugget.png" },
+    { "name":"Pearl", "price":1000 , "img":"https://img.pokemondb.net/sprites/items/pearl.png" },
+    { "name":"Big Pearl", "price":4000 , "img":"https://img.pokemondb.net/sprites/items/big-pearl.png" },
+    { "name":"Star Dust", "price":1500 , "img":"https://img.pokemondb.net/sprites/items/stardust.png" },
+    { "name":"Star Piece", "price":6000 , "img":"https://img.pokemondb.net/sprites/items/star-piece.png" }
+  ],
+  "Berry":[
+    { "name":"Figy Berry", "heal":"12.5%" , "img":"https://img.pokemondb.net/sprites/items/figy-berry.png" },
+    { "name":"Iapapa Berry", "heal":"12.5%" , "img":"https://img.pokemondb.net/sprites/items/iapapa-berry.png" },
+    { "name":"Mago Berry", "heal":"12.5%" , "img":"https://img.pokemondb.net/sprites/items/iapapa-berry.png" },
+    { "name":"Oran Berry", "heal":"10" , "img":"https://img.pokemondb.net/sprites/items/oran-berry.png" },
+    { "name":"Sitrus Berry", "heal":"25%" , "img":"https://img.pokemondb.net/sprites/items/sitrus-berry.png" }
+  ]
+}
