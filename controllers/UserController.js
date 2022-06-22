@@ -40,8 +40,6 @@ class UserController {
         where: { email },
       });
 
-      console.log(foundUser, "<<<<<<<<< user");
-
       if (!foundUser) {
         throw { name: "UserNotFound" };
       }

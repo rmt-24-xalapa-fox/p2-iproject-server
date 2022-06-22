@@ -25,11 +25,10 @@ async function authentication(req, res, next){
         }
         
         req.user = {
-            id: user.id,
-            role: user.role,
-            username: user.username
+            id: +user.id,
         }
 
+        console.log(req.user.id, "<<<<<<<<<<<<<<<<<< user id di authentication");
         next()
     } catch (err) {
         console.log(err);
