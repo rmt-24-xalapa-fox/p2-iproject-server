@@ -7,7 +7,9 @@ router.post("/register", Controller.newUser);
 router.post("/login", Controller.loginUser);
 router.use(authentication)
 router.get("/laundries", Controller.getLaundries);
-router.post("/newOrder/:LaundryId", Controller.newOrder);
+router.post("/neworder/:LaundryId", Controller.newOrder);
+router.get("/myorders", Controller.myOrders)
+
 
 
 

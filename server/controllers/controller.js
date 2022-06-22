@@ -161,6 +161,23 @@ class Controller {
       }
     }
   }
+
+  static async myOrders (req, res) {
+    try {
+        const UserId = req.userId
+        const myOrders = await User_Laundry.findAll({
+            where:{
+                UserId
+            },
+            include: Laundry
+        })
+
+        res.send(myOrders)
+
+    } catch (err) {
+        
+    }
+  }
 }
 
 module.exports = Controller;
