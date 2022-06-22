@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   FavoriteAnime.init({
-    animeId: DataTypes.STRING,
     title: DataTypes.STRING,
     currentEpisode: DataTypes.INTEGER,
     totalEpisode: DataTypes.INTEGER,

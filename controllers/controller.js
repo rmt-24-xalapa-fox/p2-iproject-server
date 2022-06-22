@@ -133,8 +133,8 @@ class Controller {
   }
   static async getAnime(req, res){
     try{
-      let size = +req.query.size
-      let page = +req.query.page
+      let size = +req.query.size || 20
+      let page = +req.query.page || 1
       const filterName = req.query.name
       const condition = {
         limit: size,
@@ -204,6 +204,7 @@ class Controller {
         message: `${response.title} has been added to Favorite`,
       });
     } catch (err) {
+      console.log(err)
       res.status(500).json({
         message: "Internal Server Error",
       });
