@@ -295,10 +295,10 @@ class Controller {
         isProduction: false,
         serverKey: SERVER_KEY,
       });
-
+      let random = Math.floor(Math.random()*(700)+1)
       let parameter = {
         transaction_details: {
-          order_id: `${id}-123456`,
+          order_id: `${id}-${random}-123456`,
           gross_amount: megaTotalPrice,
         },
         credit_card: {
