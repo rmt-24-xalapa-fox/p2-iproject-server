@@ -503,16 +503,13 @@ class Controller {
       let promises2 = [];
       response.forEach((el) => {
         const books = el.books;
-        let bookArray = [];
         let promises1 = [];
         books.forEach((id) => {
-          let promise1 = Book.findByPk(id).then((response2) => {
-            bookArray.push(response2.dataValues);
-          });
+          let promise1 = Book.findByPk(id);
           promises1.push(promise1);
           if (promises1.length === books.length) {
-            let promise2 = Promise.all(promises1).then(() => {
-              bookMultiArray.push(bookArray);
+            let promise2 = Promise.all(promises1).then((value) => {
+              bookMultiArray.push(value);
             });
             promises2.push(promise2);
           }
