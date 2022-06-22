@@ -24,39 +24,6 @@ app.get("/user/myDigimon", Controller.fetchMyDigimon);
 app.get("/user/referralCode", Controller.fetchReferralData);
 app.put("/user/sellDigimon/:myDigimonId", Controller.sellDigimon);
 
-// app.use(async (req, res, next) => {
-//   try {
-//     const access_token = req.headers.access_token;
-//     if (!access_token) {
-//       throw { name: "InvalidToken" };
-//     }
-
-//     const payload = verifyToken(access_token);
-
-//     const foundUser = await User.findOne({
-//       where: {
-//         id: payload.id,
-//         role: payload.id,
-//       },
-//     });
-
-//     if (!foundUser) {
-//       throw { name: "InvalidToken" };
-//     }
-//     req.user = {
-//       id: payload.id,
-//     };
-//     // console.log(payload.id);
-//     next();
-//   } catch (err) {
-//     if (err.name == "InvalidToken" || err.name == "JsonWebTokenError") {
-//       res.status(401).json({ message: "Invalid token" });
-//     } else {
-//       res.status(500).json(err);
-//     }
-//   }
-// });
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
