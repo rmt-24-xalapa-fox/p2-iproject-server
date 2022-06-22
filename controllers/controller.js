@@ -1,4 +1,4 @@
-const { User, Category, Book, Wishlist, Cart } = require("../models");
+const { User, Category, Book, Wishlist, Cart, Order } = require("../models");
 const { comparePassword } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
@@ -490,7 +490,21 @@ class Controller {
 
   static async readOrders(req, res, next) {
     try {
-    } catch (err) {}
+      const { id: UserId } = req.user;
+
+      const response = await Order.findAll({
+        where: {
+          UserId,
+        },
+      });
+
+      res.status(200).json({
+        statusCode: 200,
+        data: response,
+      });
+    } catch (err) {
+      next(err);
+    }
   }
 
   static async addOrder(req, res, next) {
