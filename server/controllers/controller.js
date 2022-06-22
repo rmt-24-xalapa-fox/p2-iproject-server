@@ -1,6 +1,6 @@
 const { checkPassword } = require("../helpers/bcrypt");
 const { createToken } = require("../helpers/jwt");
-const { User, Laundry } = require("../models");
+const { User, Laundry, User_Laundry } = require("../models");
 
 class Controller {
   static async newUser(req, res) {
@@ -91,9 +91,74 @@ class Controller {
     try {
       const laundryList = await Laundry.findAll();
 
-      res.status(200).json(laundryList)
+      res.status(200).json(laundryList);
     } catch (err) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
+
+  static async newOrder(req, res) {
+    try {
+      const UserId = req.userId;
+      const { LaundryId } = req.params;
+      const { service, kg } = req.body;
+
+      let cost = null;
+
+      if (!service) {
+        throw { name: "Service is required" };
+      }
+
+      if (!kg) {
+        throw { name: "Kg is required" };
+      }
+
+      if (kg < 1) {
+        throw { name: "Minimum kg is 1" };
+      }
+      if (kg >= 15) {
+        throw { name: "Maximum kg is 15" };
+      }
+
+      if (service !== "Regular" || service !== "Express") {
+        throw { name: "Service not found" };
+      }
+
+      if (service === "Regular") {
+        cost = 6000 * +kg;
+      } else if (service === "Express") {
+        cost = 10000 * +kg;
+      }
+
+      const newOrders = await User_Laundry.create({
+        UserId: +UserId,
+        LaundryId: +LaundryId,
+        service,
+        kg: +kg,
+        cost: +cost,
+      });
+
+      if (!newOrders) {
+        throw { name: "Laundry not found" };
+      }
+
+      res.status(201).json(newOrders);
+    } catch (err) {
+      if (err.name === "Service is required") {
+        res.status(400).json({ message: "Service is required" });
+      } else if (err.name === "Service not found") {
+        res.status(400).json({ message: "Service not found" });
+      } else if (err.name === "Kg is required") {
+        res.status(400).json({ message: "Kg is required" });
+      } else if (err.name === "Minimum kg is 1") {
+        res.status(400).json({ message: "Minimum kg is 1" });
+      } else if (err.name === "Maximum kg is 15") {
+        res.status(400).json({ message: "Maximum kg is 15" });
+      } else if (err.name === "Laundry not found") {
+        res.status(400).json({ message: "Laundry not found" });
+      } else {
         res.status(500).json({ message: "Internal server error" });
+      }
     }
   }
 }

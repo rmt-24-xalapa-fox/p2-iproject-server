@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User_Laundry.beforeCreate(async (order, options) => {
-    order.status = "waiting for pickup"
+    order.status = "waiting for payment"
   });
   return User_Laundry;
 };
