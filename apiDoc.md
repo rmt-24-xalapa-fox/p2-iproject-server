@@ -273,3 +273,224 @@ _Response (200 - OK)_
     ...
 }
 ```
+
+### 8. GET /genre/list
+
+_Response (200 - OK)_
+
+```json
+{
+    "genres": [
+        {
+            "id": 28,
+            "name": "Action"
+        },
+        {
+            "id": 12,
+            "name": "Adventure"
+        },
+        ...
+    ]
+}
+```
+
+### 9. GET /search/movies
+
+_body_
+
+```json
+{
+  "search": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/yFuKvT4Vm3sKHdFY4eG6I4ldAnn.jpg",
+            "genre_ids": [
+                28,
+                12,
+                878
+            ],
+            "id": 1771,
+            "original_language": "en",
+            "original_title": "Captain America: The First Avenger",
+            "overview": "During World War II, Steve Rogers is a sickly man from Brooklyn who's transformed into super-soldier Captain America to aid in the war effort. Rogers must stop the Red Skull – Adolf Hitler's ruthless head of weaponry, and the leader of an organization that intends to use a mysterious device of untold powers for world domination.",
+            "popularity": 90.202,
+            "poster_path": "/vSNxAJTlD0r02V9sPYpOjqDZXUK.jpg",
+            "release_date": "2011-07-22",
+            "title": "Captain America: The First Avenger",
+            "video": false,
+            "vote_average": 7,
+            "vote_count": 18703
+        },
+        ...
+    ]
+}
+```
+
+### 10. GET /actor/popular
+
+_Response (200 - OK)_
+
+```json
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "gender": 1,
+            "id": 6161,
+            "known_for": [
+                {
+                    "adult": false,
+                    "backdrop_path": "/tTlAA0REGPXSZPBfWyTW9ipIv1I.jpg",
+                    "genre_ids": [
+                        28,
+                        12,
+                        878,
+                        18
+                    ],
+                    "id": 315635,
+                    "media_type": "movie",
+                    "original_language": "en",
+                    "original_title": "Spider-Man: Homecoming",
+                    "overview": "Following the events of Captain America: Civil War, Peter Parker, with the help of his mentor Tony Stark, tries to balance his life as an ordinary high school student in Queens, New York City, with fighting crime as his superhero alter ego Spider-Man as a new threat, the Vulture, emerges.",
+                    "poster_path": "/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg",
+                    "release_date": "2017-07-05",
+                    "title": "Spider-Man: Homecoming",
+                    "video": false,
+                    "vote_average": 7.4,
+                    "vote_count": 18722
+                },
+                ...
+            ]
+        }
+    ],
+    "known_for_department": "Acting",
+    "name": "Jennifer Connelly",
+    "popularity": 193.186,
+    "profile_path": "/egh1eOHuYgeoqdlLQgaXMl6cPOm.jpg"
+}
+```
+
+### 11. GET /favourite
+
+_headers_
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  {
+        "id": 1,
+        "title": "Doctor Strange in the Multiverse of Madness",
+        "imageUrl": "https://image.tmdb.org/t/p/w500//9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
+        "vote": 75,
+        "release": "2022-05-04",
+        "genre": "Fantasy",
+        "movieId": 453395,
+        "UserId": 1
+    }
+    ...
+}
+```
+
+### 12. POST /favourite/add
+
+_headers_
+```json
+{
+  "access_token": "string"
+}
+```
+
+_body_
+```json
+{
+  "title": "string",
+  "imageUrl": "string",
+  "vote": "integer",
+  "release": "string",
+  "genre": "string",
+  "movieId": "integer"
+}
+```
+_Response (201 - Created)_
+```json
+{
+    "statusCode": 201,
+    "message": "Succes added to favourite",
+    "data": {
+        "id": 7,
+        "title": "Doctor Stranger",
+        "imageUrl": "https://image.tmdb.org/t/p/w500//9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
+        "vote": 75,
+        "release": "2022-05-04",
+        "genre": "Fantasy",
+        "movieId": null,
+        "UserId": 1,
+        "updatedAt": "2022-06-23T02:28:52.009Z",
+        "createdAt": "2022-06-23T02:28:52.009Z"
+    }
+}
+```
+
+### 12. DELETE /favourite/add
+
+_headers_
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+_body_
+
+````json
+{
+  "id": "integer",
+}
+_Response (201 - Created)_
+
+```json
+{
+    "statusCode": 200,
+    "message": "Favorite with id 1 deleted successfully",
+}
+````
+
+### Global Error
+_Response (401 - Unauthorized)_
+```json
+{
+  "message": "Invalid token"
+}
+```
+_Response (403 - Forbidden)_
+```json
+{
+  "message": "You are not authorized"
+}
+```
+_Response (500 - Internal Server Error)_
+
+```json
+{
+  "message": "Internal server error"
+}
+```
+
