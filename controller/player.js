@@ -1,6 +1,7 @@
 const { Rentalan, Player, Unit } = require('../models/index')
 const { hashPassword, comparePassword } = require('../helpers/bcrypt')
 const { convertToToken } = require('../helpers/jwt')
+const { Op } = require("sequelize");
 
 class PlayerController {
     static async playerRegistration(req, res, next) {
@@ -60,11 +61,25 @@ class PlayerController {
     }
 
     static async readRentalanById(req, res, next) {
+        console.log(req.query);
+
+        let option = {
+            attributes: {
+                exclude: ["createdAt", "updatedAt"]
+            },
+            include: {
+                model: Unit,
+            }
+        }
+        if (req.query.filter !== undefined) {
+            option.include.where = {
+                psType: req.query.filter
+            }
+        }
+
         try {
             const { id } = req.params
-            const perRentalan = await Rentalan.findByPk(id, {
-                include: Unit
-            })
+            const perRentalan = await Rentalan.findByPk(id, option)
             res.status(200).json({
                 perRentalan
             })
