@@ -7,7 +7,7 @@ const errorHandler = require("./middlewares/errorHandler");
 // app.use(cors()); //! CORS HARUS MENJADI MIDDLEWARE PALING AWAL
 app.use(
   cors({
-    origin: "https://instalite-i-project.herokuapp.com",
+    origin: "https://instalite-590a5.web.app",
     credentials: true,
   })
 );
