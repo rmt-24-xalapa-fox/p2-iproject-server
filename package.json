@@ -4,7 +4,8 @@
   "description": "Individual Project - Server",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon app",
+    "dev": "NODE_ENV=development npx nodemon app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +25,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "google-auth-library": "^8.0.3",
+    "heroku": "^7.60.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.7.0",
     "nodemon": "^2.0.16",
