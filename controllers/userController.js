@@ -2,6 +2,8 @@
 const { User } = require("../models");
 const { comparePass } = require("../helpers/bcrypt");
 const { tokenUser } = require("../helpers/token");
+const nodemailer = require("nodemailer");
+const { PASSWORD } = process.env;
 
 class UserController {
   static async register(req, res, next) {
@@ -15,6 +17,8 @@ class UserController {
       res.status(201).json({
         statusCode: 201,
         data: createdUser,
+        nodemail: info.messageId,
+        preview: nodemailer.getTestMessageUrl(info),
       });
     } catch (err) {
       next(err);

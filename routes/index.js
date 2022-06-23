@@ -4,6 +4,7 @@ const router = express.Router();
 const UserController = require("../controllers/userController");
 const Controller = require("../controllers/controller");
 const authentication = require("../middlewares/authentication");
+const sendEmail = require("../middlewares/nodemailer");
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
