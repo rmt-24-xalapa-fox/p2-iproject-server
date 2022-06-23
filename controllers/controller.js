@@ -188,10 +188,11 @@ class Controller{
 
     static async fetchcompletedtask(req, res, next){
         try{
+            const user = await User.findByPk(req.userId)
             const tickets = await Ticket.findAll({
                 include: User,
                 where: {
-                    ReceiverId: req.userId,
+                    ReceiverId: user.CompanyId,
                     status: 'completed'
                 }
             })
