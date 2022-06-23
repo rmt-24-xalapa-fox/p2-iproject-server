@@ -1,5 +1,5 @@
 const {verifytoken} = require('../helpers/helper')
-const {User} = require('../models')
+const {User, Company} = require('../models')
 
 const authentication = async (req, res, next)=>{
     try{
@@ -9,10 +9,11 @@ const authentication = async (req, res, next)=>{
         }
         const payload = verifytoken(access_token)
         const user = await User.findByPk(payload.userId)
-        if(!user){
+        const company = await Company.findByPk(payload.userId)
+        if(!user&&!company){
             throw {name: "InvalidToken"}
         }
-        req.userId = user.id
+        req.userId = user.id||company.id
         next()
     }catch(err){
         next(err)

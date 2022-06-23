@@ -12,6 +12,7 @@ router.post('/logincompany', Controller.logincompany)
 
 router.use(authentication)
 
+router.get('/getpaymentlink', Controller.getpaymentlink)
 router.get('/users', Controller.getcompanyusers)
 router.patch('/users/:userId', Controller.asignadmin)
 router.get('/ticket', Controller.ticketslist)

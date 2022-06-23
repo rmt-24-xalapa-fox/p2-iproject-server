@@ -311,6 +311,15 @@ class Controller{
             next(err)
         }
     }
+
+    static async getpaymentlink(req, res, next){
+        try{
+            const payment = await Payment.findByPk(req.userId)
+            res.status(200).json({payment})
+        }catch(err){
+            next(err)
+        }
+    }
 }
 
 module.exports = Controller
