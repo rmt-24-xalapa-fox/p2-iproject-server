@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Minyak bulus",
+    "description": "Minyak yang memiliki banyak manfaat",
+    "price": 95000,
+    "imgUrl": "https://id-test-11.slatic.net/p/a03137db8a69a986ccbdc1881de029ee.png",
+    "stock": 23
+  },
+  {
+    "name": "Susu Go Milku",
+    "description": "Susu kambing etawa",
+    "price": 125000,
+    "imgUrl": "https://images.tokopedia.net/img/cache/700/VqbcmM/2021/2/17/04e71e10-ff40-410b-a0b3-f9b9186df50e.jpg",
+    "stock": 10
+  },
+  {
+    "name": "Madu Hutan Baduy",
+    "description": "Madu hutan asli, bukan hasil peternakan",
+    "price": 100000,
+    "imgUrl": "https://lzd-img-global.slatic.net/g/p/3490900df561d49016954514d80247ec.jpg_720x720q80.jpg_.webp",
+    "stock": 15
+  },
+  {
+    "name": "Maxi Propolis",
+    "description": "Madu propolis dengan 100% propolis alami",
+    "price": 120000,
+    "imgUrl": "https://lzd-img-global.slatic.net/g/p/c3e11f0400a52f3941a85604eff899ea.jpg_720x720q80.jpg_.webp",
+    "stock": 15
+  },
+  {
+    "name": "Salimah Slim",
+    "description": "Untuk membantu mengurangi lemak tubuh",
+    "price": 60000,
+    "imgUrl": "https://cf.shopee.co.id/file/9228e4912e15c51a5c7121a8133147fa",
+    "stock": 21
+  }
+]

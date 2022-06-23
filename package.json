@@ -1,0 +1,33 @@
+{
+  "name": "p2-iproject-server",
+  "version": "1.0.0",
+  "description": "Individual Project - Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arimukti/p2-iproject-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arimukti/p2-iproject-server/issues"
+  },
+  "homepage": "https://github.com/Arimukti/p2-iproject-server#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "google-auth-library": "^8.0.3",
+    "googleapis": "^104.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3",
+    "sequelize": "^6.21.0",
+    "sequelize-cli": "^6.4.1",
+    "xendit-node": "^1.21.3"
+  }
+}
