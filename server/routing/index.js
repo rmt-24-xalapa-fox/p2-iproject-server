@@ -8,17 +8,23 @@ router.post("/register", Controller.registerController);
 
 router.post("/login", Controller.loginController);
 
+router.get("/weather", Controller.weather);
+
 router.get("/mountains", Controller.mountainsController);
 
 router.get("/mountains/:MountainId", Controller.mountainsByIdController);
 
 router.use(authentication);
 
+router.post("/midtrans/:LicenseId", Controller.midtransController);
+
 router.get("/licenses", Controller.licensesController);
 
-router.post("/licenses/:MountainId", Controller.postLicenseController);
+router.patch("/licenses/pay/:LicenseId", Controller.patchLicenseController);
 
-router.patch("/quota/:QuotaId/:QuotaUse", Controller.patchQuotaController);
+router.post("/licenses/:MountainId/:QuotaId", Controller.postLicenseController);
+
+router.patch("/quota/:QuotaId", Controller.patchQuotaController);
 
 router.use(errorHandler);
 
