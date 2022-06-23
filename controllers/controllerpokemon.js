@@ -96,9 +96,11 @@ class ControllerPokemon {
       for (let i = 0; i < 20; i++) {
         const tier = Math.floor(i/5)
         enemymaps.push([])
-        for (let j = 0; j < 2; j++) {
+        while (enemymaps[i].length<2) {
           const rng = Math.floor(Math.random()*grouptier[tier].length)
-          enemymaps[i].push(grouptier[tier][rng])
+          if(grouptier[tier][rng]!==enemymaps[i][0]){
+            enemymaps[i].push(grouptier[tier][rng])
+          }
         }
       }
       // console.log(enemymaps);
