@@ -1,0 +1,152 @@
+[
+    {
+        "MountainId": 1,
+        "date": "2022-06-23",
+        "quotaUse": 15,
+        "quotaMax": 20
+    },
+    {
+        "MountainId": 1,
+        "date": "2022-06-24",
+        "quotaUse": 10,
+        "quotaMax": 20
+    },
+    {
+        "MountainId": 1,
+        "date": "2022-06-25",
+        "quotaUse": 2,
+        "quotaMax": 20
+    },
+    {
+        "MountainId": 1,
+        "date": "2022-06-26",
+        "quotaUse": 5,
+        "quotaMax": 20
+    },
+    {
+        "MountainId": 1,
+        "date": "2022-06-27",
+        "quotaUse": 18,
+        "quotaMax": 20
+    },
+    {
+        "MountainId": 2,
+        "date": "2022-06-23",
+        "quotaUse": 78,
+        "quotaMax": 100
+    },
+    {
+        "MountainId": 2,
+        "date": "2022-06-24",
+        "quotaUse": 50,
+        "quotaMax": 100
+    },
+    {
+        "MountainId": 2,
+        "date": "2022-06-25",
+        "quotaUse": 98,
+        "quotaMax": 100
+    },
+    {
+        "MountainId": 2,
+        "date": "2022-06-26",
+        "quotaUse": 20,
+        "quotaMax": 100
+    },
+    {
+        "MountainId": 2,
+        "date": "2022-06-27",
+        "quotaUse": 1,
+        "quotaMax": 100
+    },
+    {
+        "MountainId": 3,
+        "date": "2022-06-23",
+        "quotaUse": 35,
+        "quotaMax": 60
+    },
+    {
+        "MountainId": 3,
+        "date": "2022-06-24",
+        "quotaUse": 30,
+        "quotaMax": 60
+    },
+    {
+        "MountainId": 3,
+        "date": "2022-06-25",
+        "quotaUse": 60,
+        "quotaMax": 60
+    },
+    {
+        "MountainId": 3,
+        "date": "2022-06-26",
+        "quotaUse": 60,
+        "quotaMax": 60
+    },
+    {
+        "MountainId": 3,
+        "date": "2022-06-27",
+        "quotaUse": 1,
+        "quotaMax": 60
+    },
+    {
+        "MountainId": 4,
+        "date": "2022-06-23",
+        "quotaUse": 2,
+        "quotaMax": 10
+    },
+    {
+        "MountainId": 4,
+        "date": "2022-06-24",
+        "quotaUse": 10,
+        "quotaMax": 10
+    },
+    {
+        "MountainId": 4,
+        "date": "2022-06-25",
+        "quotaUse": 5,
+        "quotaMax": 10
+    },
+    {
+        "MountainId": 4,
+        "date": "2022-06-26",
+        "quotaUse": 10,
+        "quotaMax": 10
+    },
+    {
+        "MountainId": 4,
+        "date": "2022-06-27",
+        "quotaUse": 10,
+        "quotaMax": 10
+    },
+    {
+        "MountainId": 5,
+        "date": "2022-06-23",
+        "quotaUse": 55,
+        "quotaMax": 80
+    },
+    {
+        "MountainId": 5,
+        "date": "2022-06-24",
+        "quotaUse": 20,
+        "quotaMax": 80
+    },
+    {
+        "MountainId": 5,
+        "date": "2022-06-25",
+        "quotaUse": 10,
+        "quotaMax": 80
+    },
+    {
+        "MountainId": 5,
+        "date": "2022-06-26",
+        "quotaUse": 79,
+        "quotaMax": 80
+    },
+    {
+        "MountainId": 5,
+        "date": "2022-06-27",
+        "quotaUse": 4,
+        "quotaMax": 80
+    }
+]
