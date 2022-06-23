@@ -1,7 +1,7 @@
 "use strict";
 
 const { comparePass, hashPass } = require("../helpers/bcrypt");
-const { User, Post, Inbox } = require();
+const { User, Post, Inbox } = require("../models");
 
 class Controller {
   static async createPost(req, res, next) {
