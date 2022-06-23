@@ -148,8 +148,8 @@ class UserController {
             })
             
             user = await user.update({role:"customer"});
+            req.target={email : user.email};
             
-            console.log(user.email, "<--- this is user")
             payload = { id: user.id, email: user.email, role: user.role };
 
             token = jwt.payloadToToken(payload);
@@ -159,8 +159,11 @@ class UserController {
                 email: user.email,
                 role: user.role
             });
+            EmailController.sendMail(req,res);
+            console.log(user.email, "<--- this is user")
 
         } catch (err) {
+            console.log(err);
             next(err);
         }
     }

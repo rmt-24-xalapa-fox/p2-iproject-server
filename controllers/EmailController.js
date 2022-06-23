@@ -153,7 +153,8 @@ function listFiles(auth) {
           };
       
           const result = await transport.sendMail(mailOptions);
-          console(result);
+          console.log(result);
+          console.log("EMAIL is sent")
         } catch (error) {
           console.log(error);
           res.send(error);

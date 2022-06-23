@@ -2,7 +2,6 @@
 const express = require('express')
 const router = express.Router();
 const PostController= require('../controllers/PostController')
-const PaymentController= require('../controllers/PaymentController')
 const {authorization,authorizationUser} = require("../middlewares/auth");
 const {authentication} = require("../middlewares/auth");
 
@@ -20,6 +19,5 @@ router.delete('/favourite/:id', PostController.unfavourited)
 router.patch('/post/:id', PostController.updatePosts)
 router.post('/promotePost/:id', PostController.promotePost)
 
-router.post('/getLink', PaymentController.generateUrl)
 
 module.exports=router;
