@@ -1,3 +1,4 @@
+const { Item } = require("../models")
 const { getStarters, getMoves, getLegendary, getMythic } = require("../helpers/getpokemonid")
 const axios = require("axios");
 const RapidAPIKey = process.env.RapidAPIKey;
@@ -26,33 +27,28 @@ class ControllerPokemon {
     try {
       const starters = getStarters()
       let options = {
+        method: "GET",
         headers: {
           'X-RapidAPI-Key': RapidAPIKey,
           'X-RapidAPI-Host': 'pokemon-go1.p.rapidapi.com'
         }
       }
 
-      // fetch info for each starters
-
       // fetch move for each starters
-      options.method = 'GET'
       options.url = 'https://pokemon-go1.p.rapidapi.com/pokemon_stats.json'
       
       const { data:recv_stats } =  await axios.request(options)
 
       // pokemon moves
-      options.method = 'GET'
       options.url = 'https://pokemon-go1.p.rapidapi.com/current_pokemon_moves.json'
       
       const { data:recv_moves } =  await axios.request(options)      
 
       // moves info
-      options.method = 'GET'
       options.url = 'https://pokemon-go1.p.rapidapi.com/fast_moves.json'
 
       const { data:recv_fast } =  await axios.request(options)      
 
-      options.method = 'GET'
       options.url = 'https://pokemon-go1.p.rapidapi.com/charged_moves.json'
 
       const { data:recv_charged } =  await axios.request(options)      
@@ -74,7 +70,18 @@ class ControllerPokemon {
         p.moves = getMoves(pokemon, { fast:recv_fast , charged:recv_charged })
       });
 
-      res.status(200).json(starters)      
+      const items = await Item.findAll({
+        attributes: {
+          exlude: ["createdAt", "updatedAt"]
+        }
+      })
+
+      // console.log("ITEMS",items);
+
+      res.status(200).json({
+        pokemons:starters,
+        items:items,
+      })
     } catch (error) {
       console.log(error);
       next(error)
@@ -82,12 +89,94 @@ class ControllerPokemon {
   }
 
   static async generateMap(req, res, next){
-    try {
-      // 
+    try {      
+      const grouptier = require("../data/groups.json")
+      // console.log(grouptier);
+      const enemymaps = []
+      for (let i = 0; i < 20; i++) {
+        const tier = Math.floor(i/5)
+        enemymaps.push([])
+        for (let j = 0; j < 2; j++) {
+          const rng = Math.floor(Math.random()*grouptier[tier].length)
+          enemymaps[i].push(grouptier[tier][rng])
+        }
+      }
+      // console.log(enemymaps);
+      res.status(200).json(enemymaps)
     } catch (error) {
+      // console.log(error);
       next(error)
     }
   }
+
+  static async getNextEnemy(req, res, next){
+    try {
+      const { map } = req.body
+      // console.log("BODY", req.body);
+      // console.log(map);
+      const pokemons = []
+      let options = {
+        method: "GET",
+        headers: {
+          'X-RapidAPI-Key': RapidAPIKey,
+          'X-RapidAPI-Host': 'pokemon-go1.p.rapidapi.com'
+        }
+      }
+
+      options.url = 'https://pokemon-go1.p.rapidapi.com/pokemon_stats.json'
+      
+      const { data:recv_stats } =  await axios.request(options)
+
+      // pokemon moves
+      options.url = 'https://pokemon-go1.p.rapidapi.com/current_pokemon_moves.json'
+      
+      const { data:recv_moves } =  await axios.request(options)      
+
+      // moves info
+      options.url = 'https://pokemon-go1.p.rapidapi.com/fast_moves.json'
+
+      const { data:recv_fast } =  await axios.request(options)      
+
+      options.url = 'https://pokemon-go1.p.rapidapi.com/charged_moves.json'
+
+      const { data:recv_charged } =  await axios.request(options)      
+
+      
+      // send data contains id name stats move
+      // stats
+      map.forEach(p => {
+        const poke = {}
+        const pokemon = recv_stats.find( s => s.pokemon_id===p && s.form==='Normal' ) 
+        poke.id = p       
+        poke.attack= pokemon.base_attack
+        poke.defense = pokemon.base_defense
+        poke.hp = pokemon.base_stamina
+        poke.name = pokemon.pokemon_name
+        pokemons.push(poke)
+      });
+
+      // moves
+      pokemons.forEach(p => {
+        const pokemon = recv_moves.find( s => s.pokemon_id===p.id && s.form==='Normal' )        
+        p.moves = getMoves(pokemon, { fast:recv_fast , charged:recv_charged })
+      });
+
+      const items = await Item.findAll({
+        attributes: {
+          exlude: ["createdAt", "updatedAt"]
+        }
+      })
+
+      // console.log("ITEMS",items);
+
+      res.status(200).json(pokemons)
+
+    } catch (error) {
+      console.log(error);
+      next(error)
+    }
+  }
+  
 }
 
 module.exports = ControllerPokemon

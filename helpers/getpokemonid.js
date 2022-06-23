@@ -21,7 +21,7 @@ function getStarters() {
     // if(counter===3) break;
   }
 
-  return [{id:starters.Grass[rng[0]]}, {id:starters.Fire[rng[1]]}, {id:starters.Water[rng[2]]}]
+  return [{id:132}, {id:starters.Grass[rng[0]]}, {id:starters.Fire[rng[1]]}, {id:starters.Water[rng[2]]}]
 }
 
 function getLegendary() {
@@ -41,12 +41,12 @@ function getMoves(pokemon, movepools) {
   moves.push({
     id: fast_move.move_id,
     name: fast_move.name,
-    power: fast_move.power,
+    power: 20+Math.ceil(fast_move.power*2.5),
     type: fast_move.type,
   })
 
   const charged = pokemon.charged_moves[getRandomInt(pokemon.charged_moves.length)]
-  const charged_move = movepools.fast.find( m => m.name === fast )
+  const charged_move = movepools.charged.find( m => m.name === charged )
   moves.push({
     id: charged_move.move_id,
     name: charged_move.name,
