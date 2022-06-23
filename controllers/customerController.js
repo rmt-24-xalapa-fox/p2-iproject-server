@@ -181,6 +181,7 @@ class CustomerController {
             const { qty } = req.body;
             console.log(qty, id, '===============');
             const foundProduct = await Product.findByPk(id);
+            console.log(foundProduct);
             const foundCustomer = await Customer.findByPk(custId);
 
             const stockUpdate = await Product.update({

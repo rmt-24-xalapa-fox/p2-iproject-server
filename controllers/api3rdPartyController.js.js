@@ -9,14 +9,18 @@ const i = new Invoice(invoiceSpecificOptions);
 
 class api3rdPartyController {
     static async getDataYoutube(req, res, next) {
-        const { query } = req.query;
-        const api_key = "AIzaSyBfwPhJGqmhPJq6MrBb9uP3a8FYgD14N4U";
-        const getDataYoutube = await axios.get(
-            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&key=${api_key}`
-        );
-        let url = `https://www.youtube.com/watch?v=`;
-        url += getDataYoutube.data.items[0].id.videoId;
-        res.status(200).json(url);
+        try {
+            const { query } = req.query;
+            const api_key = "AIzaSyBfwPhJGqmhPJq6MrBb9uP3a8FYgD14N4U";
+            const getDataYoutube = await axios.get(
+                `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&key=${api_key}`
+            );
+            let url = `https://www.youtube.com/embed/${getDataYoutube.data.items[0].id.videoId}?controls=0`;
+            // url += getDataYoutube.data.items[0].id.videoId;
+            res.status(200).json(url);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
 
