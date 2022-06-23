@@ -10,6 +10,7 @@ _User_
 - email : string, required, unique
 - name : string, required
 - password : string, required
+- status : string, required
 ```
 
 
