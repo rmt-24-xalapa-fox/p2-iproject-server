@@ -20,7 +20,6 @@ class PaymentController {
             failure_redirect_url: req.body.redirect_url,
             success_redirect_url: req.body.redirect_url
         };
-
         let url = process.env.API_GATEWAY_URL + '/v2/invoices';
     let headers = {
         'Content-Type': 'application/json'
