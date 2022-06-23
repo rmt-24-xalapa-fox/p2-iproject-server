@@ -250,6 +250,7 @@ class Controller {
   static async fetchReferralData(req, res) {
     try {
       //
+      //
       // http://localhost:3000/register?referral=1
       const userId = req.user.id;
       let referralLink = `https://gachamon-app.web.app/register?referral=${userId}`;
