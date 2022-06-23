@@ -17,8 +17,6 @@ class UserController {
       res.status(201).json({
         statusCode: 201,
         data: createdUser,
-        nodemail: info.messageId,
-        preview: nodemailer.getTestMessageUrl(info),
       });
     } catch (err) {
       next(err);
