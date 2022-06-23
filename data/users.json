@@ -1,0 +1,26 @@
+[
+  {
+    "username": "Shouma",
+    "email": "admin@gmail.com",
+    "password": "123456",
+    "role": "admin",
+    "phoneNumber": "088899444411",
+    "address": "Jl. Metro Pondok Indah Kav. IV, Kebayoran Lama, Jakarta Selatan"
+  },
+  {
+    "username": "Baki",
+    "email": "staff@gmail.com",
+    "password": "123456",
+    "role": "admin",
+    "phoneNumber": "088897774422",
+    "address": "Jl. KH Agus Salim 16, Sabang, Menteng Jakarta Pusat"
+  },
+  {
+    "username": "Shana",
+    "email": "customer@gmail.com",
+    "password": "123456",
+    "role": "customer",
+    "phoneNumber": "088891114433",
+    "address": "Jl. Taman Margasatwa No. 12, Warung Buncit, Jakarta Selatan"
+  }
+]
