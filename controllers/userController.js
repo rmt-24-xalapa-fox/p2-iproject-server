@@ -9,12 +9,6 @@ const nodemailer = require("nodemailer");
 class UserController {
     static async googleLogin(req, res, next) {
         try {
-
-        } catch (error) {
-            console.log(error);
-        }
-    } static async googleLogin(req, res, next) {
-        try {
             const idToken = req.body.credential
             const audience = CLIENT_ID
             const client = new OAuth2Client(CLIENT_ID);
@@ -36,16 +30,15 @@ class UserController {
             const data = {
                 id: user.id,
                 email: user.email,
-                role: user.role,
             }
 
             const access_token = createToken(data)
 
-            console.log('masoookkk')
             res.status(200).json({
                 statusCode: 200,
                 message: `Wellcome `,
                 access_token,
+                email: user.email,
             })
 
         } catch (error) {

@@ -19,6 +19,7 @@ class MarvelController {
             )
         } catch (error) {
             console.log(error);
+            next(error)
         }
     }
 
@@ -41,6 +42,7 @@ class MarvelController {
             )
         } catch (error) {
             console.log(error);
+            next(error)
         }
     }
 
@@ -58,6 +60,7 @@ class MarvelController {
             )
         } catch (error) {
             console.log(error);
+            next(error)
         }
     }
 
