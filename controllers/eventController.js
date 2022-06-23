@@ -27,6 +27,7 @@ class EventController {
   }
   static async getMyEvent(req, res, next) {
     try {
+      let events = []
       const { id: UserId, email: author } = req.user;
       const event = await MyEvent.findAll({
         where: {
@@ -35,9 +36,14 @@ class EventController {
         include: [Event]
       });
 
+      event.forEach(element => {
+        events.push(element.Event)
+      });
+
+
       res.status(200).json({
         statusCode: 200,
-        data: event,
+        data: events,
       });
     } catch (err) {
       console.log(err);
@@ -47,7 +53,7 @@ class EventController {
 
   static async createEvent(req, res, next) {
     try {
-      const { name, type, date, status, location, time, description, imgUrl } =
+      const { name, type, date, location, time, description, imgUrl } =
         req.body;
       const { email: author } = req.user;
 
@@ -58,7 +64,7 @@ class EventController {
       const createdEvent = await Event.create({
         name,
         type,
-        status,
+        status : 'active',
         location,
         date,
         time,
@@ -71,7 +77,17 @@ class EventController {
         from: "event_lokal@outlook.com",
         to: author,
         subject: `Event ${createdEvent.name} has been listed`,
-        text: `your event ${createdEvent.name} has been listed`,
+        text: `your event ${createdEvent.name} has been listed
+        
+        name:         ${createdEvent.name}
+        type:           ${createdEvent.type}
+        location:     ${createdEvent.location}
+        date:           ${createdEvent.date.toDateString()}
+        time:           ${createdEvent.time}
+        description:  ${createdEvent.description}
+        posted by:    ${createdEvent.author}
+
+        `,
       };
 
       await transporter.sendMail(options, function (err, info) {
@@ -170,7 +186,7 @@ class EventController {
         name:         ${newValue.name}
         type:           ${newValue.type}
         location:     ${newValue.location}
-        date:           ${newValue.date}
+        date:           ${newValue.date.toDateString()}
         time:           ${newValue.time}
         description:  ${newValue.description}
         posted by:    ${newValue.author}
@@ -236,7 +252,7 @@ class EventController {
         name:         ${attendedEvent.Event.name}
         type:           ${attendedEvent.Event.type}
         location:     ${attendedEvent.Event.location}
-        date:           ${attendedEvent.Event.date}
+        date:           ${attendedEvent.Event.date.toDateString()}
         time:           ${attendedEvent.Event.time}
         description:  ${attendedEvent.Event.description}
         posted by:    ${attendedEvent.Event.author}
