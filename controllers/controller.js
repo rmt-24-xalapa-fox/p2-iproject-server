@@ -13,68 +13,70 @@ class Controller{
                 password: createpassword(req.body.password),
                 status: 'inactive'
             })
-            // var data = JSON.stringify({
-            //     "transaction_details": {
-            //       "order_id": company.id,
-            //       "gross_amount": 50000
-            //     },
-            //     "credit_card": {
-            //       "secure": true
-            //     },
-            //     "usage_limit": 1,
-            //     "enabled_payments": [
-            //       "credit_card",
-            //       "bca_va",
-            //       "indomaret",
-            //       "gopay"
-            //     ],
-            //     "item_details": [
-            //       {
-            //         "id": "pil-001",
-            //         "name": "Pillow",
-            //         "price": 95000,
-            //         "quantity": 2,
-            //         "brand": "Midtrans",
-            //         "category": "Furniture",
-            //         "merchant_name": "PT. Midtrans"
-            //       }
-            //     ],
-            //     "customer_details": {
-            //       "first_name": "John",
-            //       "last_name": "Doe",
-            //       "email": "john.doe@midtrans.com",
-            //       "phone": "+62181000000000",
-            //       "notes": "Thank you for your purchase. Please follow the instructions to pay."
-            //     },
-            //     "custom_field1": "custom field 1 content",
-            //     "custom_field2": "custom field 2 content",
-            //     "custom_field3": "custom field 3 content"
-            //   });
+            var data = {
+                "transaction_details": {
+                  "order_id": company.id.toString(),
+                  "gross_amount": 50000
+                },
+                "credit_card": {
+                  "secure": true
+                },
+                "usage_limit": 1,
+                "enabled_payments": [
+                  "credit_card",
+                  "bca_va",
+                  "indomaret",
+                  "gopay"
+                ],
+                "item_details": [
+                  {
+                    "id": "pil-001",
+                    "name": "Pillow",
+                    "price": 50000,
+                    "quantity": 1,
+                    "brand": "Midtrans",
+                    "category": "Furniture",
+                    "merchant_name": "PT. Midtrans"
+                  }
+                ],
+                "customer_details": {
+                  "first_name": "John",
+                  "last_name": "Doe",
+                  "email": "john.doe@midtrans.com",
+                  "phone": "+62181000000000",
+                  "notes": "Thank you for your purchase. Please follow the instructions to pay."
+                },
+                "custom_field1": "custom field 1 content",
+                "custom_field2": "custom field 2 content",
+                "custom_field3": "custom field 3 content"
+              }
               
-            //   var config = {
-            //     method: 'post',
-            //     url: 'https://api.sandbox.midtrans.com/v1/payment-links',
-            //     headers: { 
-            //       'Authorization': 'Basic U0ItTWlkLXNlcnZlci1WNm9GUFF5WXFheWFQbU80SU0wVmY2WVY6', 
-            //       'Accept': 'application/json', 
-            //       'Content-Type': 'application/json'
-            //     },
-            //     data : data
-            //   };
+              var config = {
+                method: 'post',
+                url: 'https://api.sandbox.midtrans.com/v1/payment-links',
+                headers: { 
+                  'Authorization': 'Basic U0ItTWlkLXNlcnZlci1WNm9GUFF5WXFheWFQbU80SU0wVmY2WVY6', 
+                  'Accept': 'application/json', 
+                  'Content-Type': 'application/json'
+                },
+                data : data
+              };
               
-            //   axios(config)
+              const payment = await axios(config)
+              console.log(payment)
+
             //   .then(function (response) {
             //     console.log(JSON.stringify(response.data));
             //   })
             //   .catch(function (error) {
-            //     console.log(error);
+            //     console.log(error.response);
             //   });
             res.status(201).json({
                 id: company.id,
                 email: company.email
             })
         }catch(err){
-            console.log(err)
+            console.log(err.response.data)
             next(err)
         }
     }
@@ -163,10 +165,11 @@ class Controller{
 
     static async fetchtask(req, res, next){
         try{
+            const user = await User.findByPk(req.userId)
             const tickets = await Ticket.findAll({
                 include: User,
                 where: {
-                    ReceiverId: req.userId,
+                    ReceiverId: user.CompanyId,
                     status: {
                         [Op.not]: 'completed'
                     }
