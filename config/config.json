@@ -7,17 +7,13 @@
     "dialect": "postgres"
   },
   "production": {
-    "production": {
-      "use_env_variable": "DATABASE_URL",
-      "ssl": true,
-      "dialect": "postgres",
-      "protocol": "postgres",
-      "dialectOptions": {
-        "ssl": {
-          "require": true,
-          "rejectUnauthorized": false
-        }
-      }
+    "use_env_variable": "DATABASE_URL",
+    "database": "iProject",
+    "ssl": true,
+    "dialect": "postgres",
+    "protocol": "postgres",
+    "dialectOptions": {
+      "ssl": { "require": true, "rejectUnauthorized": false }
     }
   }
 }
