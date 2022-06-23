@@ -27,6 +27,14 @@ class Controller {
             })
         }
     }
+
+    static async login(req, res) {
+        try {
+            let {email, password} = req.body
+        } catch (error) {
+            
+        }
+    }
 }
 
 module.exports = Controller;
