@@ -35,11 +35,11 @@ class Controller {
         },
       });
       if (!user) {
-        throw { msg: "invalid email/password" };
+        throw { name: "invalid email/password" };
       }
       const matchPass = verifyPassword(password, user.password);
       if (!matchPass) {
-        throw { msg: "invalid email/password" };
+        throw { name: "invalid email/password" };
       }
       const payload = {
         id: user.id,
@@ -56,13 +56,15 @@ class Controller {
 
   static async googleSign(req, res, next) {
     try {
-      console.log(CLIENT_ID);
-
+      // console.log(CLIENT_ID);
+      const { credential } = req.body;
+      console.log(credential);
       const client = new OAuth2Client(CLIENT_ID);
       const ticket = await client.verifyIdToken({
-        idToken: req.headers.credential,
+        idToken: credential,
         audience: CLIENT_ID,
       });
+      console.log(ticket);
       const payload = ticket.getPayload();
       let access_token;
 
@@ -92,10 +94,10 @@ class Controller {
           username,
           password: "google sign in",
         };
-        user = await User.create(obj, { hooks: false });
+        let response = await User.create(obj, { hooks: false });
         access_token = toToken({
-          id: user.id,
-          email: user.email,
+          id: response.id,
+          email: response.email,
         });
         res.status(201).json({
           statusCode: 201,
@@ -103,7 +105,6 @@ class Controller {
           data: {
             access_token,
           },
-          user: user,
         });
       }
     } catch (err) {
@@ -115,7 +116,7 @@ class Controller {
     try {
       const response = await Tour.findAll();
       if (!res) {
-        throw { msg: "Not found" };
+        throw { name: "Not found" };
       }
       res.status(200).json({
         response,
@@ -130,7 +131,7 @@ class Controller {
       const { id } = req.params;
       const response = await Tour.findByPk(id);
       if (!response) {
-        throw { msg: "Not found" };
+        throw { name: "Not found" };
       }
       res.status(200).json({
         response,

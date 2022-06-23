@@ -31,6 +31,11 @@ function handleError(err, req, res, next) {
     msg = "can not find requested";
   }
 
+  if (err.name === "invalid email/password") {
+    code = 401;
+    msg = "unauthorized";
+  }
+
   res.status(code).json({
     msg,
     error,
