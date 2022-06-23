@@ -61,8 +61,6 @@ class UserController {
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
-      let reqEmail = email;
-      let reqPassword = password;
 
       if (!email || !password) {
         throw { name: "EmptyField" };
@@ -79,7 +77,7 @@ class UserController {
       }
 
       const passwordComparation = bcryptCompare(
-        reqPassword,
+        password,
         foundAccount.password
       );
 
