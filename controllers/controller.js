@@ -30,8 +30,6 @@ class Controller {
       next(err);
     }
   }
-<<<<<<< HEAD
-=======
 
   static async register(req, res, next) {
     try {
@@ -93,7 +91,6 @@ class Controller {
       next(err);
     }
   }
->>>>>>> login
 }
 
 module.exports = { Controller };
