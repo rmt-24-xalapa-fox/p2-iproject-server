@@ -14,6 +14,11 @@ function errorHandler(err, req, res, next) {
     error = "Invalid input";
   }
 
+  if (err.name === "bad input") {
+    code = 400;
+    error = err.message;
+  }
+
   if (err.name === "login fail") {
     code = 401;
     error = err.message;

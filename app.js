@@ -7,6 +7,7 @@ require("dotenv").config();
 
 const router = require("./routers");
 const port = process.env.PORT;
+
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

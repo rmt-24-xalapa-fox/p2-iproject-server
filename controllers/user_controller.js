@@ -23,6 +23,12 @@ class userController {
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
+      if (!email) {
+        throw { name: "bad input", message: "Email cannot be empty!" };
+      }
+      if (!password) {
+        throw { name: "bad input", message: "Password cannot be empty!" };
+      }
       const foundUser = await User.findOne({ where: { email } });
       if (!foundUser || !verifyPassword(password, foundUser.password)) {
         throw {
