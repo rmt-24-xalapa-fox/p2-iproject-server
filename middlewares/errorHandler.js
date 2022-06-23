@@ -1,7 +1,7 @@
 "use strict";
 
 const errorHandler = (err, req, res, next) => {
-  const { name, errors } = err;
+  let { name, errors } = err;
   let code = 500;
   let msg = err;
 
