@@ -16,7 +16,7 @@ module.exports = {
    await queryInterface.bulkInsert('Companies', [{
     email: 'company@mail.com',
     password: createpassword('tes123'),
-    status: 'inactive',
+    status: 'active',
     createdAt: new Date(),
     updatedAt: new Date()
    }])
