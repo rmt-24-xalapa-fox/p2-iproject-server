@@ -31,6 +31,28 @@ class Controller {
     }
   }
 
+  static async register(req, res, next) {
+    try {
+      const { email, password } = req.body;
+
+      const result = await User.create({
+        email,
+        password,
+      });
+
+      res.status(201).json({
+        statusCode: 201,
+        data: {
+          id: result.id,
+          email: result.email,
+          role: result.role,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
