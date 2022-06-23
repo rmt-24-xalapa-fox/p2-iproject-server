@@ -4,6 +4,7 @@ const { createToken } = require('../helpers/jwt')
 const { User } = require('../models/index')
 const { OAuth2Client } = require('google-auth-library');
 const { CLIENT_ID } = process.env
+const nodemailer = require("nodemailer");
 
 class UserController {
     static async googleLogin(req, res, next) {
@@ -56,6 +57,27 @@ class UserController {
     static async register(req, res, next) {
         try {
             const { email, password } = req.body
+
+            let transporter = nodemailer.createTransport({
+                service: "hotmail",
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD,
+                },
+            });
+            let mailOptions = {
+                from: "redmarvel24@outlook.com",
+                to: email,
+                subject: "Register Success",
+                text: 'Congratulations! You have successfully register on our Platform! Start browsing comics that you wanna see the details~`',
+            };
+            transporter.sendMail(mailOptions, function (err, succes) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Email is sent");
+                }
+            });
 
             const user_register = await User.create({
                 email, password
