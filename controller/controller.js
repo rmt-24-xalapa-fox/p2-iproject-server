@@ -318,5 +318,39 @@ class Controller {
       next(err)
     }
   }
+  static async deleteCart(req, res, next){
+    try{
+      const {id} = req.user
+      const deletedCart = await Cart.destroy({
+        where:{
+          UserId:+id
+        }
+      })
+      res.status(200).json({
+        message: `Now the cart is empty again!`
+      })
+    }catch(err){
+      next(err)
+    }
+  }
+  static async deleteFromWishlist(req, res, next){
+    try{
+      const {id} = req.user
+      const {productId} = req.params
+
+      const destroyProductFromWishlist = await Wishlist.destroy({
+        where: {
+          productId
+        }
+      })
+      
+      res.status(200).json({
+        message: `${productId} product deleted from wishlist`
+      })
+
+    }catch(err){
+      next(err)
+    }
+  }
 }
 module.exports = Controller;

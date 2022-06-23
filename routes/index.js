@@ -13,9 +13,11 @@ router.use(authentication)
 
 router.get('/user/wishlist', Controller.getWishlists)
 router.post('/user/wishlist', Controller.addWishlist)
+router.delete('/user/wishlist', Controller.deleteFromWishlist)
 
 router.get('/user/cart', Controller.getCart)
 router.post('/user/cart', Controller.addCart)
+router.delete('/user/cart', Controller.deleteCart)
 
 router.post('/user/transaction', Controller.getTokenTransaction)
 
