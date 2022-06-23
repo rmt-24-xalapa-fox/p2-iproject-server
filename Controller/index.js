@@ -73,10 +73,12 @@ class Controller {
         let email = payload.email;
         let password = "whatTheHelliamdoinghere";
         let status = "Free";
+        let name = payload.given_name
 
         let newAccGoogle = {
           email,
           password,
+          name,
           status
         };
 
@@ -150,6 +152,8 @@ class Controller {
         serverKey: SERVERKEY,
         clientKey: CLIENTKEY,
       });
+
+
       const { email } = req.user;
       let idNumber = 1;
 
@@ -175,6 +179,7 @@ class Controller {
       }
 
       res.status(200).json({ TokenPayment: transaction.token });
+
     } catch (error) {
       console.log(error);
       next(error);
