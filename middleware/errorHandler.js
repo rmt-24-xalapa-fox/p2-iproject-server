@@ -1,7 +1,7 @@
 "use strict"
 
 function errorHandler(err, req, res, next) {
-    console.log(err.name, "ini error");
+    console.log(err, "ini error");
     let code = 500;
     let msg = "Internal Server Error";
 
