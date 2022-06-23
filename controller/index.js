@@ -48,6 +48,7 @@ class Controller {
       res.status(200).json({
         id: findUser.id,
         email: findUser.email,
+        username: findUser.username,
         access_token: token,
       });
     } catch (err) {
