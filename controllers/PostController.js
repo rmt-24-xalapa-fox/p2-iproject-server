@@ -1,5 +1,7 @@
 const { User,Post,Comment,PostComment,PostFavourite} = require('../models')
 const { Op } = require("sequelize");
+const { tokenToPayload } = require("../helpers/jwt");
+
 class PostController{
     static async addPost(req, res, next) {
 
@@ -26,6 +28,7 @@ class PostController{
 
     }
     static async getPosts(req, res, next) {
+        
         try {
             let title=req.query.title;
         let offset=req.query.page;
@@ -62,7 +65,26 @@ class PostController{
             console.log(option);
             let {count,rows} = await Post.findAndCountAll(option);
             console.log("Pages count: "+count +" limit"+limit+" totalPages "+Math.ceil(count/limit) +" offset "+offset )
-            let totalPages=Math.ceil(count/limit) 
+            let totalPages=Math.ceil(count/limit)
+            let {access_token} = req.headers;
+            
+            if(access_token!="null"&&access_token!=""){
+                const payload = tokenToPayload(access_token);
+                const userFound = await User.findByPk(payload.id);
+                
+                if(userFound)
+                    rows.forEach(element => {
+                        
+                        if(element.UserId!=userFound){
+                            element.dataValues.canDonate=true;
+                        }else{
+                            element.dataValues.canDonate=false;
+                        }
+                        // console.log(element.dataValues);
+                    })
+                    
+                    ;
+            }
             if (rows) {   
                 res.status(200).json({ Posts: rows,totalPages });
             } else {
@@ -84,6 +106,7 @@ class PostController{
                 }else{
                     post.canDonate=false;
                 }
+                console.log(post);
                 let comments = await PostComment.findAll(
                     {where:{
                         PostId:post.id
