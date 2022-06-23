@@ -3,7 +3,13 @@
 List of Available Endpoints:
 - `POST /register`
 - `POST /login`
-- ``
+- `GET /anime`
+- `GET /seasonAnime`
+- `GET /favorites`
+- `POST /addFavorite`
+- `PATCH /favorites/:id'`
+- `DELETE /favorites/:id'`
+
 
 
 
