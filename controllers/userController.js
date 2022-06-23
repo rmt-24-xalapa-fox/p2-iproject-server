@@ -1,8 +1,28 @@
 const { User } = require("../models");
 const { addToken, verifyPassword } = require("../helpers/index");
-
+const { initializeApp } = require("firebase/app")
+const { getAuth } = require("firebase/auth")
+const firebaseConfig = {
+    apiKey: "API_KEY",
+    authDomain: "PROJECT_ID.firebaseapp.com",
+    // The value of `databaseURL` depends on the location of the database
+    databaseURL: "https://DATABASE_NAME.firebaseio.com",
+    projectId: "PROJECT_ID",
+    storageBucket: "PROJECT_ID.appspot.com",
+    messagingSenderId: "SENDER_ID",
+    appId: "APP_ID",
+}
 
 class userController {
+    static async firebaseAuth(req, res, next) {
+        try {
+            const app = initializeApp(firebaseConfig);
+
+        } catch (err) {
+
+        }
+    }
+
 
     static async register(req, res, next) {
         try {
