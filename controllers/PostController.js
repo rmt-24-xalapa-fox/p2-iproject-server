@@ -79,6 +79,11 @@ class PostController{
             let {id}=req.params
             const post = await Post.findByPk(id);
             if(post){
+                if(post.UserId!=req.user.id){
+                    post.canDonate=true;
+                }else{
+                    post.canDonate=false;
+                }
                 let comments = await PostComment.findAll(
                     {where:{
                         PostId:post.id
