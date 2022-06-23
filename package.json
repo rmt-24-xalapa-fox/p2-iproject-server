@@ -1,0 +1,31 @@
+{
+  "name": "p2-iproject-server-1",
+  "version": "1.0.0",
+  "description": "Individual Project - Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CatInTheBasket/p2-iproject-server-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CatInTheBasket/p2-iproject-server-1/issues"
+  },
+  "homepage": "https://github.com/CatInTheBasket/p2-iproject-server-1#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "google-auth-library": "^8.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "sequelize": "^6.21.0",
+    "xendit-node": "^1.21.3"
+  }
+}
