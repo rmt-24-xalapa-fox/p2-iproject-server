@@ -9,6 +9,7 @@ router.use(authentication)
 router.get("/laundries", Controller.getLaundries);
 router.post("/neworder/:LaundryId", Controller.newOrder);
 router.get("/myorders", Controller.myOrders)
+router.patch("/myorders/:id", Controller.updateStatus)
 
 
 

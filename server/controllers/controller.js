@@ -119,7 +119,7 @@ class Controller {
       if (kg >= 15) {
         throw { name: "Maximum kg is 15" };
       }
-      
+
       if (service !== "Regular" && service !== "Express") {
         throw { name: "Service not found" };
       }
@@ -162,19 +162,40 @@ class Controller {
     }
   }
 
-  static async myOrders (req, res) {
+  static async myOrders(req, res) {
     try {
-        const UserId = req.userId
-        const myOrders = await User_Laundry.findAll({
-            where:{
-                UserId
-            },
-            include: Laundry
-        })
+      const UserId = req.userId;
+      const myOrders = await User_Laundry.findAll({
+        where: {
+          UserId,
+        },
+        include: Laundry,
+      });
 
-        res.status(200).json(myOrders)
+      res.status(200).json(myOrders);
     } catch (err) {
-        res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
+
+  static async updateStatus(req, res) {
+    try {
+      const { newStatus } = req.body;
+      const { id } = req.params;
+      const update = await User_Laundry.update(
+        {
+          status: newStatus,
+        },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+
+      res.status(200).json({message: "Status has been updated"});
+    } catch (err) {
+      res.status(500).json({ message: "Internal server error" });
     }
   }
 }
