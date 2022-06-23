@@ -99,7 +99,6 @@ class UserController {
           access_token: clientToken,
           userId: foundAccount.id,
           email: foundAccount.email,
-          username: foundAccount.username,
         },
       });
     } catch (err) {
