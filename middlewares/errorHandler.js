@@ -15,7 +15,7 @@ function errorHandler(err, req, res, next) {
     msg = name;
   } else if (name === "Invalid email/password") {
     code = 401;
-    msg = "Invalid Username/Password";
+    msg = "Invalid email/password";
   } else if (name === "Palette not found") {
     code = 404;
     msg = name;
@@ -31,6 +31,9 @@ function errorHandler(err, req, res, next) {
   } else if (name === "Forbidden") {
     code = 403;
     msg = `You Don't Have Access`;
+  } else if (name === "Your account is already premium") {
+    code = 403;
+    msg = name;
   }
 
   res.status(code).json({
