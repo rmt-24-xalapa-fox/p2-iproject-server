@@ -153,6 +153,19 @@ class UserController {
             payload = { id: user.id, email: user.email, role: user.role };
 
             token = jwt.payloadToToken(payload);
+            const wallet = await Wallet.findOne({
+                where:{
+                    UserId: user.id
+                }
+                
+            })
+            if(!wallet){
+                const walletCreate = await Wallet.create({
+                    UserId: user.id,
+                    active: true,
+                    coin: 0
+                })
+            }
 
             res.status(200).json({
                 access_token: token,

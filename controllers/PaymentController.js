@@ -10,32 +10,40 @@ class PaymentController {
             const x = new Xendit({
                 secretKey: process.env.API_KEY
             });
-            const coin = await CoinPrice.findByPk(req.params.id);
-            if (coin) {
-                let wallet = await Wallet.findOne({where:{UserId:req.user.id}});
-                let coinbuy= await CoinBuy.create({WalletId:wallet.id,CoinPriceId:coin.id});
-                console.log(coin.price);
-                const { Invoice } = x;
-                const invoiceSpecificOptions = {};
-                const external = 'checkout-demo-' + new Date();
-                const i = new Invoice(invoiceSpecificOptions);
-                i.createInvoice({
-                    externalID: external,
-                    payerEmail: 'invoice+demo@xendit.co',
-                    description: 'Invoice for coin demo',
-                    currency: 'IDR',
-                    amount: coin.price,
-                }).then(({ id }) => {
-                    console.log(`Invoice created with ID: ${id}`);
-                    res.status(200).json('https://checkout-staging.xendit.co/web/' + id);
-                    xenditcoinbuy.create({CoinbuyId:coinbuy.id,xenditLink:id})
-                    
-                })
-
-
-            } else {
+            if(req.params!=null&&req.params.id!="null"){
+                const coin = await CoinPrice.findByPk(req.params.id);
+                if (coin) {
+                    console.log(coin.id);
+                    console.log(req.user.id);
+                    let wallet = await Wallet.findOne({where:{UserId:req.user.id}});
+                    console.log(wallet.id)
+                    let coinbuy= await CoinBuy.create({WalletId:wallet.id,CoinPriceId:coin.id});
+                    console.log(coin.price);
+                    const { Invoice } = x;
+                    const invoiceSpecificOptions = {};
+                    const external = 'checkout-demo-' + new Date();
+                    const i = new Invoice(invoiceSpecificOptions);
+                    i.createInvoice({
+                        externalID: external,
+                        payerEmail: 'invoice+demo@xendit.co',
+                        description: 'Invoice for coin demo',
+                        currency: 'IDR',
+                        amount: coin.price,
+                    }).then(({ id }) => {
+                        console.log(`Invoice created with ID: ${id}`);
+                        res.status(200).json('https://checkout-staging.xendit.co/web/' + id);
+                        xenditcoinbuy.create({CoinbuyId:coinbuy.id,xenditLink:id})
+                        
+                    })
+    
+    
+                } else {
+                    res.status(404).json({ message: "Not found" })
+                }
+            }else{
                 res.status(404).json({ message: "Not found" })
             }
+            
 
 
         } catch (error) {
