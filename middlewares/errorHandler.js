@@ -2,8 +2,6 @@ function errorHandler(err, req, res, next) {
   let code = 500;
   let msg = "Internal Server Error";
   const { name } = err;
-  console.log(name);
-
   if (name === "SequelizeValidationError") {
     code = 400;
     msg = err.errors.map((error) => error.message);
@@ -34,6 +32,14 @@ function errorHandler(err, req, res, next) {
   } else if (name === "Your account is already premium") {
     code = 403;
     msg = name;
+  } else if (name === "MidtransError") {
+    const transactionIdUsed =
+      err.ApiResponse.error_messages[0] ===
+      "transaction_details.order_id sudah digunakan";
+    if (transactionIdUsed) {
+      code = 403;
+      msg = "Your account is already premium";
+    }
   }
 
   res.status(code).json({
