@@ -2,7 +2,7 @@ const errorHandler = (err, req, res, next) => {
   let code = 500;
   let msg = "Internal Server Error";
 
-  console.log(err);
+  // console.log(err.name);
 
   if (
     err.name === "SequelizeUniqueConstraintError" ||

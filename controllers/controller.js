@@ -69,7 +69,6 @@ class Controller {
           accessToken: token,
           id: user.id,
           email: user.email,
-          role: user.role,
           username: user.username,
         },
       });
@@ -552,7 +551,7 @@ class Controller {
   static async addOrder(req, res, next) {
     try {
       const { id: UserId } = req.user;
-      console.log(req.body);
+      // console.log(req.body);
       const { books, price, receivedDateMin, receivedDateMax } = req.body;
 
       await Order.create({
