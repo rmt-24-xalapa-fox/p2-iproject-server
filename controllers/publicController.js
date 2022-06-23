@@ -8,6 +8,10 @@ const { User, Report } = require("../models");
 const { Op } = require("sequelize");
 const axios = require(`axios`)
 const BASE_URL = `http://localhost:8080/`
+const FormData = require('form-data');
+const fs = require('fs');
+const { get } = require("http");
+
 
 
 class publicController {
@@ -73,7 +77,9 @@ class publicController {
         try {
             let { imageUrl, description, latitude, longitude } = req.body;
 
-            if(!imageUrl){
+            // console.log(req.file,`<<<< ini req file`)
+
+            if (!imageUrl) {
                 imageUrl = `https://www.researchgate.net/profile/Sushma-Srinivas/publication/257632644/figure/fig15/AS:392608498110472@1470616568575/Damaged-road-due-to-Christchurch-earthquake-Photo.png`
             }
             const UploaderId = req.user.id;
@@ -149,25 +155,41 @@ class publicController {
     }
 
     static async uploadImage(req, res, next) {
+
+        // console.log (`INI UPLOAD IMAGE`)
         try {
-            console.log(req.body,`ini req body`)
 
-            // let data = req.body.image
-            // console.log(data,`<< dar req body`)
+            // console.log(req.file, `ini req file`)
+            let image = req.file
+            // console.log(image, `<<ini image`)
+            // console.log(req.headers)
+            // console.log(image,`<<<<<<<<<<<<<< ini image`)
 
-            // let = await axios({
-            //     method: `POST`,
-            //     data: { image: this.file },
-            //     url: `https://api.imgbb.com/1/upload?key=bfa34a461b05455ebe471a04be341154`
-            // })
+            let data = new FormData();
+            data.append('image', Buffer.from(image.buffer).toString('base64'));
 
-            // console.log(img)
+            console.log (data,`ini data <<<<<<<<<<<<`)
+            let config = {
+                method: 'post',
+                url: `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_KEY}`,
+                headers: {...data.getHeaders()},
+                data: data
+            };
+
+            // console.log(config,`<<<<<<< ini config`)
+
+            let img = await axios(config)
+
+            console.log(img.data.data.url)
+
+
 
             res.status(200).json({
                 statusCode: 200,
+                imageUrl: img.data.data.url
             });
         } catch (err) {
-            console.log(err);
+            console.log(err.response.data);
             next(err)
         }
     }

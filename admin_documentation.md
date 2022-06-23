@@ -6,10 +6,8 @@ List of available endpoints:
 
 - `POST /public/register`
 - `POST /public/login`
-- `GET /public/report`
-- `POST /public/report`
-- `GET /public/report/:id`
-- `GET /public/myReport`
+- `PATCH /public/:id`
+- `PUT /public/:id`
 &nbsp;
 
 ## 1. POST /register
@@ -104,8 +102,8 @@ _Response (200 - OK)_
     "data": {
         "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjU1NDg1OTE5LCJleHAiOjE2NTU0ODk1MTl9.AUQ9GIV_nIst3KOG1-umVzaOf-ivZFFk_hrj57dvKn4",
         "authorId": 3,
-        "displayEmail": "customer@email.com",
-        "displayRole": "customer"
+        "displayEmail": "admin@email.com",
+        "displayRole": "admin"
     }
 }
 ```
@@ -121,10 +119,10 @@ _Response (401 - Unaothorized)_
 }
 ```
 
-## 3. POST public/report
+## 3. PATCH /public/:id
 
 Description:
-- Create a new Report 
+- Change status of a specific report 
 
 Request:
 
@@ -139,14 +137,70 @@ Request:
 
 ```json
 {
-  "imageUrl": "string",
-  "description": "text",
-  "latitude": "string",
-  "longitude": "integer"
+  "status": "string",
 }
 ```
 
-_Response (201 - Created)_
+_Response (200 - Success)_
+
+```json
+{
+    "statusCode": 200,
+    "message": "Success update Report status from Rejected into Rejected",
+    "data": [
+        {
+            "id": 6,
+            "imageUrl": "https://www.researchgate.net/profile/Sushma-Srinivas/publication/257632644/figure/fig15/AS:392608498110472@1470616568575/Damaged-road-due-to-Christchurch-earthquake-Photo.png",
+            "description": "mobil saya nyungsep pas mau masuk ke coffee shop, hadeh...",
+            "latitude": "-6.278631",
+            "longitude": "106.832143",
+            "UploaderId": 1,
+            "status": "Rejected",
+            "respMessage": "No message from Administrator yet",
+            "createdAt": "2022-06-22T15:12:05.352Z",
+            "updatedAt": "2022-06-23T02:17:10.628Z"
+        }
+    ]
+}
+```
+
+_Response (400 - Bad Request)_ //to be updated//
+
+```json
+{
+  "message": "Status string invalid"
+}
+```
+
+
+
+
+&nbsp;
+
+## 4. PUT /admin/:id
+
+Description:
+- Change properties of a report
+
+Request:
+
+- headers:
+
+```json
+{
+  "access_token" : "string",
+}
+```
+
+- params:
+
+```json
+{
+  "id": "integer (required)"
+}
+```
+
+_Response (200 - OK)_
 
 ```json
 {
@@ -167,56 +221,27 @@ _Response (201 - Created)_
 }
 ```
 
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Report not found"
+}
+```
+
 _Response (400 - Bad Request)_ //to be updated//
 
 ```json
 {
-  "message": "Title is required"
+  "message": "imageUrl is required"
 }
 OR
 {
-  "message": "Content is required"
+  "message": "Latitude is required"
 }
-```
-
-
-
-
-&nbsp;
-
-## 4. GET /public/report
-
-Description:
-- Get all report from database
-
-_Response (200 - OK)_
-
-```json
+OR
 {
-    "statusCode": 200,
-    "data": [
-        {
-            "id": 1,
-            "imageUrl": "https://thumbs.dreamstime.com/b/hole-road-asphalt-defects-dangerous-encounter-road-hole-road-asphalt-defects-dangerous-142354425.jpg",
-            "description": "amblesz lhur jalanan, hadeuhhhhh",
-            "latitude": "-6.320992",
-            "longitude": "106.849308",
-            "UploaderId": 1,
-            "status": "Waiting for confirmation",
-            "respMessage": "No message from Administrator yet",
-            "createdAt": "2022-06-23T02:41:00.279Z",
-            "updatedAt": "2022-06-23T02:41:00.279Z",
-            "User": {
-                "id": 1,
-                "email": "user@email.com",
-                "password": "$2a$08$jTE0770tohXj/YxMnxk5OeIQ/E.lcnU.PmmLPaYvE1E5T7vAX9hm.",
-                "role": "normalUser",
-                "phoneNumber": null,
-                "createdAt": "2022-06-23T02:39:49.002Z",
-                "updatedAt": "2022-06-23T02:39:49.002Z"
-            }
-        }
-    ]
+  "message": "Longitude is required"
 }
 ```
 
