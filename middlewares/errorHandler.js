@@ -22,9 +22,10 @@ function errorHandler(err, req, res, next) {
   } else if (name === "InvalidToken" || name === "JsonWebTokenError") {
     code = 401;
     msg = "Invalid token";
-  } else if (name === "BadRequest") {
-    code = 400;
-    msg = `Bad Request`;
+  } else if (name === "SequelizeUniqueConstraintError") {
+    res.status(400).json({
+      message: "Email must be unique",
+    });
   } else if (name === "Forbidden") {
     code = 403;
     msg = `You Don't Have Access`;
