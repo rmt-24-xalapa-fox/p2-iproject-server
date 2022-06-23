@@ -49,8 +49,8 @@ app.post('/create-checkout-session', async (req, res) => {
             },
         ],
         mode: 'payment',
-        success_url: 'http://localhost:8080/success',
-        cancel_url: 'http://localhost:8080/cancel',
+        success_url: 'https://ps-anywhere-fix.herokuapp.com/success',
+        cancel_url: 'https://ps-anywhere-fix.herokuapp.com/cancel',
     });
     res.json({
         url: session.url
