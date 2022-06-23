@@ -27,145 +27,145 @@ class Controller {
         }
     }
     
-    // static async googleLoginCustomer (req, res, next) {
-    //     try {
-    //         const client = new OAuth2Client(CLIENT_ID);
-    //         const ticket = await client.verifyIdToken({
-    //             idToken: req.headers.credential,
-    //             audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
-    //             // Or, if multiple clients access the backend:
-    //             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-    //         });
-    //         const payload = ticket.getPayload();
-    //         let token
-    //         let email = payload.email
-    //         let foundUser = await Customer.findOne({ where: { email } })
-    //         if (foundUser) {
-    //             token = convertPayloadToToken({
-    //                 id: foundUser.id
-    //             })
-    //             res.status(200).json({
-    //                 statusCode: 200,
-    //                 data: {
-    //                     id: foundUser.id,
-    //                     name: foundUser.username,
-    //                     accessToken: token,
-    //                 }
-    //             })    
-    //         } else {
-    //             foundUser = await Customer.create({
-    //                 name: payload.name.split(" ").join("_"), email, password: "Google Sign In", location: "Unknown"
-    //             }, { hooks : false })
-    //             token = convertPayloadToToken({
-    //                 id: foundUser.id
-    //             })
-    //             res.status(200).json({
-    //                 statusCode: 200,
-    //                 data: {
-    //                     id: foundUser.id,
-    //                     name: foundUser.username,
-    //                     accessToken: token,
-    //                 }
-    //             })    
+    static async googleLoginCustomer (req, res, next) {
+        try {
+            const client = new OAuth2Client(CLIENT_ID);
+            const ticket = await client.verifyIdToken({
+                idToken: req.headers.credential,
+                audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+                // Or, if multiple clients access the backend:
+                //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+            });
+            const payload = ticket.getPayload();
+            let token
+            let email = payload.email
+            let foundUser = await Customer.findOne({ where: { email } })
+            if (foundUser) {
+                token = convertPayloadToToken({
+                    id: foundUser.id
+                })
+                res.status(200).json({
+                    statusCode: 200,
+                    data: {
+                        id: foundUser.id,
+                        name: foundUser.username,
+                        accessToken: token,
+                    }
+                })    
+            } else {
+                foundUser = await Customer.create({
+                    name: payload.name.split(" ").join("_"), email, password: "Google Sign In", location: "Unknown"
+                }, { hooks : false })
+                token = convertPayloadToToken({
+                    id: foundUser.id
+                })
+                res.status(200).json({
+                    statusCode: 200,
+                    data: {
+                        id: foundUser.id,
+                        name: foundUser.username,
+                        accessToken: token,
+                    }
+                })    
 
-    //         }
+            }
 
-    //     } catch (err) {
-    //         next(err)
-    //     }
-    // }
+        } catch (err) {
+            next(err)
+        }
+    }
 
-    // static async registerationBarber (req, res, next) {
-    //     try {
-    //         const { email, password, name, price, location, profile_image } = req.body
-    //         const createBarber = await Barber.create({
-    //             email, password, name, price, location, profile_image, rating: 0, ratingCount: 0
-    //         })
-    //         res.status(201).json({
-    //             statusCode: 201,
-    //             data: {
-    //                 message: 'Barber has been created',
-    //                 newUser: {
-    //                     id: createBarber.id,
-    //                     email: createBarber.email    
-    //                 }
-    //             }
-    //         })
-    //     } catch (err) {
-    //         console.log(err)
-    //         next(err)
-    //     }
-    // }
+    static async registerationBarber (req, res, next) {
+        try {
+            const { email, password, name, price, location, profile_image } = req.body
+            const createBarber = await Barber.create({
+                email, password, name, price, location, profile_image, rating: 0, ratingCount: 0
+            })
+            res.status(201).json({
+                statusCode: 201,
+                data: {
+                    message: 'Barber has been created',
+                    newUser: {
+                        id: createBarber.id,
+                        email: createBarber.email    
+                    }
+                }
+            })
+        } catch (err) {
+            console.log(err)
+            next(err)
+        }
+    }
 
-    // static async loginBarber (req, res, next) {
-    //     try {
-    //         const { email, password } = req.body
-    //         const foundUser = await Barber.findOne({
-    //             where: {
-    //                 email: email
-    //             }
-    //         })
-    //         if (!foundUser) {
-    //             throw { name: "User not found" }
-    //         }
-    //         const passwordChecking = bcryptCompareSync(password, foundUser.password)
-    //         if (!passwordChecking) {
-    //             throw { name: "User not found" }
-    //         }
-    //         const payloadSend = {
-    //             id: foundUser.id
-    //         }
+    static async loginBarber (req, res, next) {
+        try {
+            const { email, password } = req.body
+            const foundUser = await Barber.findOne({
+                where: {
+                    email: email
+                }
+            })
+            if (!foundUser) {
+                throw { name: "User not found" }
+            }
+            const passwordChecking = bcryptCompareSync(password, foundUser.password)
+            if (!passwordChecking) {
+                throw { name: "User not found" }
+            }
+            const payloadSend = {
+                id: foundUser.id
+            }
 
-    //         const token = convertPayloadToToken(payloadSend)
+            const token = convertPayloadToToken(payloadSend)
 
-    //         res.status(200).json({
-    //             statusCode: 200,
-    //             data: {
-    //                 id: foundUser.id,
-    //                 name: foundUser.username,
-    //                 role: foundUser.role,
-    //                 accessToken: token,
-    //             }
-    //         })
-    //     } catch (err) {
-    //         next(err)
-    //     }
-    // }
+            res.status(200).json({
+                statusCode: 200,
+                data: {
+                    id: foundUser.id,
+                    name: foundUser.username,
+                    role: foundUser.role,
+                    accessToken: token,
+                }
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
 
-    // static async loginCustomer (req, res, next) {
-    //     try {
-    //         const { email, password } = req.body
-    //         const foundUser = await Customer.findOne({
-    //             where: {
-    //                 email: email
-    //             }
-    //         })
-    //         if (!foundUser) {
-    //             throw { name: "User not found" }
-    //         }
-    //         const passwordChecking = bcryptCompareSync(password, foundUser.password)
-    //         if (!passwordChecking) {
-    //             throw { name: "User not found" }
-    //         }
-    //         const payloadSend = {
-    //             id: foundUser.id
-    //         }
+    static async loginCustomer (req, res, next) {
+        try {
+            const { email, password } = req.body
+            const foundUser = await Customer.findOne({
+                where: {
+                    email: email
+                }
+            })
+            if (!foundUser) {
+                throw { name: "User not found" }
+            }
+            const passwordChecking = bcryptCompareSync(password, foundUser.password)
+            if (!passwordChecking) {
+                throw { name: "User not found" }
+            }
+            const payloadSend = {
+                id: foundUser.id
+            }
 
-    //         const token = convertPayloadToToken(payloadSend)
+            const token = convertPayloadToToken(payloadSend)
 
-    //         res.status(200).json({
-    //             statusCode: 200,
-    //             data: {
-    //                 id: foundUser.id,
-    //                 name: foundUser.username,
-    //                 role: foundUser.role,
-    //                 accessToken: token,
-    //             }
-    //         })
-    //     } catch (err) {
-    //         next(err)
-    //     }    
-    // }
+            res.status(200).json({
+                statusCode: 200,
+                data: {
+                    id: foundUser.id,
+                    name: foundUser.username,
+                    role: foundUser.role,
+                    accessToken: token,
+                }
+            })
+        } catch (err) {
+            next(err)
+        }    
+    }
 
     // static async barberTransactions (req, res, next) {
     //     try {
