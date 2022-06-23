@@ -22,6 +22,7 @@ class UserController {
         id: user.id,
         name: user.name,
         email: user.email,
+        message: `Account successfully created`,
       });
     } catch (err) {
       next(err);
