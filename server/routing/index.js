@@ -8,6 +8,8 @@ router.post("/register", Controller.registerController);
 
 router.post("/login", Controller.loginController);
 
+router.post("/gsignin", Controller.googleSignIn);
+
 router.get("/weather", Controller.weather);
 
 router.get("/mountains", Controller.mountainsController);

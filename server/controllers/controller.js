@@ -3,6 +3,8 @@ const { bcryptCheckPass } = require("../helpers/bcrypt");
 const { convertToToken } = require("../helpers/jwt");
 const axios = require("axios");
 const midtransClient = require("midtrans-client");
+const { OAuth2Client } = require("google-auth-library");
+const CLIENT_ID = process.env.CLIENT_ID;
 class Controller {
   static async registerController(req, res, next) {
     try {
@@ -263,6 +265,72 @@ class Controller {
         }
       );
       res.status(200).json({ message: "Success" });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async googleSignIn(req, res, next) {
+    try {
+      const { credential } = req.body;
+      const client = new OAuth2Client(CLIENT_ID);
+      const ticket = await client.verifyIdToken({
+        idToken: credential,
+        audience: CLIENT_ID,
+      });
+      const payload = ticket.getPayload();
+
+      let access_token;
+      let email = payload.email;
+
+      let user = await User.findOne({
+        where: {
+          email,
+        },
+      });
+
+      if (user) {
+        access_token = convertToToken({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        });
+
+        res.status(200).json({
+          statusCode: 200,
+          data: {
+            access_token,
+            email: user.email,
+            userId: user.id,
+          },
+        });
+      } else {
+        user = await User.create(
+          {
+            email,
+            password: "Google Sign In",
+            name: "Google User",
+            phoneNumber: "Google Phone Number",
+          },
+          {
+            hooks: false,
+          }
+        );
+        access_token = convertToToken({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        });
+
+        res.status(201).json({
+          statusCode: 201,
+          data: {
+            access_token,
+            email: user.email,
+            userId: user.id,
+          },
+        });
+      }
     } catch (err) {
       next(err);
     }
