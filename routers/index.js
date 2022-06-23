@@ -4,11 +4,12 @@ const router = express.Router();
 
 const user = require('./user')
 // const history = require('./histories')
-// const movie = require('./movies')
+const posts = require('./posts')
 const {authentication} = require("../middlewares/auth");
 
 router.use("/users",user);
 
+router.use("/",posts);
 
 // router.use("/",movie)
 

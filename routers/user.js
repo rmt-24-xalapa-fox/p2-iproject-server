@@ -17,4 +17,7 @@ router.post('/giftCoin/:id', UserController.giftCoin)
 
 router.post('/addPrice', UserController.addCoinPrices)
 
+router.get('/following', UserController.getFollowing)
+router.post('/follow/:id', UserController.follow)
+router.delete('/follow/:id', UserController.deleteFollow)
 module.exports=router;

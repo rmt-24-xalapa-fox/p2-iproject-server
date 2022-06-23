@@ -1,8 +1,11 @@
-const { User,CoinPrice,Wallet} = require('../models')
+const { User,CoinPrice,Wallet,UserFollow} = require('../models')
 const bcrypt = require('../helpers/bcrypt')
 const jwt = require('../helpers/jwt')
 const { OAuth2Client } = require('google-auth-library');
 const { Op } = require("sequelize");
+const EmailController = require("./EmailController");
+
+
 class UserController {
 
     //user controller
@@ -232,6 +235,61 @@ class UserController {
                 }
             }
             // res.status(200).json(price);
+        } catch (error) {
+            console.log(error);
+            next(error);
+        }
+
+    }
+
+    static async getFollowing(req, res, next) {
+
+        try {
+            let id = req.user.id
+            const following = await UserFollow.findAll({where:{UserId:id}});
+            res.status(200).json(following);
+        } catch (error) {
+            console.log(error);
+            next(error);
+        }
+
+    }
+
+    static async follow(req, res, next) {
+
+        try {
+            let UserId = req.user.id
+            let targetId= req.params.id
+            const target = await User.findByPk(targetId);
+            if(target){
+                const following = await UserFollow.findOrCreate({where:{UserId:id,FollowerId:target.id}});    
+                res.status(200).json({message:"User followed"});
+            }
+            
+        } catch (error) {
+            console.log(error);
+            next(error);
+        }
+
+    }
+
+    static async deleteFollow(req, res, next) {
+
+        try {
+            let UserId = req.user.id
+            let targetId= req.params.id
+            const target = await User.findByPk(targetId);
+            if(target){
+                const following = await UserFollow.findOne({where:{UserId:id,FollowerId:target.id}});
+                if(following){
+                    following.destroy();
+                    res.status(200).json({message:"User unfollowed"});
+                }else{
+                    res.status(400).json({message:"User never followed"});
+                }    
+                
+            }
+            
         } catch (error) {
             console.log(error);
             next(error);
