@@ -1,6 +1,9 @@
 "use strict"
 
-require('dotenv').config()
+if(process.env.NODE_ENV !== 'production') {
+    require("dotenv").config()
+}
+// require('dotenv').config()
 const cors = require("cors")
 const errorHandler = require('./middlewares/errorHandler')
 const express = require('express')
@@ -8,7 +11,7 @@ const app = express()
 
 const routes = require('./routes')
 
-const port = 3000;
+const port = process.env.PORT ||    3000;
 
 app.use(cors())
 

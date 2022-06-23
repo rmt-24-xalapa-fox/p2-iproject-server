@@ -50,7 +50,7 @@ class Controller {
 
   static async favouriteDelete(req, res, next) {
     try {
-      const {id} = req.body
+      const id = +req.params.id
       const destroyFavorite = await Favourite.destroy({
           where: {
               id: id
@@ -63,7 +63,7 @@ class Controller {
 
       res.status(200).json({
           statusCode: 200,
-          message: `Food with id ${id} deleted successfully`,
+          message: `Favorite with id ${id} deleted successfully`,
       });
 
   } catch (err) {
