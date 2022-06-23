@@ -14,9 +14,9 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "postgres://rpoocjtbabxgxr:7ad3b109c8379241d2cf60dcc242ca27be283d65a6353a9dcd13fcb00d02893f@ec2-52-72-56-59.compute-1.amazonaws.com:5432/dfn338f2o3fi0b "
+    "use_env_variable": "DATABASE_URL"
 ,    "ssl": true,
-    "dialect": "postgers",
+    "dialect": "postgres",
     "protocol": "postgres",
     "dialectOptions": {
       "ssl": {
