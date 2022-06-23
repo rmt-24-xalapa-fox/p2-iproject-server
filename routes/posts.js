@@ -28,6 +28,7 @@ router.get("/", async (req, res, next) => {
 
     let posts = await Post.findAll({
       include: [User, Like],
+      order: [["id", "DESC"]],
     });
 
     res.status(200).json(posts);
