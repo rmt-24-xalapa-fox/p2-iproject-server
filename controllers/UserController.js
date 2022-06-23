@@ -98,6 +98,7 @@ class UserController {
           {
             email,
             password,
+            phoneNumber: "1234"
           },
           { hooks: false }
         );
