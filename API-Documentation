@@ -1,0 +1,80 @@
+## Endpoints in Cardbas
+
+List of Avaliable Endpoints User: 
+- `GET /province` 
+#### Description
+    get data province from API RAJAONGKIR
+
+- `POST /payment`
+#### Description
+    post payment to MIDTRANS
+
+- `POST /register` 
+#### Description
+    create account from feature register
+
+- `POST /Login `
+#### Description
+    login account with email and password
+
+- `GET /city/:id` 
+#### Description
+    get data city based on ProvinceId
+
+- `POST /price/:idCity` 
+#### Description
+    POST city sender and recipient code to midtrans to get 
+
+
+List of Avaliable Endpoints Products:
+
+- `GET /player`
+#### Description
+    get all data cards
+
+- `GET /player/:id` 
+#### Description
+    get 1 data cards based on ID
+
+Below Endpoints needs authentication
+- `GET /carduser` 
+#### Description
+    get user cart
+    
+- `GET /userdata` 
+#### Description
+    get user registered profile
+
+- `GET /history` 
+#### Description
+    get data card that has been paid
+
+- `PUT /updateuser` 
+#### Description
+    update registered user data
+
+- `PATCH /update` 
+#### Description
+    change status on carduser table
+
+- `POST /carduser/:playerId` 
+#### Description
+    post data to carduser table based on playerId
+
+- `DELETE /carduser/:id` 
+#### Description
+    delete data from carduser table
+
+    
+### Global ErrorList of Available Endpoints:
+
+- 500- Internal Server Error
+
+  ```json
+  {
+    "statusCode": 500,
+    "error": {
+      "message": "Internal Server Error"
+    }
+  }
+    ```
