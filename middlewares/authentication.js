@@ -13,7 +13,8 @@ const authentication = async (req, res, next)=>{
         if(!user&&!company){
             throw {name: "InvalidToken"}
         }
-        req.userId = user.id||company.id
+        req.userId = user.id
+        req.companyId = company.id
         next()
     }catch(err){
         next(err)

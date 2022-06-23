@@ -237,7 +237,7 @@ class Controller{
             logger: true 
         });
         const payload = {
-            companyId : req.userId
+            companyId : req.companyId
         }
         const reg = signtoken(payload)
         console.log(payload)
@@ -256,7 +256,7 @@ class Controller{
     static async getcompanyusers(req, res, next){
         try{
             const users = await User.findAll({where: {
-                CompanyId: req.userId
+                CompanyId: req.companyId
             }})
             res.status(200).json(users)
         }catch(err){
@@ -315,7 +315,7 @@ class Controller{
 
     static async getpaymentlink(req, res, next){
         try{
-            const payment = await Payment.findByPk(req.userId)
+            const payment = await Payment.findByPk(req.companyId)
             res.status(200).json({payment})
         }catch(err){
             next(err)
