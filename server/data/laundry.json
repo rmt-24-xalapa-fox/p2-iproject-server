@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Adinda's Laundry",
+    "email": "adinda@mail.com",
+    "phone": "081388888888",
+    "address": "RW 03, Pondok Pinang, Kebayoran Lama, South Jakarta, Jakarta Special Capital Region, 12240, Indonesia",
+    "latitude": "-6.26295",
+    "longitude": "106.78124",
+    "county": "Jakarta Selatan",
+    "socialMedia": "https://www.instagram.com/ismailnlhkm/"
+  },
+  {
+    "name": "Cantika's Laundry",
+    "email": "cantika@mail.com",
+    "phone": "081388888888",
+    "address": "Jalan Pinang Perak, RW 03, Pondok Pinang, Kebayoran Lama, South Jakarta, Jakarta Special Capital Region, 12310, Indonesia",
+    "latitude": "-6.26513",
+    "longitude": "106.77841",
+    "county": "Jakarta Selatan",
+    "socialMedia": "https://www.instagram.com/ismailnlhkm/"
+  },
+  {
+    "name": "Devina's Laundry",
+    "email": "devina@mail.com",
+    "phone": "081388888888",
+    "address": "Jalan Alam Elok IV, RW 16, Pondok Pinang, Kebayoran Lama, South Jakarta, Jakarta Special Capital Region, 12310, Indonesia",
+    "latitude": "-6.26682",
+    "longitude": "106.78174",
+    "county": "Jakarta Selatan",
+    "socialMedia": "https://www.instagram.com/ismailnlhkm/"
+  },{
+    "name": "Erika's Laundry",
+    "email": "erika@mail.com",
+    "phone": "081388888888",
+    "address": "Jalan Marga Guna III, RW 01, Gandaria Selatan, Cilandak, South Jakarta, Jakarta Special Capital Region, 12140, Indonesia",
+    "latitude": "-6.26334",
+    "longitude": "106.78677",
+    "county": "Jakarta Selatan",
+    "socialMedia": "https://www.instagram.com/ismailnlhkm/"
+  },{
+    "name": "Ghania's Laundry",
+    "email": "ghania@mail.com",
+    "phone": "081388888888",
+    "address": "Jalan Margaguna I, RW 15, Gandaria Utara, Kebayoran Baru, South Jakarta, Jakarta Special Capital Region, 12140, Indonesia    ",
+    "latitude": "-6.26224",
+    "longitude": "106.78774",
+    "county": "Jakarta Selatan",
+    "socialMedia": "https://www.instagram.com/ismailnlhkm/"
+  }
+]
