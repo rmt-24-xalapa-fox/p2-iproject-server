@@ -22,6 +22,7 @@ class UserController {
         id: user.id,
         name: user.name,
         email: user.email,
+        message: `Account successfully created`,
       });
     } catch (err) {
       next(err);
@@ -115,7 +116,7 @@ class UserController {
 
       let parameter = {
         transaction_details: {
-          order_id: `ColorSrc-upgrade-${user.id}`,
+          order_id: `ColorSrc-upgrade-${user.name}-${user.id}`,
           gross_amount: 10000,
         },
         credit_card: {

@@ -62,7 +62,7 @@ class PaletteController {
       const palettes = await ColorPalette.findAll({
         where: { UserId: req.user.id },
       });
-      if (user.plan === "Free" && palettes.length >= 20) {
+      if (user.plan === "Free" && palettes.length >= 10) {
         throw { name: "Color palettes has reached the limit" };
       }
       const colorPalette = await ColorPalette.create(input);
