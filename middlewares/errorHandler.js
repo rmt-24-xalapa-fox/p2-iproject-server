@@ -23,9 +23,11 @@ function errorHandler(err, req, res, next) {
     code = 401;
     msg = "Invalid token";
   } else if (name === "SequelizeUniqueConstraintError") {
-    res.status(400).json({
-      message: "Email must be unique",
-    });
+    code = 400;
+    msg = "Email must be unique";
+  } else if (name === "Color palettes has reached the limit") {
+    code = 403;
+    msg = name;
   } else if (name === "Forbidden") {
     code = 403;
     msg = `You Don't Have Access`;
