@@ -1,4 +1,4 @@
-const {Company, Ticket, User} = require('../models')
+const {Company, Ticket, User, Payment} = require('../models')
 const {createpassword, verifypassword, signtoken, verifytoken} = require('../helpers/helper')
 const nodemailer = require("nodemailer");
 const { Op } = require("sequelize");
@@ -63,8 +63,11 @@ class Controller{
               };
               
               const payment = await axios(config)
-              console.log(payment)
-
+              console.log(payment.data.payment_url)
+              await Payment.create({
+                payment_url: payment.data.payment_url,
+                CompanyId: company.id
+              })
             //   .then(function (response) {
             //     console.log(JSON.stringify(response.data));
             //   })
@@ -284,6 +287,20 @@ class Controller{
                 }
             })
             res.status(200).json(tickets)
+        }catch(err){
+            next(err)
+        }
+    }
+
+    static async handlePayment(req, res, next){
+        try{
+            await Company.update({
+                status: 'active'
+            },{
+                where: {
+                    id: req.body.order_id
+                }
+            })
         }catch(err){
             next(err)
         }

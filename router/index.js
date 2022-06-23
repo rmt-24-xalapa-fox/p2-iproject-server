@@ -4,6 +4,7 @@ const authentication = require('../middlewares/authentication')
 const router = express.Router()
 const errorHandler = require('../middlewares/errorHandler')
 
+router.post('/handlepayment', Controller.handlePayment)
 router.post('/registercompany', Controller.registerCompany)
 router.post('/registeruser', Controller.registerUser)
 router.post('/loginuser', Controller.loginuser)
