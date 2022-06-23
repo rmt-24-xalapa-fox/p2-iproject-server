@@ -4,14 +4,14 @@ const { bcryptCompare, bcryptHash } = require("../helpers/bcrypt");
 const { jwtSign } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
 const CLIENT_ID = process.env.CLIENT_ID;
-const nodemailer = require('nodemailer')
+const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
-  service: 'hotmail',
+  service: "hotmail",
   auth: {
-    user: 'event_lokal@outlook.com',
-    pass: 'Eventlokal1'
-  }
-})
+    user: "event_lokal@outlook.com",
+    pass: "Eventlokal1",
+  },
+});
 
 class UserController {
   static async register(req, res, next) {
@@ -27,19 +27,19 @@ class UserController {
       });
 
       const options = {
-        from: 'event_lokal@outlook.com',
+        from: "event_lokal@outlook.com",
         to: email,
         subject: `EVENT LOKAL : WELCOME`,
-        text: `Hi ${createdUser.name}!, Your EVENT LOKAL account has been created`
-      }
+        text: `Hi ${createdUser.name}!, Your EVENT LOKAL account has been created`,
+      };
 
-      await transporter.sendMail(options, function(err,info) {
+      await transporter.sendMail(options, function (err, info) {
         if (err) {
           console.log(err);
         } else {
           console.log(`sent: ${info.response}`);
         }
-      })
+      });
 
       res.status(201).json({
         statusCode: 201,
@@ -102,64 +102,6 @@ class UserController {
       });
     } catch (err) {
       next(err);
-    }
-  }
-
-  static async googleLogin(req, res) {
-    try {
-      const { credential } = req.body;
-      const client = new OAuth2Client(CLIENT_ID);
-      const ticket = await client.verifyIdToken({
-        idToken: credential,
-        audience: CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
-        // Or, if multiple clients access the backend:
-        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-      });
-      const payload = ticket.getPayload();
-      const userid = payload["sub"];
-      // If request specified a G Suite domain:
-      // const domain = payload['hd'];
-      let email = payload.email;
-      let user = await User.findOne({ where: { email } });
-      if (user) {
-        const clientPayload = {
-          id: user.id,
-        };
-
-        const clientToken = jwtSign(clientPayload);
-
-        res.status(200).json({
-          access_token: clientToken,
-          email,
-          role: user.role,
-        });
-      } else {
-        console.log(payload);
-        let username = payload.name.split(" ").join("_");
-        console.log(email);
-        let obj = {
-          username: email,
-          email,
-          password: "Google Sign In",
-          role: "staff",
-          phoneNumber: Math.floor(Math.random() * 1000) + 1,
-          address: "Google Sign In",
-        };
-        user = await User.create(obj, { hooks: false });
-        const clientPayload = {
-          id: user.id,
-        };
-
-        const clientToken = jwtSign(clientPayload);
-        res.status(201).json({
-          access_token: clientToken,
-          email,
-          role: user.role,
-          message: `success create google account`,
-        });
-      }
-    } catch (err) {
-      console.log(err);
     }
   }
 }
