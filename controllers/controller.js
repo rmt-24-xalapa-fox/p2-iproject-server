@@ -1,4 +1,6 @@
 "use strict";
+
+const { comparePass, hashPass } = require("../helpers/bcrypt");
 const { User, Post, Inbox } = require();
 
 class Controller {
@@ -33,19 +35,19 @@ class Controller {
 
   static async register(req, res, next) {
     try {
-      const { email, password } = req.body;
+      let { username, password } = req.body;
+
+      password = hashPass(password);
 
       const result = await User.create({
-        email,
+        username,
         password,
       });
 
       res.status(201).json({
-        statusCode: 201,
         data: {
           id: result.id,
-          email: result.email,
-          role: result.role,
+          username: result.username,
         },
       });
     } catch (err) {
@@ -55,16 +57,16 @@ class Controller {
 
   static async login(req, res, next) {
     try {
-      const { email, password } = req.body;
-      const targetEmail = await User.findOne({
-        where: { email: email },
+      const { username, password } = req.body;
+      const targetUser = await User.findOne({
+        where: { username: username },
       });
 
-      if (!targetEmail) {
+      if (!targetUser) {
         throw { name: "Email/password invalid" };
       }
 
-      const isPassTrue = comparePass(password, targetEmail.password);
+      const isPassTrue = comparePass(password, targetUser.password);
 
       if (!isPassTrue) {
         throw { name: "Email/password invalid" };
@@ -73,18 +75,15 @@ class Controller {
       //sending token
 
       const payload = {
-        email: targetEmail.email,
-        role: targetEmail.role,
+        username: targetUser.username,
       };
 
       const token = payloadToToken(payload);
 
       res.status(200).json({
-        statusCode: 200,
         data: {
           access_token: token,
-          role: targetEmail.role,
-          id: targetEmail.id,
+          id: targetUser.id,
         },
       });
     } catch (err) {
