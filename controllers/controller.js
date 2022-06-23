@@ -304,6 +304,9 @@ class Controller{
                     id: order_id
                 }
             })
+            res.status(200).json({
+                message: 'payment confirmed'
+            })
         }catch(err){
             next(err)
         }
