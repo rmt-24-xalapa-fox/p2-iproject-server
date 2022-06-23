@@ -294,11 +294,14 @@ class Controller{
 
     static async handlePayment(req, res, next){
         try{
+            let order_id = req.body.order_id
+            order_id = order_id.split('-')
+            order_id = order_id[0]
             await Company.update({
                 status: 'active'
             },{
                 where: {
-                    id: req.body.order_id
+                    id: order_id
                 }
             })
         }catch(err){
