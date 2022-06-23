@@ -8,10 +8,10 @@ class PlayerController {
         try {
             let { email, password } = req.body
             if (!email) {
-                throw { name: "email is requrired" }
+                throw { name: "email is required" }
             }
             if (!password) {
-                throw { name: "password is requrired" }
+                throw { name: "password is required" }
             }
             password = hashPassword(password)
             const registran = await Player.create({ email, password })
@@ -26,6 +26,12 @@ class PlayerController {
     static async playerLogin(req, res, next) {
         try {
             const { email, password } = req.body
+            if (!email) {
+                throw { name: "email is required" }
+            }
+            if (!password) {
+                throw { name: "password is required" }
+            }
             const player = await Player.findOne({ where: { email } })
             if (!player) {
                 throw { name: "email/password invalid" }

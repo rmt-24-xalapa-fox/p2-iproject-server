@@ -35,6 +35,8 @@ app.get('/auth/facebook/secrets',
 const stripe = require("stripe")('sk_test_51LD3zSGsdBMqOjdKPg8LxPZxF4ylvxmDO689Jk0RqsHR2wE0EFh9OCAmbBfvxEJ4kdKeN9xL03xqVzgkVkYzBjQj00pndb8A8E');
 
 app.post('/create-checkout-session', async (req, res) => {
+    let baseUrl = 'http://localhost:8080'
+    // let baseUrl = 'https://ps-anywhere-fix.herokuapp.com
     const session = await stripe.checkout.sessions.create({
         line_items: [
             {
@@ -49,10 +51,13 @@ app.post('/create-checkout-session', async (req, res) => {
             },
         ],
         mode: 'payment',
-        success_url: 'https://ps-anywhere-fix.herokuapp.com/success',
-        cancel_url: 'https://ps-anywhere-fix.herokuapp.com/cancel',
+        success_url: baseUrl + '/success',
+        cancel_url: baseUrl + '/cancel',
     });
     res.json({
+        id: session.id,
+        currency: session.currency,
+        amount: session.amout_total,
         url: session.url
     })
     console.log(session);

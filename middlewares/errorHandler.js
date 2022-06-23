@@ -6,10 +6,29 @@ const errorHandler = (err, req, res, next) => {
     let message = "Error";
 
     switch (name) {
-        case "email/password required":
-            // case "SequelizeValidationError":
+        case "password is required":
             code = 400;
-            message = "Bad Request";
+            message = "password is required";
+            break;
+        case 'email is requrired':
+            code = 400;
+            message = 'email is requrired';
+            break
+        case "SequelizeValidationError":
+            code = 400;
+            message = "invalid email format"
+            break;
+        case "SequelizeUniqueConstraintError":
+            code = 400;
+            message = "email must be unique"
+            break;
+        case "email/password invalid":
+            code = 400;
+            message = "email/password invalid"
+            break;
+        case 'Not found Unit':
+            code = 403;
+            message = 'Not found Unit'
             break;
         // case "Invalid Token":
         //     code = 400;

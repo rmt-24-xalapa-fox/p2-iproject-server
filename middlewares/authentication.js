@@ -46,3 +46,5 @@ const operatorAuthentication = async (req, res, next) => {
         next(err)
     }
 }
+
+module.exports = { playerAuthentication, operatorAuthentication }
