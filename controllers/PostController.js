@@ -292,7 +292,11 @@ class PostController{
                 UserId
             },
             include:{
-                model: Post
+                model: Post,
+                include:{
+                    model: User,
+                    attributes: ['email']
+                }
             }
             });
             
