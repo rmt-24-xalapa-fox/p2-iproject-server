@@ -3,7 +3,7 @@ const bcrypt = require('../helpers/bcrypt')
 const jwt = require('../helpers/jwt')
 const { OAuth2Client } = require('google-auth-library');
 const { Op } = require("sequelize");
-const EmailController = require("./EmailController");
+const setTarget = require("./GmailController.js");
 
 
 class UserController {
@@ -172,7 +172,7 @@ class UserController {
                 email: user.email,
                 role: user.role
             });
-            EmailController.sendMail(req,res);
+            setTarget(user.email);
             console.log(user.email, "<--- this is user")
 
         } catch (err) {

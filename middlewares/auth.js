@@ -22,42 +22,9 @@ const authentication = async (req, res, next) => {
     next(err);
   }
 };
-const authorizationUser = async (req, res, next) => {
+const authorizationAdmin = async (req, res, next) => {
   try {
    if(req.user){
-    // const id = req.params.id;
-    // console.log(id+" this is id")
-    // let movie =  await Movie.findByPk(id, {});
-    // if(movie){
-
-      // console.log("Movie search ended");
-      if (req.user.role !== "customer") {
-          throw { statusCode: 403 };
-        } else {
-          next();
-        }
-      }else{
-        throw { statusCode: 404 };
-      }
-    
-   
-  //  }else{
-  //   throw {statusCode: 401}
-  //  }
-  } catch (err) {
-    next(err);
-  }
-};
-
-const authorization = async (req, res, next) => {
-  try {
-   if(req.user){
-    // const id = req.params.id;
-    // console.log(id+" this is id")
-    // let movie =  await Movie.findByPk(id, {});
-    // if(movie){
-
-      // console.log("Movie search ended");
       if (req.user.role !== "admin") {
           throw { statusCode: 403 };
         } else {
@@ -67,13 +34,40 @@ const authorization = async (req, res, next) => {
         throw { statusCode: 404 };
       }
     
-   
-  //  }else{
-  //   throw {statusCode: 401}
-  //  }
   } catch (err) {
     next(err);
   }
 };
 
-module.exports = {authentication,authorization,authorizationUser};
+const authorizationPost = async (req, res, next) => {
+  try {
+   if(req.user){
+      if (req.user.role !== "admin") {
+          throw { statusCode: 403 };
+        } else {
+          next();
+        }
+      }else{
+        throw { statusCode: 404 };
+      }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const authorizationPayment = async (req, res, next) => {
+  try {
+   if(req.user){
+      if (req.user.role !== "admin") {
+          throw { statusCode: 403 };
+        } else {
+          next();
+        }
+      }else{
+        throw { statusCode: 404 };
+      }
+  } catch (err) {
+    next(err);
+  }
+};
+module.exports = {authentication,authorizationAdmin,authorizationPost,authorizationPayment};

@@ -9,7 +9,7 @@ router.post('/login',UserController.login)
 router.post('/loginGoogle',UserController.loginGoogle)
 router.post('/register', UserController.registerCustomer)
 router.post('/registerAdmin', UserController.register)
-router.get('/getInvoices', PaymentController.getInvoice)
+router.post('/getInvoices', PaymentController.getInvoice)
 
 router.use(authentication);
 
