@@ -2,6 +2,7 @@
 const starters = require('../data/starters.json')
 const legendaries = require('../data/legendaries.json')
 const mythics = require('../data/mythics.json')
+const standards = require("../data/standards.json")
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -25,11 +26,50 @@ function getStarters() {
 }
 
 function getLegendary() {
-  return legendaries[getRandomInt(legendaries.length)]
+  let lindex = []
+  while (lindex.length<3) {
+    const rng = getRandomInt(legendaries.length)
+    if(rng !== lindex[0]){
+      lindex.push(rng)
+    }
+  }
+
+  const legens = lindex.map( l => {
+    return legendaries[l]    
+  });
+
+  return legens
+
 }
 
 function getMythic() {
   return mythics[getRandomInt(mythics.length)]
+}
+
+function getRandomPokemons() {
+  const pokemons = []
+
+  while (pokemons.length<2) {
+    const chance = Math.random()
+    let id
+  
+    if(chance<0.1){
+      id = legendaries[getRandomInt(legendaries.length)]
+    }
+    else if (chance< 0.3){
+      id = mythics[getRandomInt(mythics.length)]
+    }
+    else {
+      id = standards[getRandomInt(standards.length)]
+    }
+
+    if(id!==132){
+      pokemons.push(id)
+    }
+    
+  }
+
+  return pokemons
 }
 
 function getMoves(pokemon, movepools) {
@@ -58,4 +98,4 @@ function getMoves(pokemon, movepools) {
     
 } 
 
-module.exports = { getStarters, getLegendary, getMythic, getMoves }
+module.exports = { getStarters, getLegendary, getRandomPokemons, getMoves }
