@@ -1,11 +1,10 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon bin/www",
-    "start": "node app.js",
+    "start": "node bin/www",
     "test": "jest --forceExit --verbose --detectOpenHandles --runInBand"
   },
   "keywords": [],
@@ -26,5 +25,9 @@
   "devDependencies": {
     "nodemon": "^2.0.16",
     "sequelize-cli": "^6.4.1"
-  }
+  },
+  "bin": {
+    "server": "bin/www.js"
+  },
+  "description": ""
 }

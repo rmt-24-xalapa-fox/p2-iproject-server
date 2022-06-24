@@ -74,6 +74,7 @@ class Controller {
             model: Quota,
           },
         ],
+        order: [[Quota, "date", "ASC"]],
       });
       if (!findMountain) {
         throw { name: "MountainNotFound" };
@@ -88,10 +89,22 @@ class Controller {
     try {
       const { MountainId, QuotaId } = req.params;
       const findMountain = await Mountain.findByPk(MountainId);
+      const { numberOfClimbers, totalPrice } = req.body;
+      if (numberOfClimbers <= 0) {
+        throw { name: "BadInput" };
+      }
       if (!findMountain) {
         throw { name: "MountainNotFound" };
       }
-      const { numberOfClimbers, totalPrice } = req.body;
+      const quota = await Quota.findByPk(QuotaId);
+      const sisaKuota = quota.quotaMax - quota.quotaUse;
+      console.log(sisaKuota);
+      if (sisaKuota - numberOfClimbers < 0) {
+        throw {
+          name: "QuotaExceed",
+          quotaRemain: sisaKuota,
+        };
+      }
       const { id: UserId } = req.user;
       const data = {
         UserId,
@@ -151,6 +164,7 @@ class Controller {
             model: User,
           },
         ],
+        order: [["id", "ASC"]],
       });
       res.status(200).json(response);
     } catch (err) {
@@ -331,6 +345,28 @@ class Controller {
           },
         });
       }
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async deleteLicenses(req, res, next) {
+    try {
+      const { LicenseId } = req.params;
+      const { id } = req.user;
+      const findLicense = await License.findByPk(LicenseId);
+      if (!findLicense) {
+        throw { name: "LicenseNotFound" };
+      }
+      if (findLicense.UserId !== id) {
+        throw { name: "Forbidden" };
+      }
+      await License.destroy({
+        where: {
+          id: LicenseId,
+        },
+      });
+      res.status(200).json({ message: "Success Delete License" });
     } catch (err) {
       next(err);
     }

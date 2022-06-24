@@ -24,6 +24,8 @@ router.get("/licenses", Controller.licensesController);
 
 router.patch("/licenses/pay/:LicenseId", Controller.patchLicenseController);
 
+router.delete("/licenses/:LicenseId", Controller.deleteLicenses);
+
 router.post("/licenses/:MountainId/:QuotaId", Controller.postLicenseController);
 
 router.patch("/quota/:QuotaId", Controller.patchQuotaController);

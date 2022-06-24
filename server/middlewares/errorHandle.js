@@ -25,6 +25,19 @@ const errorHandler = (err, req, res, next) => {
   } else if (name === "QuotaNotFound") {
     statusCode = 400;
     message = "Quota Not Found";
+  } else if (name === "QuotaExceed") {
+    statusCode = 400;
+    let sisaQuota = err.quotaRemain;
+    message = `Quota Only Remain ${sisaQuota} left`;
+  } else if (name === "BadInput") {
+    statusCode = 400;
+    message = "Make Sure Your Input is Correct";
+  } else if (name === "LicenseNotFound") {
+    statusCode = 400;
+    message = "License Not Found";
+  } else if (name === "Forbidden") {
+    statusCode = 403;
+    message = "Forbidden";
   }
 
   res.status(statusCode).json({ message });
