@@ -320,8 +320,16 @@ _Response (401 - Unauthorized)_
 
 ## 2. POST '/post'
 Create a new post if all required input is correct
-body:
 
+
+headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+body:
 ```json
 {
   "title": "string",
@@ -345,20 +353,213 @@ _Response (400 - Invalid data)_
     "message": "Invalid input"
 }
 ```
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
 
 ## 3. POST '/post/:id/comments'
+Create a comment on the post
+
+
+headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+body:
+```json
+{
+  "comment": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+    "message": "Comment created"
+}
+```
+
+_Response (400 - Invalid data)_
+
+```json
+{
+    "message": "Invalid input"
+}
+```
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
+_Response (404 - Not found)_
+```json
+{
+    "message": "Not found"
+}
+```
 ## 4. GET '/favourite'
+Will return all favourited post
+headers:
 
+```json
+{
+  "access_token": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+    "Favourites": [
+        {
+            "id": "integer",
+            "PostId": "integer",
+            "UserId": "integer",
+            "createdAt": "date",
+            "updatedAt": "date",
+            "Post": {
+                "id": "integer",
+                "title": "string",
+                "media": "string",
+                "UserId": "integer",
+                "description": "string",
+                "createdAt": "date",
+                "updatedAt": "date"
+            }
+        }
+    ]
+}
+```
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
 ## 5. POST '/favourite/:id'
-## 6. DELETE '/favourite/:id'
+Add a post to favourite
 
-## 7. POST '/users/coinPrice'
+headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+    "message": "Post favourited"
+}
+```
+
+_Response (400 - Invalid data)_
+
+```json
+{
+    "message": "Invalid input"
+}
+```
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
+_Response (404 - Not found)_
+```json
+{
+    "message": "Not found"
+}
+```
+## 6. DELETE '/favourite/:id'
+Will remove post from favourite
+
+headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+    "message": "Post unfavourited"
+}
+```
+
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
+
+_Response (404 - Not found)_
+```json
+{
+    "message": "Unfavourited failed"
+}
+```
+
+## 7. GET '/users/coinPrice'
+Will return all coin with it price
+headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+_Response (200 - OK)_
+
+```json
+[
+    {
+        "id": "integer",
+        "coinAmmount": "integer",
+        "price": "integer",
+        "createdAt": "date",
+        "updatedAt": "date"
+    }
+]
+```
+
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
 ## 8. POST '/users/getInvoices'
+Will get invoices then check if its been paid or not, then add coin to user wallets
+
 ## 9. POST '/users/getLink/:id'
+Will create an invoice link based on coin that being bought
+
 ## 10. POST '/users/buyCoin/:id'
+Add coin directly to user wallet without payment gateway
+
 ## 11. POST '/users/giftCoin/:id'
+Transfer coin from a user to another user
 
 #Avaliable to specific users
 ## 1. PATCH '/post/:id'
+Update user post
 
 ## 2. POST '/users/addPrice'
+Admin only command, will create a new price item for coin
