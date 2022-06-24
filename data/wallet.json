@@ -1,0 +1,12 @@
+[
+    {
+        "UserId":"1",
+        "active":"false",
+        "coin":0
+    },
+    {
+        "UserId":"2",
+        "active":"false",
+        "coin":0
+    }
+]
