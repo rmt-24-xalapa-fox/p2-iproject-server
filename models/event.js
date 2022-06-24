@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     status: DataTypes.STRING,
     location: DataTypes.STRING,
+    latitude: DataTypes.STRING,
+    longitude: DataTypes.STRING,
     date: DataTypes.DATE,
     time: DataTypes.STRING,
     description: DataTypes.STRING,

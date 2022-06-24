@@ -315,7 +315,7 @@ class EventController {
       });
 
 
-      res.status(201).json({
+      res.status(200).json({
         message: `Event ${myEvent[0].Event.name} removed from my event`,
       });
     } catch (err) {
