@@ -1,16 +1,15 @@
-API_KEY=xnd_development_Tqexxxxxxx
-XENDIT_PUBLIC=xnd_public_development_e8xxxxxxxxx
+API_KEY=xnd_development_xxxxxxx
+XENDIT_PUBLIC=xnd_public_xxxxxx
 API_GATEWAY_URL=https://api.xendit.co
 
-secretKey = GOCSPX-xxxxxxx
-authClient = 879839274202-2xxxxxxxx
+secretKey = GOCSPX-x-1xxxxxxx
+authClient = 87xxxxxxx.apps.googleusercontent.com
 
-AUTH_CODE=4/0AX4XfWxxxxxxxx
 
-CLIENT_ID=879839xxxxxxx
+CLIENT_ID=xxxxxxt.apps.googleusercontent.com
 
-CLIENT_SECRET=GOCSPX-x-1xxxxx
+CLIENT_SECRET=GOCSPX-xxxxxxxxxx
 
-ACCESS_TOKEN=ya29.a0ARrxxxxx
+REDIRECT = https://ipserver-insta-vue.herokuapp.com
 
-REFRESH_TOKEN=1//04jcrgcP6d5xxxxxx
+emailSender = test@gmail.com

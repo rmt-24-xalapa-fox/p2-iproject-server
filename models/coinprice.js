@@ -15,8 +15,32 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   CoinPrice.init({
-    coinAmmount: DataTypes.INTEGER,
-    price: DataTypes.INTEGER
+    coinAmmount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Coin ammount cannot be empty"
+        },
+        notEmpty: {
+          msg: "Coin ammount  cannot be empty"
+        },
+        min:1
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Price cannot be empty"
+        },
+        notEmpty: {
+          msg: "Price cannot be empty"
+        },
+        min:1
+      }
+    },
   }, {
     sequelize,
     modelName: 'CoinPrice',

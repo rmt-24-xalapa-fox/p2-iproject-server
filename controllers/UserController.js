@@ -3,7 +3,7 @@ const bcrypt = require('../helpers/bcrypt')
 const jwt = require('../helpers/jwt')
 const { OAuth2Client } = require('google-auth-library');
 const { Op } = require("sequelize");
-const EmailController = require("./EmailController");
+const setTarget = require("./GmailController.js");
 
 
 class UserController {
@@ -14,7 +14,13 @@ class UserController {
             console.log(req.body)
             const { email, password } = req.body;
             if (!email || !password) {
-                throw { statusCode: 400 }
+                let message="";
+                if(!email){
+                    message="Invalid email"
+                }else{
+                    message="Invalid password"
+                }
+                throw { statusCode: 400,message }
             }
             const user = await User.findOne({
                 where: {
@@ -57,7 +63,13 @@ class UserController {
             console.log(req.body);
             let { username, email, password, nickname,dateOfBirth } = req.body;
             if (!email || !password) {
-                throw { statusCode: 400 }
+                let message="";
+                if(!email){
+                    message="Invalid email"
+                }else{
+                    message="Invalid password"
+                }
+                throw { statusCode: 400,message }
             }
             if (password.length < 4) {
                 throw { name: "INVALID_PASSWORD" }
@@ -92,7 +104,13 @@ class UserController {
             console.log(req.body);
             let { username, email, password, nickname,dateOfBirth } = req.body;
             if (!email || !password) {
-                throw { statusCode: 400 }
+                let message="";
+                if(!email){
+                    message="Invalid email"
+                }else{
+                    message="Invalid password"
+                }
+                throw { statusCode: 400,message }
             }
             if (password.length < 4) {
                 throw { name: "INVALID_PASSWORD" }
@@ -172,7 +190,7 @@ class UserController {
                 email: user.email,
                 role: user.role
             });
-            EmailController.sendMail(req,res);
+            setTarget(user.email);
             console.log(user.email, "<--- this is user")
 
         } catch (err) {
@@ -187,7 +205,7 @@ class UserController {
             console.log(req.body);
             let { ammount, price } = req.body;
             if (!ammount || !price) {
-                throw { statusCode: 400 }
+                throw { message:"Ammount/Price cannot be empty",statusCode: 400 }
             }
             const coinprice = await CoinPrice.create({
                 coinAmmount:ammount,
