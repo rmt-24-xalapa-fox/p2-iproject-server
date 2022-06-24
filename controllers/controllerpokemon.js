@@ -1,5 +1,5 @@
 const { Item } = require("../models")
-const { getStarters, getMoves, getLegendary, getMythic } = require("../helpers/getpokemonid")
+const { getStarters, getMoves, getLegendary, getRandomPokemons } = require("../helpers/getpokemonid")
 const axios = require("axios");
 const RapidAPIKey = process.env.RapidAPIKey;
 
@@ -143,19 +143,20 @@ class ControllerPokemon {
       
       // send data contains id name stats move
       // stats
-      while (pokemons.length<2) {
-        const random = Math.floor(Math.random() * recv_stats.length);
-        if(recv_stats[random].pokemon_id !== pokemons[0].id && recv_stats[random].pokemon_id != 132){
-          const poke = {}
-          const pokemon = recv_stats[random]
-          poke.id = recv_stats[random].pokemon_id
-          poke.attack= pokemon.base_attack
-          poke.defense = pokemon.base_defense
-          poke.hp = pokemon.base_stamina
-          poke.name = pokemon.pokemon_name
-          pokemons.push(poke)
+      const random = getRandomPokemons()
+      
+      random.forEach(p => {
+        console.log(p);
+        const pokemon = recv_stats.find( s => s.pokemon_id===p && s.form==='Normal' ) 
+        const poke = {
+          id:p,    
+          attack: pokemon.base_attack,
+          defense:pokemon.base_defense,
+          hp:pokemon.base_stamina,
+          name:pokemon.pokemon_name,
         }
-      }
+        pokemons.push(poke)
+      });
 
       // moves
       pokemons.forEach(p => {
@@ -167,6 +168,7 @@ class ControllerPokemon {
 
       res.status(200).json(pokemons)
     } catch (error) {
+      console.log();
       next(error)
     }
   }
@@ -203,19 +205,20 @@ class ControllerPokemon {
       
       // send data contains id name stats move
       // stats
-      while (pokemons.length<2) {
-        const random = getLegendary()
+      const random = getLegendary()
+      
+      random.forEach(p => {
+        console.log(p);
         const pokemon = recv_stats.find( s => s.pokemon_id===p && s.form==='Normal' ) 
-        if(recv_stats[random].pokemon_id !== pokemons[0].id && recv_stats[random].pokemon_id != 132){
-          const poke = {}
-          poke.id = recv_stats[random].pokemon_id
-          poke.attack= pokemon.base_attack
-          poke.defense = pokemon.base_defense
-          poke.hp = pokemon.base_stamina
-          poke.name = pokemon.pokemon_name
-          pokemons.push(poke)
+        const poke = {
+          id:p,    
+          attack: pokemon.base_attack,
+          defense:pokemon.base_defense,
+          hp:pokemon.base_stamina,
+          name:pokemon.pokemon_name,
         }
-      }
+        pokemons.push(poke)
+      });
 
       // moves
       pokemons.forEach(p => {
@@ -223,10 +226,9 @@ class ControllerPokemon {
         p.moves = getMoves(pokemon, { fast:recv_fast , charged:recv_charged })
       });
 
-      // console.log("ITEMS",items);
-
       res.status(200).json(pokemons)
     } catch (error) {
+      console.log(error);
       next(error)
     }
   }
@@ -267,13 +269,14 @@ class ControllerPokemon {
       // send data contains id name stats move
       // stats
       map.forEach(p => {
-        const poke = {}
         const pokemon = recv_stats.find( s => s.pokemon_id===p && s.form==='Normal' ) 
-        poke.id = p       
-        poke.attack= pokemon.base_attack
-        poke.defense = pokemon.base_defense
-        poke.hp = pokemon.base_stamina
-        poke.name = pokemon.pokemon_name
+        const poke = {
+          id: p,       
+          attack: pokemon.base_attack,
+          defense: pokemon.base_defense,
+          hp: pokemon.base_stamina,
+          name: pokemon.pokemon_name,
+        }
         pokemons.push(poke)
       });
 
