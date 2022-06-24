@@ -22,6 +22,34 @@ const authentication = async (req, res, next) => {
     next(err);
   }
 };
+
+const loginOrNot = async (req, res, next) => {
+  try {
+    const {access_token} = req.headers;
+    if(!access_token){
+      next();
+    }else{
+      const payload = tokenToPayload(access_token);
+      console.log(payload);
+      const userFound = await User.findByPk(payload.id);
+  
+      if (!userFound) {
+        next();
+      } else {
+        req.user = {
+          id: userFound.id,
+          email: userFound.email,
+          role: userFound.role
+        };
+      }
+      next();
+    }
+    
+  } catch (err) {
+    next(err);
+  }
+};
+
 const authorizationAdmin = async (req, res, next) => {
   try {
    if(req.user){
@@ -42,9 +70,12 @@ const authorizationAdmin = async (req, res, next) => {
 const authorizationPost = async (req, res, next) => {
   try {
    if(req.user){
-      if (req.user.role !== "admin") {
+    let {id}=req.params
+    let post = await Post.findByPk(id);
+      if (req.user.id != post.UserId) {
           throw { statusCode: 403 };
         } else {
+          req.posts=post;
           next();
         }
       }else{
@@ -70,4 +101,4 @@ const authorizationPayment = async (req, res, next) => {
     next(err);
   }
 };
-module.exports = {authentication,authorizationAdmin,authorizationPost,authorizationPayment};
+module.exports = {authentication,authorizationAdmin,authorizationPost,authorizationPayment,loginOrNot};

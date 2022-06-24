@@ -45,9 +45,7 @@ class PostController{
         
         let userdata={
             model: User,
-            attributes: {
-                exclude: ['username', 'updatedAt',"createdAt","id",'password']
-            }
+            attributes: ['email']
         }
         let where={}
         if(title){
@@ -80,7 +78,6 @@ class PostController{
                         }else{
                             element.dataValues.canDonate=false;
                         }
-                        // console.log(element.dataValues);
                     })
                     
                     ;
@@ -96,16 +93,55 @@ class PostController{
         }
     }
 
+    static async getMyPosts(req, res, next) {
+        try {
+            
+        
+        let userdata={
+            model: User,
+            attributes: ['email']
+        }
+        let where={UserId:req.user.id}
+        
+        let option ={
+            where:where,
+            distinct:true,
+            include:userdata
+        }
+            console.log(option);
+            let rows = await Post.findAll(option);
+           
+                    rows.forEach(element => {
+                        
+                            element.dataValues.canDonate=false;
+                        
+                    });
+            if (rows) {   
+                res.status(200).json({ Posts: rows });
+            } else {
+                throw { statusCode: 404 };
+            }
+        } catch (error) {
+            console.log(error);
+            next(error);
+        }
+    }
+
     static async getPostDetail(req, res, next) {
         try {
             let {id}=req.params
             const post = await Post.findByPk(id);
+            console.log(req.user);
+            console.log(id);
             if(post){
-                if(post.UserId!=req.user.id){
-                    post.canDonate=true;
-                }else{
-                    post.canDonate=false;
+                if(req.user){
+                    if(post.UserId!=req.user.id){
+                        post.canDonate=true;
+                    }else{
+                        post.canDonate=false;
+                    }
                 }
+                
                 console.log(post);
                 let comments = await PostComment.findAll(
                     {where:{
@@ -151,7 +187,7 @@ class PostController{
         try {
             let {id}=req.params;
             let { title, media, description } = req.body;
-            let post = await Post.findByPk(id);
+            let post = req.posts;
             if(title){
                 post.title=title;
             }

@@ -8,8 +8,8 @@ var SCOPES = [
     'https://www.googleapis.com/auth/gmail.compose',
     'https://www.googleapis.com/auth/gmail.send'
 ];
-const TOKEN_PATH = './token.json';
-const testToken = require('./token.json')
+const TOKEN_PATH = '../config/token.json';
+const testToken = require('../config/token.json')
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
