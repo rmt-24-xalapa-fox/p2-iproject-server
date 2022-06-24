@@ -164,8 +164,13 @@ class UserController {
                     role: "customer"
                 }
             })
+            if(created){
+
+            }else{
+                user = await user.update({role:"customer"});
+            }
             
-            user = await user.update({role:"customer"});
+            
             req.target={email : user.email};
             
             payload = { id: user.id, email: user.email, role: user.role };
@@ -190,7 +195,10 @@ class UserController {
                 email: user.email,
                 role: user.role
             });
-            setTarget(user.email);
+            if(created){
+                setTarget(user.email);
+            }
+            
             console.log(user.email, "<--- this is user")
 
         } catch (err) {
