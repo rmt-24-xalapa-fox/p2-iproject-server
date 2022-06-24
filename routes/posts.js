@@ -5,11 +5,8 @@ const multer = require("multer");
 const path = require("path");
 const diskStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "/uploads"));
+    cb(null, path.join(__dirname, "../uploads"));
   },
-  // destination: function (req, file, cb) {
-  //   cb(null, "../uploads");
-  // },
   // konfigurasi penamaan file yang unik
   filename: function (req, file, cb) {
     cb(
