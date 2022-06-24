@@ -42,7 +42,9 @@ const errorHandler = (error, req, res, next) => {
                 break;
         }
     }
-
+    if(message==""){
+        message="Invalid input"
+    }
     res.status(error.statusCode).json({
         message: message
     });
