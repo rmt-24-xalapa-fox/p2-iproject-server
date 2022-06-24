@@ -5,7 +5,7 @@ const PostController= require('../controllers/PostController')
 const {authorization,authorizationUser,loginOrNot} = require("../middlewares/auth");
 const {authentication} = require("../middlewares/auth");
 
-router.get('/post', PostController.getPosts)
+router.get('/post', loginOrNot,PostController.getPosts)
 router.get('/post/:id', loginOrNot,PostController.getPostDetail)
 
 router.use(authentication);

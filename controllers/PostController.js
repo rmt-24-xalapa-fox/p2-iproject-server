@@ -64,6 +64,8 @@ class PostController{
             let {count,rows} = await Post.findAndCountAll(option);
             console.log("Pages count: "+count +" limit"+limit+" totalPages "+Math.ceil(count/limit) +" offset "+offset )
             let totalPages=Math.ceil(count/limit)
+            console.log(req.user);
+            console.log("User found");
             if(req.user){
                 
                 if(req.user.id)
