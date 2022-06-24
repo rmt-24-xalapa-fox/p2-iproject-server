@@ -77,7 +77,18 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      Item1Id: DataTypes.INTEGER,
+      Item1Id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Item ID is required",
+          },
+          notEmpty: {
+            msg: "Item ID is required",
+          },
+        },
+      },
       Item2Id: {
         type: DataTypes.INTEGER,
         allowNull: false,

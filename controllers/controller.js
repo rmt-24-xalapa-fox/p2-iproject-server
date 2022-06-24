@@ -88,10 +88,39 @@ class Controller {
             as: "item7",
           },
         ],
+        order: [["vote", "DESC"]],
+        limit: 20,
       });
       res.status(200).json({
         statusCode: 200,
         buildList,
+      });
+    } catch (err) {
+      console.log(err);
+      next(err);
+    }
+  }
+
+  static async votting(req, res, next) {
+    try {
+      const buildId = req.params.id;
+      const buildByPk = await Build.findByPk(buildId);
+      let vote = buildByPk.vote;
+      const updateVote = await Build.update(
+        {
+          vote: vote + 1,
+        },
+        {
+          where: {
+            id: buildId,
+          },
+        }
+      );
+
+      // console.log(buildByPk.vote);
+      res.status(200).json({
+        message: "Update Vote Success",
+        updateVote,
       });
     } catch (err) {
       console.log(err);

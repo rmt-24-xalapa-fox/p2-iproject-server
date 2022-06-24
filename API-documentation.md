@@ -8,6 +8,7 @@ List of Available Endpoints:
 - `GET /items`
 - `GET /builds`
 - `POST /builds`
+- `PATCH /builds/:id`
 - `GET /api/heroes`
 - `GET /api/roles`
 - `GET /api/heroes/:id`
@@ -269,6 +270,25 @@ _400 - All column must be filled_
     "error": {
       "message": "All is required"
     }
+  }
+  ```
+
+### PATCH /builds/:id
+
+#### Description
+
+- Update vote based on given id
+
+#### Response
+
+_200 - OK_
+
+- Body
+
+  ```json
+  {
+    "message": "Update Vote Success",
+    "updateVote": [1]
   }
   ```
 

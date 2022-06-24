@@ -16,5 +16,6 @@ router.use(authentication);
 
 router.post("/builds", Controller.createBuild);
 router.get("/builds", Controller.getBuilds);
+router.patch("/builds/:id", Controller.votting);
 
 module.exports = router;
