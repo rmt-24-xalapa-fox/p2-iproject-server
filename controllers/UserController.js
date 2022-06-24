@@ -243,6 +243,8 @@ class UserController {
                     wallet.coin= wallet.coin+price.coinAmmount;
                     wallet = await wallet.save();
                     res.status(200).json({message:"Coin has been added"})
+            }else{
+                res.status(404).json({message:"Not found"})
             }
             // res.status(200).json(price);
         } catch (error) {
@@ -267,6 +269,8 @@ class UserController {
                     walletTarget= await walletTarget.save();
                     res.status(200).json({message:"Coin has been gifted"})
                 }
+            }else{
+                res.status(404).json({message:"Not found"})
             }
             // res.status(200).json(price);
         } catch (error) {

@@ -242,17 +242,21 @@ class PostController{
             if (!comment) {
                 throw { statusCode: 400 }
             }
-            const comments = await Comment.create({
-                comment,
-                UserId
-            });
+            const post = await Post.findByPk(id);
+            if(post){
+                const comments = await Comment.create({
+                    comment,
+                    UserId
+                });
+                PostComment.create({CommentId:comments.id,PostId:post.id})
+            }else{
+                throw { statusCode: 404 }
+            }
+            
             res.status(201).json({
                 message: "Comment created"
             });
-            const post = await Post.findByPk(id);
-            if(post){
-                PostComment.create({CommentId:comments.id,PostId:post.id})
-            }
+            
         } catch (error) {
             console.log(error);
             next(error);
