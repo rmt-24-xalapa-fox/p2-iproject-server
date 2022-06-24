@@ -83,7 +83,6 @@ class ControllerPokemon {
         items:items,
       })
     } catch (error) {
-      console.log(error);
       next(error)
     }
   }
@@ -146,7 +145,6 @@ class ControllerPokemon {
       const random = getRandomPokemons()
       
       random.forEach(p => {
-        console.log(p);
         const pokemon = recv_stats.find( s => s.pokemon_id===p && s.form==='Normal' ) 
         const poke = {
           id:p,    
@@ -168,7 +166,6 @@ class ControllerPokemon {
 
       res.status(200).json(pokemons)
     } catch (error) {
-      console.log();
       next(error)
     }
   }
@@ -208,7 +205,6 @@ class ControllerPokemon {
       const random = getLegendary()
       
       random.forEach(p => {
-        console.log(p);
         const pokemon = recv_stats.find( s => s.pokemon_id===p && s.form==='Normal' ) 
         const poke = {
           id:p,    
@@ -228,7 +224,6 @@ class ControllerPokemon {
 
       res.status(200).json(pokemons)
     } catch (error) {
-      console.log(error);
       next(error)
     }
   }
@@ -289,7 +284,6 @@ class ControllerPokemon {
       res.status(200).json(pokemons)
 
     } catch (error) {
-      console.log(error);
       next(error)
     }
   }
