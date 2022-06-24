@@ -547,15 +547,141 @@ _Response (401 - Unauthorized)_
 ```
 ## 8. POST '/users/getInvoices'
 Will get invoices then check if its been paid or not, then add coin to user wallets
+headers:
 
+```json
+{
+  "invoice_link": "string"
+}
+```
+_Response (200 - OK)_
+
+```json
+[
+    {
+        "message": "Payment have been processed"
+    }
+]
+```
+_Response (400 - Invalid data)_
+
+```json
+[
+    {
+        "message": "Payment not done"
+    }
+]
+```
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
+_Response (404 - Not found)_
+```json
+{
+    "message": "Link not found"
+}
+```
 ## 9. POST '/users/getLink/:id'
 Will create an invoice link based on coin that being bought
+headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+_Response (200 - OK)_
+
+```json
+{
+"https://checkout-staging.xendit.co/web/token_link"
+}
+```
+
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
+
+
+_Response (404 - Not found)_
+```json
+{
+    "message": "Not found"
+}
+```
 
 ## 10. POST '/users/buyCoin/:id'
 Add coin directly to user wallet without payment gateway
+headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+_Response (200 - OK)_
+
+```json
+{
+    "message": "Coin has been added"
+}
+```
+
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
+_Response (404 - Unauthorized)_
+```json
+{
+    "message":"Not found"
+}
+```
 
 ## 11. POST '/users/giftCoin/:id'
 Transfer coin from a user to another user
+headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+body:
+
+```json
+{
+  "total": "integer"
+}
+```
+_Response (200 - OK)_
+
+```json
+{
+    "message": "Coin has been gifted"
+}
+```
+
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
+_Response (404 - Unauthorized)_
+```json
+{
+    "message":"Not found"
+}
+```
 
 #Avaliable to specific users
 ## 1. PATCH '/post/:id'
@@ -563,3 +689,34 @@ Update user post
 
 ## 2. POST '/users/addPrice'
 Admin only command, will create a new price item for coin
+headers:
+
+```json
+{
+  "access_token": "string"
+}
+```
+body:
+
+```json
+{
+  "coinAmmount": "integer",
+   "price": "integer",
+}
+```
+_Response (201 - OK)_
+
+```json
+[
+    {
+        "message": "Price added"
+    }
+]
+```
+
+_Response (401 - Unauthorized)_
+```json
+{
+    "message": "Token invalid"
+}
+```
