@@ -89,7 +89,8 @@ function makeBody(to, from, subject, message) {
 }
 
 function sendMessage(auth,targetEmail) {
-    var raw = makeBody(process.env.emailSender, targetEmail, 'User Registered', 'Thank you for registering at Insta Vue!');
+    console.log("Mail sent to "+targetEmail)
+    var raw = makeBody(targetEmail, process.env.emailSender, 'User Registered', 'Thank you for registering at Insta Vue!');
     const gmail = google.gmail({version: 'v1', auth});
     gmail.users.messages.send({
         auth: auth,
@@ -105,6 +106,7 @@ function sendMessage(auth,targetEmail) {
 }
 
 function setTarget(targetEmail){
+    console.log("Mail to sent to "+targetEmail)
     authorize( sendMessage,targetEmail);
 }
 

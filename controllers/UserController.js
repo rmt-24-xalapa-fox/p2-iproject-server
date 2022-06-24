@@ -142,9 +142,9 @@ class UserController {
     static async loginGoogle(req, res, next) {
         try {
             console.log("GOOGLE LOGIN");
-            console.log(req.body);
+            // console.log(req.body);
             let { token } = req.body
-            console.log(token)
+            // console.log(token)
             if (!token) {
                 throw { statusCode: 400 }
             }
@@ -155,8 +155,14 @@ class UserController {
                 audience: process.env.authClient,
             });
             let payload = ticket.getPayload()
-            console.log(payload);
-
+            // console.log(payload);
+            let tempUser = await User.findOne({where: { email: payload.email }});
+            if(tempUser){
+                console.log(tempUser.email)
+            }else{
+                console.log("User is newly created")
+                setTarget(payload.email);
+            }
             let [user, created] = await User.findOrCreate({
                 where: { email: payload.email },
                 defaults: {
@@ -164,8 +170,9 @@ class UserController {
                     role: "customer"
                 }
             })
+            console.log("Is created: "+created)
             if(created){
-
+                // setTarget(user.email);
             }else{
                 user = await user.update({role:"customer"});
             }
@@ -195,9 +202,9 @@ class UserController {
                 email: user.email,
                 role: user.role
             });
-            if(created){
-                setTarget(user.email);
-            }
+            // if(created){
+            //     setTarget(user.email);
+            // }
             
             console.log(user.email, "<--- this is user")
 
