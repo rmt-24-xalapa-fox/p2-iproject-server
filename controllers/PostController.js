@@ -151,7 +151,7 @@ class PostController{
                         include:{
                             model: User,
                             attributes: {
-                                exclude: ['username', 'updatedAt',"createdAt","id",'password']
+                                exclude: ['username', 'dateOfBirth','role','updatedAt',"createdAt","id",'password']
                             }
                         }
                     }
@@ -159,6 +159,8 @@ class PostController{
                 )
 
                 res.status(200).json({Post:post,Comments:comments});
+            }else{
+                throw {statusCode:404};
             }
             
         } catch (error) {
