@@ -9,6 +9,7 @@ router.post("/login", Controller.login);
 router.post("/google-sign", Controller.googleSign);
 router.get("/tour", Controller.dataTour);
 router.get("/tour/:id", Controller.oneData);
+router.get("/spesifictour", Controller.spesificTour);
 
 router.use((err, req, res, next) => {
   handleError(err, req, res, next);

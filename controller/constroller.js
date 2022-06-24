@@ -2,7 +2,8 @@
 const { User, Tour } = require("../models");
 const { verifyPassword, toToken } = require("../helper/helper");
 const { OAuth2Client } = require("google-auth-library");
-const { CLIENT_ID } = process.env;
+const { CLIENT_ID, API_KEY } = process.env;
+const axios = require("axios");
 
 class Controller {
   static async register(req, res, next) {
@@ -58,13 +59,13 @@ class Controller {
     try {
       // console.log(CLIENT_ID);
       const { credential } = req.body;
-      console.log(credential);
+      // console.log(credential);
       const client = new OAuth2Client(CLIENT_ID);
       const ticket = await client.verifyIdToken({
         idToken: credential,
         audience: CLIENT_ID,
       });
-      console.log(ticket);
+      // console.log(ticket);
       const payload = ticket.getPayload();
       let access_token;
 
@@ -135,6 +136,21 @@ class Controller {
       }
       res.status(200).json({
         response,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async spesificTour(req, res, next) {
+    try {
+      const { q } = req.query;
+      console.log(q);
+      let response = await axios.get(
+        `https://pixabay.com/api/?key=${API_KEY}=${q}&image_type=photo&per_page=10`
+      );
+      res.status(200).json({
+        response: response.data.hits,
       });
     } catch (err) {
       next(err);
