@@ -26,7 +26,9 @@ const authentication = async (req, res, next) => {
 const loginOrNot = async (req, res, next) => {
   try {
     const {access_token} = req.headers;
-    if(!access_token){
+    console.log(req.headers.access_token);
+    console.log(req.body);
+    if(!access_token||access_token=="null"||access_token==""||access_token==null){
       next();
     }else{
       const payload = tokenToPayload(access_token);

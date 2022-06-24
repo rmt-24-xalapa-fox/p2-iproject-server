@@ -64,23 +64,19 @@ class PostController{
             let {count,rows} = await Post.findAndCountAll(option);
             console.log("Pages count: "+count +" limit"+limit+" totalPages "+Math.ceil(count/limit) +" offset "+offset )
             let totalPages=Math.ceil(count/limit)
-            let {access_token} = req.headers;
-            
-            if(access_token!="null"&&access_token!=""){
-                const payload = tokenToPayload(access_token);
-                const userFound = await User.findByPk(payload.id);
+            console.log(req.user);
+            console.log("User found");
+            if(req.user){
                 
-                if(userFound)
+                if(req.user.id)
                     rows.forEach(element => {
                         
-                        if(element.UserId!=userFound){
+                        if(element.UserId!=req.user.id){
                             element.dataValues.canDonate=true;
                         }else{
                             element.dataValues.canDonate=false;
                         }
-                    })
-                    
-                    ;
+                    });
             }
             if (rows) {   
                 res.status(200).json({ Posts: rows,totalPages });
@@ -292,7 +288,11 @@ class PostController{
                 UserId
             },
             include:{
-                model: Post
+                model: Post,
+                include:{
+                    model: User,
+                    attributes: ['email']
+                }
             }
             });
             
