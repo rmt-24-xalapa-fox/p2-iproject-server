@@ -128,12 +128,11 @@ _Response (404 - Not found)_
 
 ```json
 {
-    "statusCode": 404,
     "message": "Not found"
 }
 ```
 ## 3. POST '/users/login'
-Return access token if credential is valid
+Return access token,email and role if credential is valid
 
 body:
 
@@ -173,6 +172,102 @@ _Response (401 - Unauthorized)_
 ```
 
 ## 4. POST '/users/loginGoogle'
+Unregistered user will be registered and existing user role will become customer, then return access token,email and role if credential is valid
+- Headers:
+
+```json
+{
+  "token": "string",
+}
+```
+_Response (200 - OK)_
+
+```json
+{
+    "access_token": "string",
+    "email": "string",
+    "role": "string"
+}
+```
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "message": "Invalid token"
+}
+```
 
 ## 5. POST '/users/register'
+Register user as customer
+
+body:
+
+```json
+{
+  "email": "string",
+  "username": "string",
+  "nickname": "string",
+  "dateOfBirth": "date",
+  "password": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+    "access_token": "string",
+    "email": "string",
+    "role": "string"
+}
+```
+_Response (400 - Bad Request)_
+```json
+{
+  "message": "Email is required"
+}
+OR
+{
+  "message": "Password is required"
+}
+OR
+{
+    "message": "Email is used"
+}
+```
+
 ## 6.  POST '/users/registerAdmin'
+Register user as admin
+
+body:
+
+```json
+{
+  "email": "string",
+  "password": "string"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+    "access_token": "string",
+    "email": "string",
+    "role": "string"
+}
+```
+_Response (400 - Bad Request)_
+```json
+{
+  "message": "Email is required"
+}
+OR
+{
+  "message": "Password is required"
+}
+OR
+{
+  "message": "Email is used"
+}
+```
