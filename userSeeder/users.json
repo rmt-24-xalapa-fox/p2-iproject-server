@@ -1,0 +1,20 @@
+[
+    {
+        "email": "user1@email.com",
+        "password": "12345",
+        "name": "user1",
+        "status": "free"
+    },
+    {
+        "email": "user2@email.com",
+        "password": "12345",
+        "name": "user2",
+        "status": "premium"
+    },
+    {
+        "email": "user3@email.com",
+        "password": "12345",
+        "name": "user3",
+        "status": "premium"
+    }
+]
