@@ -1,0 +1,4 @@
+// npx sequelize model:create --name User --attributes username:string,email:string,password:string
+
+// npx sequelize model:create --name FavoriteAnime --attributes title:string,currentEpisode:integer,totalEpisode:integer,imgUrl:string,animeUrl:string,UserId:integer
+// npx sequelize model:create --name Anime --attributes title:string,imageUrl:string,synopsis:string,url:string,trailer:string,episode:string,status:string,score:string
