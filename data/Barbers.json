@@ -1,0 +1,102 @@
+[
+    {
+        "email": "budi@gmail.com",
+        "password": "Budii",
+        "name": "Budi",
+        "price": 12000,
+        "location": "Jakarta",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    },
+    {
+        "email": "younglex@gmail.com",
+        "password": "young",
+        "name": "Young",
+        "price": 201000,
+        "location": "Bandung",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    },
+    {
+        "email": "arilasso@gmail.com",
+        "password": "arilasso",
+        "name": "Ari",
+        "price": 500000,
+        "location": "Kalimantan",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    },
+    {
+        "email": "noah@gmail.com",
+        "password": "noaah",
+        "name": "Noah",
+        "price": 1200000,
+        "location": "Sumatera",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    },
+    {
+        "email": "varrel@gmail.com",
+        "password": "varell",
+        "name": "Varrel",
+        "price": 30000,
+        "location": "Aceh",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    },
+    {
+        "email": "joko@gmail.com",
+        "password": "jokowi",
+        "name": "Jokowi",
+        "price": 3000000,
+        "location": "Bogor",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    },
+    {
+        "email": "bahlil@gmail.com",
+        "password": "bahliil",
+        "name": "Bahlil",
+        "price": 20000,
+        "location": "Tanggerang",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    },
+    {
+        "email": "nadim@gmail.com",
+        "password": "nadim",
+        "name": "Nadim",
+        "price": 20000,
+        "location": "Jakarta",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    },
+    {
+        "email": "yudi@gmail.com",
+        "password": "yudis",
+        "name": "Yudi",
+        "price": 120003,
+        "location": "Pontianak",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    },
+    {
+        "email": "sahroni@gmail.com",
+        "password": "sahroni",
+        "name": "Sahroni",
+        "price": 301000,
+        "location": "Belitung",
+        "profile_image": "profileImg",
+        "rating": 0,
+        "ratingCount": 0
+    }
+]
