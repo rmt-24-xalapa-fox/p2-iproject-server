@@ -1,0 +1,134 @@
+[
+    {
+        "name": "Milk",
+        "stock": 3000,
+        "cost": 14,
+        "unit": "ml"
+    },
+    {
+        "name": "Ice",
+        "stock": 3000,
+        "cost": 2,
+        "unit": "gr"
+    },
+    {
+        "name": "Soda",
+        "stock": 4500,
+        "cost": 8,
+        "unit": "ml"
+    },
+    {
+        "name": "Yoghurt",
+        "stock": 1000,
+        "cost": 43,
+        "unit": "ml"
+    },
+    {
+        "name": "Condensed Milk",
+        "stock": 1600,
+        "cost": 34,
+        "unit": "gr"
+    },
+    {
+        "name": "Syrup",
+        "stock": 3000,
+        "cost": 30,
+        "unit": "ml"
+    },
+    {
+        "name": "Creamer",
+        "stock": 3000,
+        "cost": 48,
+        "unit": "gr"
+    },
+    {
+        "name": "Milkshake Powder",
+        "stock": 3000,
+        "cost": 70,
+        "unit": "gr"
+    },
+    {
+        "name": "Strawberry",
+        "stock": 500,
+        "cost": 52,
+        "unit": "gr"
+    },
+    {
+        "name": "Dragon Fruit",
+        "stock": 2000,
+        "cost": 35,
+        "unit": "gr"
+    },
+    {
+        "name": "Grapes",
+        "stock": 1000,
+        "cost": 65,
+        "unit": "gr"
+    },
+    {
+        "name": "Lemon",
+        "stock": 1000,
+        "cost": 25,
+        "unit": "gr"
+    },
+    {
+        "name": "Chocolate Waffer",
+        "stock": 50,
+        "cost": 2500,
+        "unit": "pcs"
+    },
+    {
+        "name": "Cookies",
+        "stock": 50,
+        "cost": 417,
+        "unit": "pcs"
+    },
+    {
+        "name": "Chocochips",
+        "stock": 2000,
+        "cost": 60,
+        "unit": "gr"
+    },
+    {
+        "name": "Sprinkles",
+        "stock": 500,
+        "cost": 60,
+        "unit": "gr"
+    },
+    {
+        "name": "Gummies",
+        "stock": 500,
+        "cost": 300,
+        "unit": "gr"
+    },
+    {
+        "name": "Marshmallow",
+        "stock": 50,
+        "cost": 395,
+        "unit": "pcs"
+    },
+    {
+        "name": "Ice Cream",
+        "stock": 8000,
+        "cost": 18,
+        "unit": "gr"
+    },
+    {
+        "name": "Espresso",
+        "stock": 3000,
+        "cost": 100,
+        "unit": "ml"
+    },
+    {
+        "name": "Simple Syrup",
+        "stock": 3000,
+        "cost": 15,
+        "unit": "gr"
+    },
+    {
+        "name": "Packaging",
+        "stock": 3000,
+        "cost": 1500,
+        "unit": "pcs"
+    }
+]
