@@ -7,7 +7,6 @@ async function searchMovies(query, page) {
     const findMovie = await axios.get(
       `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${api_key}&language=en-US&page=${page}&include_adult=false`
     );
-
     return findMovie.data;
   } catch (err) {
     return err;
@@ -68,8 +67,7 @@ async function test() {
   const year = found.release_date.slice(0, 4);
   let query = `${name} ${year} trailer`;
   const video = await getTrailer(query);
-  console.log(query);
-  console.log(video);
+  return video;
 }
 
 module.exports = { searchMovies, discoverMovies, getTrailer, getDetails };

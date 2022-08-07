@@ -12,14 +12,19 @@ class movieController {
 
   static async getMainFeed(req, res, next) {
     try {
-      let { sort, page } = req.body;
+      let movieList = [];
+      let { sort, page, query } = req.query;
       if (!sort) {
         sort = "popularity";
       }
       if (!page) {
         page = 1;
       }
-      const movieList = await discoverMovies(sort, page);
+      if (!query) {
+        movieList = await discoverMovies(sort, page);
+      } else {
+        movieList = await searchMovies(query, page);
+      }
       const modifiedMovieList = [];
       movieList.results.forEach((el) => {
         modifiedMovieList.push({
